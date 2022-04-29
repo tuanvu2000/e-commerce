@@ -9,11 +9,15 @@ import {
     Order,
     Total
 } from './pages/admin'
+import {
+    AppLayout
+} from './pages'
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="" element={<AppLayout />} />
                 <Route path="admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="product" element={<Product />} />
