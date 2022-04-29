@@ -1,0 +1,7 @@
+export { default as AdminLayout } from './AdminLayout'
+export { default as Dashboard } from './Dashboard'
+export { default as Product } from './Product'
+export { default as Account } from './Account'
+export { default as AccountCreate } from './AccountCreate'
+export { default as Order } from './Order'
+export { default as Total } from './Total'

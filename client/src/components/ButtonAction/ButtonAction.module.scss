@@ -1,0 +1,34 @@
+.btn {
+    border-radius: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+
+    &.blue {
+        background: #1890ff;
+        border-color: #1890ff;
+    }
+
+    &.red {
+        background: #FF2828;
+        border-color: #FF2828;
+    }
+
+    &.black {
+        background: #1890ff;
+        border-color: #1890ff;
+    }
+
+    &.orange {
+        background: #1890ff;
+        border-color: #1890ff;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    i {
+        margin-right: 8px;
+    }
+}

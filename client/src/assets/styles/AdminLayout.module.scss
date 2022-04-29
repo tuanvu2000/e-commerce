@@ -1,0 +1,15 @@
+
+.wrapper {
+    margin-left: 210px;
+    transition: margin 0.3s;
+
+    &.collapse {
+        margin-left: 50px;
+    }
+}
+
+.wrapContent {
+    background: #FFF7B4;
+    min-height: calc(100vh - 50px);
+    padding: 24px 32px;
+}

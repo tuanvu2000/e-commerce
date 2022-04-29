@@ -1,0 +1,13 @@
+.link {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: 600;
+    margin-top: 12px;
+    color: #000;
+
+    i {
+        margin-left: 4px;
+        font-size: 12px;
+    }
+}
