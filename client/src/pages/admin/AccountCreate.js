@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import styles from '../../assets/styles/AccountCreate.module.scss'
-import { ButtonAction, TitleContent } from '../../components'
+import { ButtonAction, TitleContent, FromCreateUser } from '../../components'
 
 const AccountCreate = () => {
     return (
@@ -13,6 +13,7 @@ const AccountCreate = () => {
                     <ButtonAction action='Lưu' icon='userAdd' color='red' />
                 </div>
             </div>
+            <FromCreateUser />
         </div>
     )
 }
