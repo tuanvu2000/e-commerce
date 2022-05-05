@@ -2,7 +2,7 @@
     thead > tr > th {
         font-weight: 700;
     }
-
+    
     table {
         border-top: 1px solid #5e5e5e !important;
         border-left: 1px solid #5e5e5e !important;
@@ -15,6 +15,16 @@
             > p:last-child {
                 margin-bottom: 0;
             }
+        }
+    }
+
+    &.history {
+        thead > tr > th {
+            background: #9CACFF;
+        }
+
+        tr:hover > td {
+            background: #FFD990;
         }
     }
 }

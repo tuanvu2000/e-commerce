@@ -2,8 +2,18 @@ import React from 'react'
 import { Table } from 'antd'
 import { SelectOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import clsx from 'clsx'
+import styles from './TableContainer.module.scss'
 
-const TableContainer = ({type, data}) => {
+const TableContainer = ({type, data, loading}) => {
+
+    const handleMoney = (number) => {
+        const numToString = number.toString();
+        const regex = /\B(?=(\d{3})+(?!\d))/g;
+
+        return numToString.replace(regex, '.')
+    }
+
     const columnAccount = [
         {
             title: 'STT',
@@ -13,8 +23,8 @@ const TableContainer = ({type, data}) => {
         },
         {
             title: 'Họ và tên',
-            dataIndex: 'fullname',
-            key: 'fullname'
+            dataIndex: 'fullName',
+            key: 'fullName'
         },
         {
             title: 'Tên tài khoản',
@@ -36,14 +46,96 @@ const TableContainer = ({type, data}) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
-            render: () => <Link to='.'><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
         }
     ]
 
+    const columnHistory = [
+        {
+            title: 'STT',
+            dataIndex: 'stt',
+            key: 'stt',
+            width: 50,
+            render: (text) => <p style={{ textAlign: 'center'}}>{text}</p>
+        },
+        {
+            title: 'Mã hóa đơn',
+            dataIndex: 'idOrder',
+            key: 'idOrder',
+        },
+        {
+            title: 'Tên sản phẩm',
+            dataIndex: 'products',
+            key: 'nameProduct',
+            render: products => (
+                <>
+                    {
+                        products.map((product, index) => (
+                            <p key={'N'+index}>
+                                {product.nameProduct}
+                            </p>
+                        ))
+                    }
+                </>
+            )
+        },
+        {
+            title: 'Số lượng',
+            dataIndex: 'products',
+            key: 'quantity',
+            render: products => (
+                <>
+                    {
+                        products.map((product, index) => (
+                            <p key={'N'+index}>
+                                {product.quantity}
+                            </p>
+                        ))
+                    }
+                </>
+            )
+        },
+        {
+            title: 'Đơn giá',
+            dataIndex: 'products',
+            key: 'price',
+            render: products => (
+                <>
+                    {
+                        products.map((product, index) => (
+                            <p key={'N'+index}>
+                                {handleMoney(product.price)}
+                            </p>
+                        ))
+                    }
+                </>
+            )
+        },
+        {
+            title: 'Tổng tiền',
+            dataIndex: 'total',
+            key: 'total',
+            render: (text) => handleMoney(text)
+        },
+        {
+            title: 'Ngày đặt hàng',
+            dataIndex: 'dateOrder',
+            key: 'dateOrder',
+        },
+    ]
+
+    const columns = {
+        account: columnAccount,
+        historyBuy: columnHistory
+    }
+
     return (
-        <div>
+        <div className={clsx(styles.tb, {
+            [styles.history]: type === 'historyBuy'
+        })}>
             <Table
-                columns={columnAccount}
+                loading={loading}
+                columns={columns[type]}
                 dataSource={data}
                 bordered={true}
                 pagination={{ pageSize: 20, position: ['bottomCenter'] }}

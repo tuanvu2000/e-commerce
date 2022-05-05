@@ -3,6 +3,7 @@
     color: #fff;
     text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
     box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+    font-weight: 600;
 
     &.blue {
         background: #1890ff;
@@ -15,13 +16,13 @@
     }
 
     &.black {
-        background: #1890ff;
-        border-color: #1890ff;
+        background: #000;
+        border-color: #000;
     }
 
     &.orange {
-        background: #1890ff;
-        border-color: #1890ff;
+        background: #FF7121;
+        border-color: #FF7121;
     }
 
     &:hover {

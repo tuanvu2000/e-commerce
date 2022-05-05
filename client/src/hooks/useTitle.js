@@ -8,7 +8,7 @@ function useTitle(title = 'Phuot Culture', isOverride = false) {
         } else {
             document.title = title !== 'Phuot Culture' ? `${title} - Phuot Culture` : title;
         }
-    }, []);
+    }, [isOverride, title]);
 
     return null;
 }

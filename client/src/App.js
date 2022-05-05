@@ -6,6 +6,7 @@ import {
     Product,
     Account,
     AccountCreate,
+    AccountDetail,
     Order,
     Total
 } from './pages/admin'
@@ -23,6 +24,7 @@ function App() {
                     <Route path="product" element={<Product />} />
                     <Route path="account" element={<Account />} />
                     <Route path="account/create" element={<AccountCreate />} />
+                    <Route path="account/:id" element={<AccountDetail />} />
                     <Route path="order" element={<Order />} />
                     <Route path="total" element={<Total />} />
                 </Route>
