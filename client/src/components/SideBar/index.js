@@ -50,7 +50,7 @@ const SideBar = () => {
             setLoading(false)
         }
     }, [loading])
-    console.log(loading)
+    // console.log(loading)
 
     return (
         <div className={wrapperStyle}>

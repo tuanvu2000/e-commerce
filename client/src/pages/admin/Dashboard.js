@@ -4,8 +4,10 @@ import { TitleContent, CardItem, TableOrderNew } from '../../components'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Dashboard.module.scss'
+import useTitle from '../../hooks/useTitle'
 
 const Dashboard = () => {
+    useTitle('Dashboard')
 
     const cards = [
         <CardItem 
@@ -29,13 +31,6 @@ const Dashboard = () => {
             url="#"
         />
     ]
-
-    // const link = [
-    //     'product',
-    //     'account',
-    //     'orer',
-    //     'total'
-    // ]
 
     const orders = [
         {
@@ -107,7 +102,7 @@ const Dashboard = () => {
             </div>
             <p style={{ fontWeight: 600, fontSize: 16 }}>Đơn hàng mới</p>
             <TableOrderNew data={orders} />
-            <Link to='#' className={clsx(styles.link)}>
+            <Link to='order' className={clsx(styles.link)}>
                 Xem chi tiết
                 <i className="fas fa-angle-double-right"></i>
             </Link>

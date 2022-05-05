@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const appRoute = require('./src/routes');
 
 dotenv.config();
 
@@ -27,3 +28,5 @@ mongoose
         console.log(error);
         process.exit(1);
     })
+
+app.use('/api', appRoute)

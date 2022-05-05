@@ -1,0 +1,62 @@
+.avatar {
+    margin: 0 auto;
+    max-width: 280px;
+
+    img {
+        width: 100%;
+        border-radius: 50%;
+        filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+    }
+}
+
+.wrapBox {
+    padding: 0 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    background: #FDFF9A;
+}
+
+.header {
+    position: relative;
+    padding: 10px 0;
+
+    i {
+        color: #FF2828;
+        background: #FDFF9A;
+        font-size: 20px;
+        padding: 0 8px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        height: 1px;
+        width: 100%;
+        background: #000;
+    }
+
+}
+
+.group {
+    margin-bottom: 22px;
+}
+
+.label {
+    font-weight: 700;
+}
+
+.box {
+    background: #FFF7B4;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 5px 8px;
+    min-height: 34px;
+}

@@ -4,6 +4,7 @@ export { default as CardItem } from './CardItem'
 export { default as TableOrderNew } from './TableOrderNew'
 export { default as TableContainer } from './TableContainer'
 export { default as FromCreateUser } from './FromCreateUser'
+export { default as InfoAccount } from './InfoAccount'
 
 // UI small
 export {default as TitleContent } from './TitleContent'
