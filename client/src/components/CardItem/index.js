@@ -1,4 +1,3 @@
-import React from 'react'
 import clsx from 'clsx'
 import styles from './CardItem.module.scss'
 import { Link } from 'react-router-dom'

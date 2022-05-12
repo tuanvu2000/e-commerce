@@ -1,5 +1,5 @@
 import { Col, Row, Form, Input, DatePicker, Radio } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import styles from './InfoAccount.module.scss'
 import avt from '../../assets/images/avt.jpg'

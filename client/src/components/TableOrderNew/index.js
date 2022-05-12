@@ -1,4 +1,3 @@
-import React from 'react'
 import clsx from 'clsx'
 import styles from './TableOrderNew.module.scss'
 import { Table } from 'antd'

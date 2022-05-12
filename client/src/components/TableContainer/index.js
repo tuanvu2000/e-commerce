@@ -50,6 +50,49 @@ const TableContainer = ({type, data, loading}) => {
         }
     ]
 
+    const columnProduct = [
+        {
+            title: 'STT',
+            dataIndex: 'stt',
+            key: 'stt',
+            width: 50,
+        },
+        {
+            title: 'Tên sản phẩm',
+            dataIndex: 'namePd',
+            key: 'namePd'
+        },
+        {
+            title: 'Loại sản phẩm',
+            dataIndex: 'subCategory',
+            key: 'subCategory'
+        },
+        {
+            title: 'Thương hiệu',
+            dataIndex: 'brand',
+            key: 'brand',
+        },
+        {
+            title: 'Giá tiền',
+            dataIndex: 'price',
+            key: 'price',
+            render: text => handleMoney(text)
+        },
+        {
+            title: 'Tồn kho',
+            dataIndex: 'inventory',
+            key: 'inventory',
+            width: 95
+        },
+        {
+            title: 'Chi tiết',
+            key: 'detail',
+            width: 150,
+            render: (text) => <Link to="#"><SelectOutlined /> Xem chi tiết</Link>
+            // render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
+        }
+    ]
+
     const columnHistory = [
         {
             title: 'STT',
@@ -126,6 +169,7 @@ const TableContainer = ({type, data, loading}) => {
 
     const columns = {
         account: columnAccount,
+        product: columnProduct,
         historyBuy: columnHistory
     }
 

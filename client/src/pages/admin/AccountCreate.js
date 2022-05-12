@@ -1,7 +1,6 @@
-import React from 'react'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Account.module.scss'
-import { ButtonAction, TitleContent, FromCreateUser } from '../../components'
+import { ButtonAction, TitleContent, FormCreateUser } from '../../components'
 import { Form, message } from 'antd'
 import useTitle from '../../hooks/useTitle'
 import moment from 'moment'
@@ -34,7 +33,7 @@ const AccountCreate = () => {
                     <ButtonAction action='Lưu' icon='userAdd' color='red' onSave={onSave} />
                 </div>
             </div>
-            <FromCreateUser
+            <FormCreateUser
                 form={form}
             />
         </div>

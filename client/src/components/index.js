@@ -3,7 +3,8 @@ export { default as HeaderAdmin } from './HeaderAdmin'
 export { default as CardItem } from './CardItem'
 export { default as TableOrderNew } from './TableOrderNew'
 export { default as TableContainer } from './TableContainer'
-export { default as FromCreateUser } from './FromCreateUser'
+export { default as FormCreateUser } from './FormCreateUser'
+export { default as FormCreateProduct } from './FormCreateProduct'
 export { default as InfoAccount } from './InfoAccount'
 
 // UI small

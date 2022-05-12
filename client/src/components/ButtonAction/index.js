@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from 'antd'
 import clsx from 'clsx'
 import styles from './ButtonAction.module.scss'

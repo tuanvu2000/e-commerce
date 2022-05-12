@@ -1,4 +1,3 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom';
 import { SideBar, HeaderAdmin } from '../../components'
 import clsx from 'clsx'

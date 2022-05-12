@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { TitleContent, TableContainer, ButtonCreate } from '../../components'
 import useTitle from '../../hooks/useTitle'
 import userApi from '../../api/userApi'
@@ -64,7 +64,7 @@ const Account = () => {
                 <ButtonCreate
                     to='create'
                     action='Thêm'
-                    icon='add'
+                    icon='addUser'
                 />
             </div>
 

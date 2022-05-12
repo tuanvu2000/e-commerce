@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import userApi from '../../api/userApi'
 import { ButtonAction, TitleContent, InfoAccount, TableContainer } from '../../components'
 import useTitle from '../../hooks/useTitle'
@@ -33,7 +33,6 @@ const AccountDetail = () => {
             values.birthday = birthday ? moment(birthday).format() : birthday
             await userApi.update(id, values)
             message.success('Create success')
-            console.log('render-2')
             // console.log(values)
         } catch (error) {
             // console.log('error validate')

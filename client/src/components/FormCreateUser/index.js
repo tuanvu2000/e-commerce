@@ -1,9 +1,8 @@
-import React from 'react'
 import { Form, Input, Radio, DatePicker } from 'antd'
 import clsx from 'clsx'
-import styles from './FromCreateUser.module.scss'
+import styles from './FormCreateUser.module.scss'
 
-const FromCreateUser = ({form}) => {
+const FormCreateUser = ({form}) => {
 
     const validation = {
         fullname: [
@@ -129,4 +128,4 @@ const FromCreateUser = ({form}) => {
     )
 }
 
-export default FromCreateUser
+export default FormCreateUser

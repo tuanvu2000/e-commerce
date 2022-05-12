@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AdminLayout,
     Dashboard,
-    Product,
     Account,
     AccountCreate,
     AccountDetail,
+    Product,
+    ProductCreate,
     Order,
     Total
 } from './pages/admin'
@@ -21,10 +22,11 @@ function App() {
                 <Route path="" element={<AppLayout />} />
                 <Route path="admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
-                    <Route path="product" element={<Product />} />
                     <Route path="account" element={<Account />} />
                     <Route path="account/create" element={<AccountCreate />} />
                     <Route path="account/:id" element={<AccountDetail />} />
+                    <Route path="product" element={<Product />} />
+                    <Route path="product/create" element={<ProductCreate />} />
                     <Route path="order" element={<Order />} />
                     <Route path="total" element={<Total />} />
                 </Route>

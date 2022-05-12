@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row, Col } from 'antd'
 import { TitleContent, CardItem, TableOrderNew } from '../../components'
 import { Link } from 'react-router-dom'

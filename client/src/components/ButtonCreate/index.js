@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from 'antd'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
@@ -6,7 +5,8 @@ import styles from './ButtonCreate.module.scss'
 
 const ButtonCreate = ({ to, action, icon }) => {
     const arrIcon = {
-        add: <i className="fas fa-user-plus"></i>
+        addUser: <i className="fas fa-user-plus"></i>,
+        addProduct: <i className="fas fa-plus"></i>
     }
 
     return (    
