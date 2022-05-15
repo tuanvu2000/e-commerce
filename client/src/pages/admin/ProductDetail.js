@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ButtonAction, TitleContent, InfoProduct } from '../../components'
+import { ButtonAction, TitleContent, InfoProduct, Loading } from '../../components'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import productApi from '../../api/productApi'
@@ -77,7 +77,7 @@ const ProductDetail = () => {
         <div>
             {
                 loading 
-                ? <div>Loading...</div>
+                ? <Loading />
                 : <>
                     {/* Hiển thị tiêu đề trang và các button */}
                     <div className={clsx(styles.flex)}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ButtonAction, TitleContent, InfoAccount, TableContainer } from '../../components'
+import { ButtonAction, TitleContent, InfoAccount, TableContainer, Loading } from '../../components'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import userApi from '../../api/userApi'
@@ -65,7 +65,7 @@ const AccountDetail = () => {
         <div>
             {
                 loading 
-                ? <div>...Loading</div>
+                ? <Loading />
                 : <>
                     {/* Hiển thị tiêu đề trang và các button */}
                     <div className={clsx(styles.flex)}>
