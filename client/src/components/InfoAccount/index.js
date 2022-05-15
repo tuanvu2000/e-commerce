@@ -83,7 +83,7 @@ const InfoAccount = ({ data, edit, form }) => {
                                 <i className="fas fa-star"></i>
                             </div>
                             <div className={clsx(styles.content)}>
-                                <FormItem 
+                                <FormList 
                                     styles={styles}
                                     dataList={dataUser}
                                     isEdit={edit}
@@ -99,9 +99,9 @@ const InfoAccount = ({ data, edit, form }) => {
 
 export default InfoAccount
 
-const FormItem = ({styles, dataList, isEdit }) => {
-    const formItem = (type, data) => {
-        switch (type) {
+const FormList = ({styles, dataList, isEdit }) => {
+    const formItem = (data) => {
+        switch (data.type) {
             case 'text':
                 return (
                     <Form.Item
@@ -162,7 +162,7 @@ const FormItem = ({styles, dataList, isEdit }) => {
                             <span className={clsx(styles.label)}>{item.label}:</span>
                             {
                                 isEdit 
-                                    ? formItem(item.type, item)
+                                    ? formItem(item)
                                     : <div className={clsx(styles.box)}>{changeData(item)}</div>
                             }
                         </div>

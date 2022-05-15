@@ -14,6 +14,9 @@ const userApi = {
     update: (id, params) => axiosClient.put(
         `user/${id}`,
         params
+    ),
+    delete: (id) => axiosClient.delete(
+        `user/${id}`
     )
 }
 

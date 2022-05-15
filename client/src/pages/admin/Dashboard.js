@@ -12,7 +12,7 @@ const Dashboard = () => {
         <CardItem 
             header="Sản phẩm"
             number={348}
-            url="#"
+            url="product"
         />,
         <CardItem 
             header="Khách hàng"
@@ -22,12 +22,12 @@ const Dashboard = () => {
         <CardItem 
             header="Đơn hàng"
             number={259}
-            url="#"
+            url="order"
         />,
         <CardItem 
             header="Tổng doanh thu"
             number={'19.131.410 đ'}
-            url="#"
+            url="total"
         />
     ]
 

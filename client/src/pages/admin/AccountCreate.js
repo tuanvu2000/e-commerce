@@ -17,9 +17,7 @@ const AccountCreate = () => {
             values.birthday = birthday ? moment(birthday).format() : birthday
             await userApi.register(values)
             message.success('Create success')
-            console.log(values)
         } catch (error) {
-            console.log('error validate')
             message.error('error validate')
         }
     }

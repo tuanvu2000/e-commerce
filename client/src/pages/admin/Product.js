@@ -30,36 +30,6 @@ const Product = () => {
         getData()
     }, [])
 
-    // const list = [
-    //     {
-    //         key: 1,
-    //         stt: 1,
-    //         namePd: "Nón 3/4 KYT Venom Xám Đen Nhám",
-    //         typePd: "Nón bảo hiểm 3/4",
-    //         brand: "KYT",
-    //         price: 1750000,
-    //         inventory: 31
-    //     },
-    //     {
-    //         key: 2,
-    //         stt: 2,
-    //         namePd: "Fullface KYT Falcon Leopard Locatelli",
-    //         typePd: "Nón bảo hiểm Fullface",
-    //         brand: "PWA",
-    //         price: 2210000,
-    //         inventory: 158
-    //     },
-    //     {
-    //         key: 3,
-    //         stt: 3,
-    //         namePd: "Nón Thể thao EMP Vàng Hồng Cam",
-    //         typePd: "Nón lưỡi trai",
-    //         brand: "EMP",
-    //         price: 780000,
-    //         inventory: 434
-    //     },
-    // ]
-
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between'}}>

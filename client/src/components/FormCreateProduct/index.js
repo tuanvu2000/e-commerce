@@ -1,15 +1,17 @@
-import { Form, Input, InputNumber, Select, Row, Col, Upload } from 'antd'
+import { Form, Input, Select, Row, Col, Upload, Button } from 'antd'
+import { UploadOutlined } from '@ant-design/icons';
 import clsx from 'clsx'
 import styles from './FormCreateProduct.module.scss'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import data from './data'
-import { useDispatch } from 'react-redux'
+import { data } from './data'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveImgProduct } from '../../redux/slices/savedSlice'
 
 const { Option } = Select
 const FormCreateProduct = ({ form }) => {
     const dispatch = useDispatch()
+    const upImage = useSelector((state) => state.saved.product.url)
     const [image, setImage] = useState([])
     const [category, setCategory] = useState(data.subCategoryData[data.categoryData[0]])
     const [subCategory, setSubCategory] = useState(data.subCategoryData[data.categoryData[0]][0])
@@ -44,10 +46,10 @@ const FormCreateProduct = ({ form }) => {
             }
         }
         formData.append("file", file)
-        formData.append("upload_preset", "new_preset")
+        formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET)
         try {
             const res = await axios.post(
-                "https://api.cloudinary.com/v1_1/dwf04fosc/image/upload",
+                `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
                 formData,
                 config
             )
@@ -67,13 +69,6 @@ const FormCreateProduct = ({ form }) => {
         setImage(fileList)
     }
 
-    const checkNumber = (_, value) => {
-        if (value >= 0) {
-            return Promise.resolve()
-        }
-        return Promise.reject(new Error('Number must be greater than equal to zero!'))
-    }
-
     return (
         <div className={clsx(styles.wrapper)}>
             <Form
@@ -87,22 +82,24 @@ const FormCreateProduct = ({ form }) => {
                 }}
                 autoComplete="off"
                 labelAlign="left"
-                // initialValues={{
-                //     price: {
-                //         number: 0
-                //     }
-                // }}
             >
                 <Row gutter={10}>
-                    <Col span={4}>
-                        <Upload
-                            accept="image/*"
-                            customRequest={uploadImage}
-                            onChange={handleOnChange}
-                            listType="picture-card"
-                        >
-                            {image.length < 1 && '+ Upload'}
-                        </Upload>
+                    <Col span={6} className={clsx(styles.imgProduct)}>
+                        {
+                            upImage && <img src={upImage} alt="imgProduct" />
+                        }
+                        <div className={clsx(styles.upload)}>
+                            <Upload
+                                accept="image/*"
+                                customRequest={uploadImage}
+                                onChange={handleOnChange}
+                                listType="text"
+                            >
+                                {
+                                    image.length < 1 && <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                                }
+                            </Upload>
+                        </div>
                     </Col>
                     <Col span={10}>
                         <Form.Item
@@ -152,7 +149,7 @@ const FormCreateProduct = ({ form }) => {
                             initialValue={["S", "M", "L"]}
                         >
                             <Select mode="tags">
-                                {data.hatSize.map(item => (
+                                {data.size.map(item => (
                                     <Option key={item}>{item}</Option>
                                 ))}
                             </Select>
@@ -209,30 +206,27 @@ const FormCreateProduct = ({ form }) => {
                             </Select>
                         </Form.Item>
                     </Col>
-                    <Col span={10}>
+                    <Col span={8}>
                         <Form.Item
                             name="sale"
                             label="Giảm giá"
-                            initialValue={0}
-                            rules={[{ validator: checkNumber }]}
+                            initialValue={{ number: 0 }}
                         >
-                            <InputNumber style={{ width: '100%' }} />
+                            <PriceInput />
                         </Form.Item>
                         <Form.Item
                             name="inventory"
                             label="Tồn kho"
-                            initialValue={0}
-                            rules={[{ validator: checkNumber }]}
+                            initialValue={{ number: 0 }}
                         >
-                            <InputNumber style={{ width: '100%' }} />
+                            <PriceInput />
                         </Form.Item>
                         <Form.Item
                             name="weight"
                             label="Trọng lượng"
-                            initialValue={0}
-                            rules={[{ validator: checkNumber }]}
+                            initialValue={{ number: 0 }}
                         >
-                            <InputNumber style={{ width: '100%' }} />
+                            <PriceInput />
                         </Form.Item>
                         <Form.Item
                             name="madeIn"
@@ -246,12 +240,12 @@ const FormCreateProduct = ({ form }) => {
                             </Select>
                         </Form.Item>
                         <Form.Item
-                            name="branch"
+                            name="brand"
                             label="Thương hiệu"
-                            initialValue={data.branch[0]}
+                            initialValue={data.brand[0]}
                         >
                             <Select value="Không">
-                                {data.branch.map(item => (
+                                {data.brand.map(item => (
                                     <Option key={item}>{item}</Option>
                                 ))}
                             </Select>

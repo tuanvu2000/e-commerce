@@ -88,8 +88,7 @@ const TableContainer = ({type, data, loading}) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
-            render: (text) => <Link to="#"><SelectOutlined /> Xem chi tiết</Link>
-            // render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
         }
     ]
 

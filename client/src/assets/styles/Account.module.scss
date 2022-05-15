@@ -4,9 +4,10 @@
 }
 
 .space {
-    div {
-        &:first-child {
-            margin-right: 12px;
+    > div {
+        margin-right: 12px;
+        &:last-child {
+            margin-right: 0;
         }
     }
 

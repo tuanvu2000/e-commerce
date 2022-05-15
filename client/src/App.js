@@ -8,6 +8,7 @@ import {
     AccountDetail,
     Product,
     ProductCreate,
+    ProductDetail,
     Order,
     Total
 } from './pages/admin'
@@ -27,6 +28,7 @@ function App() {
                     <Route path="account/:id" element={<AccountDetail />} />
                     <Route path="product" element={<Product />} />
                     <Route path="product/create" element={<ProductCreate />} />
+                    <Route path="product/:id" element={<ProductDetail />} />
                     <Route path="order" element={<Order />} />
                     <Route path="total" element={<Total />} />
                 </Route>

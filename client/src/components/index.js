@@ -6,6 +6,7 @@ export { default as TableContainer } from './TableContainer'
 export { default as FormCreateUser } from './FormCreateUser'
 export { default as FormCreateProduct } from './FormCreateProduct'
 export { default as InfoAccount } from './InfoAccount'
+export { default as InfoProduct } from './InfoProduct'
 
 // UI small
 export {default as TitleContent } from './TitleContent'

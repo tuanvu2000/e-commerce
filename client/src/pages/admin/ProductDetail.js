@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react'
-import { ButtonAction, TitleContent, InfoAccount, TableContainer } from '../../components'
+import { ButtonAction, TitleContent, InfoProduct } from '../../components'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
-import userApi from '../../api/userApi'
+import productApi from '../../api/productApi'
 import useTitle from '../../hooks/useTitle'
 import clsx from 'clsx'
-import styles from '../../assets/styles/Account.module.scss'
-import moment from 'moment'
+import styles from '../../assets/styles/Product.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const AccountDetail = () => {
-    useTitle('Detail Account')
+const ProductDetail = () => {
+    useTitle('Detail Product')
     const navigate = useNavigate()
 
-    const [user, setUser] = useState({})
+    const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
     const [form] = Form.useForm()
-    const id = window.location.pathname.split('/admin/account/')[1]
+    const id = window.location.pathname.split('/admin/product/')[1]
+    const urlImg = useSelector((state) => state.saved.product)
 
     useEffect(() => {
         const getData = async () => {
-            const apiRes = await userApi.getOne(id)
-            setUser(apiRes)
+            const apiRes = await productApi.getOne(id)
+            setProduct(apiRes)
             setLoading(false)
         }
         getData()
@@ -32,12 +33,23 @@ const AccountDetail = () => {
         setLoading(true)
         try {
             const values = await form.validateFields();
-            const birthday = values.birthday
-            values.birthday = birthday ? moment(birthday).format() : birthday
-            await userApi.update(id, values)
-            message.success('Create success')
+            values.price = values.price.number
+            values.sale = values.sale.number
+            values.inventory = values.inventory.number
+            values.weight = values.weight.number
+            values.size = values.size.join(", ")
+            values.transportFee = +values.transportFee
+            values.transportFeeFast = +values.transportFeeFast
+            if (urlImg.url && urlImg.cloudinaryId) {
+                values.image = urlImg.url
+                values.cloudinaryId = urlImg.cloudinaryId
+            }
+            await productApi.update(id, values)
+            message.success('Create new product success')
+            // console.log(values)
         } catch (error) {
-            message.error('error validate')
+            message.error('Please input all fields')
+            // console.log('error: ', error)
         }
         setLoading(false)
     }
@@ -51,8 +63,8 @@ const AccountDetail = () => {
             cancelText: 'No',
             async onOk() {
                 try {
-                    await userApi.delete(id)
-                    navigate('../account')
+                    await productApi.delete(id)
+                    navigate('../product')
                     message.success('Đã xóa sản phẩm')
                 } catch (error) {
                     message.error('Không thể xóa sản phẩm này')
@@ -65,18 +77,18 @@ const AccountDetail = () => {
         <div>
             {
                 loading 
-                ? <div>...Loading</div>
+                ? <div>Loading...</div>
                 : <>
                     {/* Hiển thị tiêu đề trang và các button */}
                     <div className={clsx(styles.flex)}>
-                        <TitleContent content='Thông tin khách hàng' />
+                        <TitleContent content='Thông tin sản phẩm' />
                         <div className={clsx(styles.flex, styles.space)}>
                             {
                                 !isEdit ? (
                                     <>
                                         <div>
                                             <ButtonAction
-                                                action='Xóa tài khoản'
+                                                action='Xóa sản phẩm'
                                                 color='red-inner'
                                                 onDelete={onDelete}
                                             />
@@ -108,7 +120,7 @@ const AccountDetail = () => {
                                         <div onClick={() => setIsEdit(false)}>
                                             <ButtonAction
                                                 action='Lưu'
-                                                icon='add'
+                                                icon='addPd'
                                                 color='red'
                                                 onSave={onSave}
                                             />
@@ -120,69 +132,11 @@ const AccountDetail = () => {
                     </div>
 
                     {/* Hiển thị thông tin tài khoản */}
-                    <InfoAccount data={user} edit={isEdit} form={form} />
-                    <div className={clsx(styles.divider)}></div>
-
-                    {/* Hiển thị lịch sử mua hàng */}
-                    <p className={clsx(styles.title)}>Lịch sử mua hàng</p>
-                    <TableContainer 
-                        type="historyBuy"
-                        data={dataTest}
-                    />
+                    <InfoProduct data={product} edit={isEdit} form={form} />
                 </>
             }
         </div>
     )
 }
 
-export default AccountDetail
-
-const dataTest = [
-    {
-        key: 1,
-        stt: 1,
-        idOrder: '000001',
-        products: [
-            {
-                nameProduct: 'Mũ Xe Đạp Balder B79 Đen Xanh',
-                quantity: 2,
-                price: 672000,
-            },
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 3344000,
-        dateOrder: '12/03/2022 07:12:46'
-    },
-    {
-        key: 2,
-        stt: 2,
-        idOrder: '000002',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 2000000,
-        dateOrder: '21/04/2022 15:43:25'
-    },
-    {
-        key: 3,
-        stt: 3,
-        idOrder: '000003',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Xám Đen Nhám',
-                quantity: 1,
-                price: 1750000,
-            }
-        ],
-        total: 1750000,
-        dateOrder: '23/04/2022 17:22:07'
-    }
-]
+export default ProductDetail

@@ -15,6 +15,18 @@
         border-color: #FF2828;
     }
 
+    &.redInner {
+        background: none;
+        border: none;
+        color: #FF2828;
+
+        &:hover {
+            background: #FF2828;
+            border-color: #FF2828;
+            color: #fff;
+        }
+    }
+
     &.black {
         background: #000;
         border-color: #000;

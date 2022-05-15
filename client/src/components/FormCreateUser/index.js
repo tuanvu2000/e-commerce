@@ -68,7 +68,7 @@ const FormCreateUser = ({form}) => {
                 <Form.Item
                     label="Họ và tên"
                     name="fullName"
-                    // rules={validation.fullname}
+                    rules={validation.fullname}
                 >
                     <Input />
                 </Form.Item>
@@ -82,14 +82,14 @@ const FormCreateUser = ({form}) => {
                 <Form.Item
                     label="Mật khẩu"
                     name="password"
-                    // rules={validation.password}
+                    rules={validation.password}
                 >
                     <Input.Password />
                 </Form.Item>
                 <Form.Item
                     label="Email"
                     name="email"
-                    // rules={validation.email}
+                    rules={validation.email}
                 >
                     <Input />
                 </Form.Item>
@@ -112,14 +112,14 @@ const FormCreateUser = ({form}) => {
                 <Form.Item
                     label="Số điện thoại"
                     name="phoneNumber"
-                    // rules={validation.numberPhone}
+                    rules={validation.numberPhone}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="Địa chỉ"
                     name="address"
-                    // rules={validation.address}
+                    rules={validation.address}
                 >
                     <Input />
                 </Form.Item>

@@ -22,6 +22,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    sale: {
+        type: Number,
+        default: 0
+    },
     image: {
         type: String,
         required: true
@@ -34,7 +38,8 @@ const productSchema = new mongoose.Schema({
         type: String
     },
     weight: {
-        type: Number
+        type: Number,
+        default: 0
     },
     color: {
         type: String
