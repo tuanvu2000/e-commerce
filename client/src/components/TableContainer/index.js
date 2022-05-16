@@ -92,6 +92,42 @@ const TableContainer = ({type, data, loading}) => {
         }
     ]
 
+    const columnOrder = [
+        {
+            title: 'Mã đơn hàng',
+            dataIndex: 'orderId',
+            key: 'orderId',
+            width: 180,
+        },
+        {
+            title: 'Tên khách hàng',
+            dataIndex: 'fullName',
+            key: 'fullName'
+        },
+        {
+            title: 'Tổng tiền',
+            dataIndex: 'total',
+            key: 'total'
+        },
+        {
+            title: 'Ngày đặt hàng',
+            dataIndex: 'dateOrder',
+            key: 'dateOrder'
+        },
+        {
+            title: 'Tình trạng',
+            dataIndex: 'status',
+            key: 'status'
+        },
+        {
+            title: 'Chi tiết',
+            key: 'detail',
+            width: 150,
+            // render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to="."><SelectOutlined /> Xem chi tiết</Link>
+        },
+    ]
+
     const columnHistory = [
         {
             title: 'STT',
@@ -169,6 +205,7 @@ const TableContainer = ({type, data, loading}) => {
     const columns = {
         account: columnAccount,
         product: columnProduct,
+        order: columnOrder,
         historyBuy: columnHistory
     }
 
