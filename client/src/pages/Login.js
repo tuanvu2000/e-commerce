@@ -1,14 +1,25 @@
 import React from 'react'
-import { Form, Input } from 'antd'
-import { Link } from 'react-router-dom'
+import { Form, Input, Button } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from '../assets/styles/Login.module.scss'
+import { ArrowLeftOutlined } from '@ant-design/icons'
 
 const Login = () => {
+    const navigate = useNavigate()
     const [form] = Form.useForm()
 
     return (
         <div className={clsx(styles.wrapper)}>
+            <div className={clsx(styles.wrapBtn)}>
+                <Button 
+                    type='primary' 
+                    icon={<ArrowLeftOutlined />} 
+                    onClick={() => navigate('/')}
+                >
+                    Quay lại
+                </Button>
+            </div>
             <div className={clsx(styles.box)}>
                 <h2 className={clsx(styles.title)}>Đăng nhập</h2>
                 <div className={clsx(styles.form)}>

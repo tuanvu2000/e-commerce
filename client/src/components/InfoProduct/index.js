@@ -36,7 +36,7 @@ const InfoProdcut = ({ data, edit, form }) => {
             'timeChangeError',
             'transportFee',
             'transportFeeFast',
-            'washingHat'
+            'washingHat',
         ]
         const arrLabel = {
             namePd: "Tên sản phẩm",

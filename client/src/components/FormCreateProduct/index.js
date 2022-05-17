@@ -7,6 +7,7 @@ import axios from 'axios'
 import { data } from './data'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveImgProduct } from '../../redux/slices/savedSlice'
+import Item from 'antd/lib/list/Item';
 
 const { Option } = Select
 const FormCreateProduct = ({ form }) => {

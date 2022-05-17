@@ -89,6 +89,9 @@ const productSchema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 0
+    },
+    content: {
+        type: String
     }
 }, schemaOptions);
 
