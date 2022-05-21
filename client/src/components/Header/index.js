@@ -44,6 +44,10 @@ const Header = () => {
                         {user ? (
                             <>
                                 <li>
+                                    <Link to="admin">Admin</Link>
+                                </li>
+                                <li></li>
+                                <li>
                                     <Link to=".">Thông tin tài khoản</Link>
                                 </li>
                                 <li></li>
