@@ -1,3 +1,4 @@
+import React from 'react'
 import 'antd/dist/antd.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
@@ -15,16 +16,21 @@ import {
 import {
     AppLayout,
     Login,
-    Register
+    Register,
+    Home
 } from './pages'
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="" element={<AppLayout />} />
+                <Route path="" element={<AppLayout />}>
+                    <Route index element={<Home />} />
+                </Route>
+
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                
                 <Route path="admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="account" element={<Account />} />

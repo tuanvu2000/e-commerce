@@ -2,7 +2,7 @@ export const data = {
     // categoryData: ['Nón', 'Găng tay', 'Phụ kiện khác'],
     categoryData: ['Nón'],
     subCategoryData: {
-        'Nón': ['Nón 3/4', 'Nón full-face', 'Nón thể thao', 'Nón lưỡi trai', 'Nón bảo hiểm'],
+        'Nón': ['Nón bảo hiểm 3/4', 'Nón bảo hiểm full-face', 'Nón nửa đầu', 'Nón xe đạp', 'Nón trẻ em'],
         'Găng tay': ['Găng tay kín', 'Găng tay hở ngón', 'Găng lông'],
         'Phụ kiện khác': ['Kính', 'Áo', 'Trợ lực']
     },
@@ -22,7 +22,7 @@ export const data = {
     ],
     earCover: ['Không có', 'Có thể tháo rời', 'Mềm linh hoạt'],
     madeIn: ['Việt Nam', 'Thái Lan', 'Hàn Quốc', 'Trung Quốc', 'Mỹ', 'Malaysia'],
-    brand: ['ROYAL', 'ROC', 'BALDER', 'KYT', 'RONA', 'ANDES', 'TORC', 'JC', 'ASIA', 'SUNDA'],
+    brand: ['Royal', 'ROC', 'Balder', 'KYT', 'Rona', 'Andes', 'TORC', 'JC', 'Asia', 'Sunda'],
     warranty: ['Không', '3 Tháng', '6 Tháng', '12 Tháng'],
     timeChangeError: ['Không', '7 Ngày'],
     transportFee: [20000, 0],

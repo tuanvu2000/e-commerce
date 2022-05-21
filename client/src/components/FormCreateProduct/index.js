@@ -58,7 +58,7 @@ const FormCreateProduct = ({ form }) => {
                 url: res.data.secure_url,
                 cloudinaryId: res.data.public_id
             }))
-            console.log("server res: ", res);
+            // console.log("server res: ", res);
         } catch (error) {
             console.log("Eroor: ", error);
             onError({ error });

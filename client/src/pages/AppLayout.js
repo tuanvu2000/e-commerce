@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import { Header, Footer } from '../components'
 
 const AppLayout = () => {
     return (
-        <div style={{ margin: 50, fontSize: 30 }}>
-            <Link to="admin">Page Admin</Link>
-            <br />
-            <Link to="login">Login</Link>
-            <br />
-            <Link to="register">Register</Link>
+        <div styles={{ minHeight: '100vh' }}>
+            <Header />
+            <div style={{ minHeight: 500 }}>
+                <Outlet />
+            </div>
+            <Footer />
         </div>
     )
 }

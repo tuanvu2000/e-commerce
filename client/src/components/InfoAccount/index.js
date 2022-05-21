@@ -74,7 +74,7 @@ const InfoAccount = ({ data, edit, form }) => {
                 <Row gutter={30}>
                     <Col span={8}>
                         <div className={clsx(styles.avatar)}>
-                            <img src={avt} alt="avatar" />
+                            <img src={data.avatar} alt="avatar" />
                         </div>
                     </Col>
                     <Col span={16}>

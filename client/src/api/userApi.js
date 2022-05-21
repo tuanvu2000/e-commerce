@@ -5,6 +5,13 @@ const userApi = {
         'user/register',
         params
     ),
+    login: (params) => axiosClient.post(
+        'user/login',
+        params
+    ),
+    checkToken: () => axiosClient.post(
+        'user/check-token'
+    ),
     getAll: () => axiosClient.get(
         'user'
     ),

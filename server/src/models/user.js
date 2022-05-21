@@ -44,6 +44,9 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String
+    },
+    cloudinaryId: {
+        type: String
     }
 }, schemaOptions);
 

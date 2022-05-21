@@ -1,24 +1,112 @@
-import { useState } from 'react'
-import { Form, Input, Button, Radio, DatePicker } from 'antd'
-import { ArrowLeftOutlined } from '@ant-design/icons'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Form, Input, Button, Radio, DatePicker, Upload, message } from 'antd'
+import { UploadOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons'
+import { saveImgUser } from '../redux/slices/savedSlice'
+import axios from 'axios'
 import clsx from 'clsx'
 import styles from '../assets/styles/Register.module.scss'
-import avt from '../assets/images/avt.jpg'
+import moment from 'moment'
+import userApi from '../api/userApi'
 
 const Register = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [form] = Form.useForm()
+    const upImage = useSelector((state) => state.saved.user)
 
     const [nextStep, setNextStep] = useState(false)
+    const [image, setImage] = useState([])
 
-    const handleNextStep = () => {
+    useEffect(() => {
+        const checkToken = localStorage.getItem('access_token')
+        if (checkToken) return navigate('/')
+    }, [navigate])
+
+    const handleNextStep = (e) => {
+        e.preventDefault();
         setNextStep(true)
     }
-    const handleReturnStep = () => {
+    const handleReturnStep = (e) => {
+        e.preventDefault();
         setNextStep(false)
     }
+    const handleComplete = async () => {
+        try {
+            const values = await form.validateFields()
+            const birthday = values.birthday
+            const newValues = {
+                ...values,
+                username: values.username.trim().toLowerCase(),
+                birthday: birthday ? moment(birthday).format() : birthday,
+                avatar: upImage.url ? upImage.url : '',
+                cloudinaryId: upImage.cloudinaryId ? upImage.cloudinaryId : ''
+            }
+            const apiRes = await userApi.register(newValues)
+            console.log(apiRes)
 
+            navigate('../login')
+            message.success('Đăng kí thành công')
+        } catch (error) {
+            message.error('Vui lòng nhập đủ thông tin')
+        }
+    }
+
+    const uploadImage = async (options) => {
+        const { onSuccess, onError, file, onProgress } = options;
+
+        const formData = new FormData()
+        const config = {
+            headers: { "content-type": "multipart/form-data" },
+            onUploadProgress: event => {
+                const percent = Math.floor((event.loaded / event.total) * 100);
+                // setProgress(percent);
+                var progress = percent
+                if (percent === 100) {
+                    setTimeout(() => progress, 1000);
+                }
+                onProgress({ percent: (event.loaded / event.total) * 100 });
+            }
+        }
+        formData.append("file", file)
+        formData.append("folder", 'e-commerce/userImage')
+        formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET)
+        try {
+            const res = await axios.post(
+                `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+                formData,
+                config
+            )
+            onSuccess("Ok");
+            dispatch(saveImgUser({
+                url: res.data.secure_url,
+                cloudinaryId: res.data.public_id
+            }))
+            // console.log("server res: ", res);
+        } catch (error) {
+            console.log("Eroor: ", error);
+            onError({ error });
+        }
+    }
+
+    const handleOnChange = ({file, fileList, event}) => {
+        setImage(fileList)
+    }
+
+    const onRemove = (file) => {
+        const index = image.indexOf(file)
+        const newFileList = image.slice()
+        newFileList.splice(index, 1)
+        dispatch(saveImgUser({
+            url: '',
+            cloudinaryId: ''
+        }))
+        return {
+            fileList: newFileList
+        }
+    }
 
     return (
         <div className={clsx(styles.wrapper)}>
@@ -114,7 +202,31 @@ const Register = () => {
                             { [styles.activeStep]: nextStep })}
                         >
                             <div className={clsx(styles.uploadImg)}>
-                                <img src={avt} alt="upload-img" />
+                                {
+                                    upImage.url
+                                        ? <img src={upImage.url} alt="upload-img" /> 
+                                        : (
+                                            <div className={clsx(styles.img)}>
+                                                <p>
+                                                    + Thêm ảnh <br />
+                                                    <span>(Không bắt buộc)</span>
+                                                </p> 
+                                            </div>
+                                        )
+                                }
+                                <div className={clsx(styles.center)}>
+                                    <Upload
+                                        accept="image/*"
+                                        customRequest={uploadImage}
+                                        onChange={handleOnChange}
+                                        listType="text"
+                                        onRemove={onRemove}
+                                    >
+                                        {
+                                            image.length < 1 && <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                                        }
+                                    </Upload>
+                                </div>
                             </div>
                             <div className={clsx(styles.content)}>
                                 <Form.Item
@@ -146,7 +258,7 @@ const Register = () => {
                                 </Form.Item>
                                 <div className={clsx(styles.wrapInput)}>
                                     <Form.Item
-                                        name="birthDay"
+                                        name="birthday"
                                         label="Ngày sinh"
                                     >
                                         <DatePicker />
@@ -193,7 +305,12 @@ const Register = () => {
                                     >
                                         Quay lại
                                     </button>
-                                    <button className={clsx(styles.btn, styles.green)}>Hoàn tất</button>
+                                    <button 
+                                        onClick={handleComplete}
+                                        className={clsx(styles.btn, styles.green)}
+                                    >
+                                        Hoàn tất
+                                    </button>
                                 </div>
                             </div>
                         </div>

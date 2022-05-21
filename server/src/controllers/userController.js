@@ -28,16 +28,47 @@ exports.register = async (req, res) => {
         const savedUser = await newUser.save();
 
         // Hiển thị kết quả
-        res.status(201).json({
-            user: savedUser
-        });
+        res.status(201).json(savedUser);
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
     }
 }
 
-exports.login = async (req, res) => {}
+exports.login = async (req, res) => {
+    try {
+        // Tìm user cố tồn tại hay không ?
+        const user = await User.findOne({
+            username: req.body.username
+        });
+        // Nếu không tồn tại username thì báo lỗi
+        if (!user) {
+            return res.status(401).json('Tài khoản không tồn tại');
+        }
+        // Giải mã password để kiểm tra password đầu vào có giống hay không ?
+        const decryptedPass = CryptoJS.AES.decrypt(
+            user.password,
+            process.env.PASSWORD_SECRET_KEY
+        ).toString(CryptoJS.enc.Utf8);
+        if (decryptedPass !== req.body.password) {
+            return res.status(401).json('Mật khẩu không đúng, vui lòng thử lại');
+        }
+        // Khởi tạo token khi login
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.TOKEN_SECRET_KEY,
+        );
+        user.password = undefined;
+        // Hiển thị kết quả
+        res.status(200).json({
+            token,
+            user
+        })
+    } catch (error) {
+        console.Console(error);
+        res.status(500).json(error);
+    }
+}
 
 exports.getAll = async (req, res) => {
     try {

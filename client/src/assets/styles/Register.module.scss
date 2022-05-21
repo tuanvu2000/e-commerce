@@ -34,7 +34,7 @@
         padding: 4px 16px;
         border-radius: 30px;
         border: 2px solid transparent;
-        transition: 1s;
+        transition: 0.3s;
 
         &.active {
             color: #FF8412;
@@ -79,7 +79,6 @@
         margin-left: -7.2px;
     }
     span {
-        // border-radius: 10px;
         > input {
             letter-spacing: 1px;
         }
@@ -148,12 +147,48 @@
 }
 
 .uploadImg {
-    // max-width: 300px;
     margin-right: 48px;
+
+    .img {
+        background: #C4C4C4;
+        border: 1px solid #000;
+        border-radius: 50%;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+
+        p {
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        span {
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
     
     img {
         border-radius: 50%;
-        max-width: 300px;
-        max-height: 300px;
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .center {
+        margin-top: 8px;
+        text-align: center;
+
+        div ~ div {
+            > div > div {
+                color: #FF4D4F;
+            }
+            > div {
+                width: 300px;
+            }
+        }
     }
 }
