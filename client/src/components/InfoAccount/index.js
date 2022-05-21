@@ -2,7 +2,6 @@ import { Col, Row, Form, Input, DatePicker, Radio } from 'antd'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import styles from './InfoAccount.module.scss'
-import avt from '../../assets/images/avt.jpg'
 import moment from 'moment'
 
 const InfoAccount = ({ data, edit, form }) => {
