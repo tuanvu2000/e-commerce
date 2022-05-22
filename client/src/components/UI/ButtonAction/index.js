@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import clsx from 'clsx'
 import styles from './ButtonAction.module.scss'
 import { useDispatch } from 'react-redux'
-import { saveImgProduct } from '../../redux/slices/savedSlice'
+import { saveImgProduct } from '../../../redux/slices/savedSlice'
 
 const ButtonAction = ({ action, icon, color, onSave, onDelete }) => {
     const dispatch = useDispatch()

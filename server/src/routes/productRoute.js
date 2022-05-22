@@ -26,4 +26,14 @@ router.delete(
     productController.delete
 )
 
+router.get(
+    '/list/best-sell',
+    productController.bestSell
+)
+
+router.get(
+    '/list/:category',
+    productController.listCategory
+)
+
 module.exports = router;

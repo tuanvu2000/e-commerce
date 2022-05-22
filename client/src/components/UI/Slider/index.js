@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel } from 'antd'
-import banner1 from '../../assets/images/banner/banner1.jpg'
-import banner2 from '../../assets/images/banner/banner2.jpg'
+import banner1 from '../../../assets/images/banner/banner1.jpg'
+import banner2 from '../../../assets/images/banner/banner2.jpg'
 import clsx from 'clsx'
 import styles from './Silder.module.scss'
 

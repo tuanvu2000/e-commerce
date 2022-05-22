@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, message } from 'antd'
-import { ButtonAction, TitleContent, FormCreateProduct } from '../../components'
+import { FormCreateProduct } from '../../components'
+import { ButtonAction, TitleContent } from '../../components/UI'
 import useTitle from '../../hooks/useTitle'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Product.module.scss'

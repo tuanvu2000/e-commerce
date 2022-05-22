@@ -2,7 +2,7 @@ export const data = {
     // categoryData: ['Nón', 'Găng tay', 'Phụ kiện khác'],
     categoryData: ['Nón'],
     subCategoryData: {
-        'Nón': ['Nón bảo hiểm 3/4', 'Nón bảo hiểm full-face', 'Nón nửa đầu', 'Nón xe đạp', 'Nón trẻ em'],
+        'Nón': ['Nón bảo hiểm 3/4', 'Nón bảo hiểm full-face', 'Nón nửa đầu', 'Mũ xe đạp', 'Nón trẻ em'],
         'Găng tay': ['Găng tay kín', 'Găng tay hở ngón', 'Găng lông'],
         'Phụ kiện khác': ['Kính', 'Áo', 'Trợ lực']
     },

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ButtonAction, TitleContent, InfoProduct, Loading } from '../../components'
+import { InfoProduct } from '../../components'
+import { ButtonAction, TitleContent } from '../../components/UI'
+import { Loading } from '../../components/UI'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import productApi from '../../api/productApi'

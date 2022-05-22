@@ -65,3 +65,83 @@ exports.delete = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+exports.bestSell = async (req, res) => {
+    try {
+        const list = await Product.find({}).sort('-quantitySell').limit(8);
+        res.status(200).json(list);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+exports.listCategory = async (req, res) => {
+    try {
+        const list = req.params.category.split('+');
+
+        switch (list[0]) {
+            case 'non':
+                if (list[1] === 'non-34') {
+                    const products = await Product
+                        .find({ subCategory: 'Nón bảo hiểm 3/4'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'non-fullface') {
+                    const products = await Product
+                        .find({ subCategory: 'Nón bảo hiểm full-face'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'non-nua-dau') {
+                    const products = await Product
+                        .find({ subCategory: 'Nón nửa đầu'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'non-tre-em') {
+                    const products = await Product
+                        .find({ subCategory: 'Nón trẻ em'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'mu-xe-dap') {
+                    const products = await Product
+                        .find({ subCategory: 'Mũ xe đạp'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+            case 'phukien':
+                if (!list[1]) {
+                    const products = await Product
+                        .find({ category: 'Phụ kiện' })
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'kinh') {
+                    const products = await Product
+                        .find({ subCategory: 'Kính'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'gang-tay') {
+                    const products = await Product
+                        .find({ subCategory: 'Găng tay'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+                if (list[1] === 'orther') {
+                    const products = await Product
+                        .find({ subCategory: 'Khác'})
+                        .sort('-price')
+                    res.status(200).json(products)
+                }
+            default:
+                return []
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}

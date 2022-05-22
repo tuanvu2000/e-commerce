@@ -1,5 +1,6 @@
 import { Row, Col } from 'antd'
-import { TitleContent, CardItem, TableOrderNew } from '../../components'
+import { CardItem, TableOrderNew } from '../../components'
+import { TitleContent } from '../../components/UI'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Dashboard.module.scss'

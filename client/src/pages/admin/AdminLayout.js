@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
-import { SideBar, HeaderAdmin, Loading } from '../../components'
+import { SideBar, HeaderAdmin } from '../../components'
+import { Loading } from '../../components/UI'
 import clsx from 'clsx'
 import styles from '../../assets/styles/AdminLayout.module.scss'
 import { useSelector } from 'react-redux'

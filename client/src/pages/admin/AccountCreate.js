@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import styles from '../../assets/styles/Account.module.scss'
-import { ButtonAction, TitleContent, FormCreateUser } from '../../components'
+import { FormCreateUser } from '../../components'
+import { TitleContent, ButtonAction } from '../../components/UI'
 import { Form, message } from 'antd'
 import useTitle from '../../hooks/useTitle'
 import moment from 'moment'

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ButtonAction, TitleContent, InfoAccount, TableContainer, Loading } from '../../components'
+import { InfoAccount, TableContainer } from '../../components'
+import { TitleContent, ButtonAction } from '../../components/UI'
+import { Loading } from '../../components/UI'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import userApi from '../../api/userApi'

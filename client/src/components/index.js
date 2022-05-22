@@ -12,10 +12,5 @@ export { default as InfoProduct } from './InfoProduct'
 // for User
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
-
-// UI small
-export {default as Loading } from './Loading'
-export {default as TitleContent } from './TitleContent'
-export {default as ButtonCreate } from './ButtonCreate'
-export {default as ButtonAction } from './ButtonAction'
-export {default as Slider } from './Slider'
+export { default as CategoryLink } from './CategoryLink'
+export { default as ListProduct } from './ListProduct'

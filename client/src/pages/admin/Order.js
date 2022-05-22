@@ -1,5 +1,6 @@
 // import { useState, useEffect } from 'react'
-import { TitleContent, TableContainer, ButtonCreate } from '../../components'
+import { TableContainer } from '../../components'
+import { TitleContent, ButtonCreate } from '../../components/UI'
 import useTitle from '../../hooks/useTitle'
 
 const Order = () => {

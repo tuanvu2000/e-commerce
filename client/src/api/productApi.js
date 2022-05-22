@@ -17,6 +17,12 @@ const productApi = {
     ),
     delete: (id) => axiosClient.delete(
         `product/${id}`
+    ),
+    getBestSell: () => axiosClient.get(
+        'product/list/best-sell'
+    ),
+    getCategory: (values) => axiosClient.get(
+        `product/list/${values}`
     )
 }
 
