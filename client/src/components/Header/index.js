@@ -5,6 +5,7 @@ import styles from './Header.module.scss'
 import userApi from '../../api/userApi'
 import { logout } from '../../handlers/authHandler'
 import { navHat, navAccessory, navBrand } from './data'
+import { CartList } from '../../components'
 
 const Header = () => {
     const navigate = useNavigate()
@@ -58,7 +59,7 @@ const Header = () => {
                         ) : (
                             <>
                                 <li>
-                                    <Link to="admin">Admin</Link>
+                                    <Link to="admin">Anonymous</Link>
                                 </li>
                                 <li></li>
                                 <li>
@@ -73,7 +74,9 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className={clsx(styles.bottom)}>
-                    <div className={clsx(styles.logo)}>PHƯỢT CULTURE</div>
+                    <div className={clsx(styles.logo)}>
+                        <Link to='/'>PHƯỢT CULTURE</Link>
+                    </div>
                     <ul className={clsx(styles.navbar)}>
                         <li>
                             <Link to=".">
@@ -100,6 +103,12 @@ const Header = () => {
                                 <i className="fas fa-angle-down"></i>
                             </Link>
                             <NavbarList data={navBrand} />
+                        </li>
+                        <li>
+                            <Link to=".">
+                                <i className='bx bx-cart-alt'></i>
+                            </Link>
+                            <CartList />
                         </li>
                     </ul>
                 </div>

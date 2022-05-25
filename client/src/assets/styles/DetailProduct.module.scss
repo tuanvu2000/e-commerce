@@ -1,0 +1,49 @@
+.wrapper {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.col {
+    padding: 0 12px;
+    // left
+    > img {
+        width: 100%;
+        object-fit: contain;
+    }
+
+    //right
+    > h2 {
+        font-weight: 700;
+        font-size: 28px;
+    }
+    .price {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 32px;
+        
+        > .priceOld {
+            font-weight: 400;
+            color: #777;
+            text-decoration: line-through;
+            margin-right: 16px;
+        }
+    }
+    .content {
+        p {
+            display: flex;
+
+            span {
+                &:first-child {
+                    width: 180px;
+                    font-weight: 700;
+                }
+                &:last-child {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+

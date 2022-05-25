@@ -76,7 +76,7 @@ const Home = () => {
                                     category={item.data.category} 
                                     subCategory={item.data.subCategory}
                                     title={item.title}
-                                /> 
+                                />
                             </div>
                         ))
                     }

@@ -10,8 +10,6 @@ const ListProduct = ({ category, subCategory, title }) => {
     const [products, setProducts] = useState()
     const [loading, setLoading] = useState(false)
 
-    // console.log({category, subCategory})
-
     useEffect(() => {
         const changeData = () => {
             if (category === 'Nón') {
@@ -61,21 +59,33 @@ const ListProduct = ({ category, subCategory, title }) => {
         const numToString = number.toString();
         const regex = /\B(?=(\d{3})+(?!\d))/g;
         
-        return numToString.replace(regex, '.')
+        return numToString.replace(regex, '.');
+    }
+
+    const removeAccents = (str) => {
+        return str.toLowerCase()
+                .normalize('NFD')                   // chuyển chuỗi sang unicode tổ hợp
+                .replace(/[\u0300-\u036f]/g, '')    // xóa các ký tự dấu sau khi tách tổ hợp
+                .replace(/[đĐ]/g, 'd')              // Thay ký tự đ Đ
+                .replace(/([^0-9a-z-\s])/g, '')     // Xóa ký tự đặc biệt
+                .replace(/(\s+)/g, '-')             // Xóa khoảng trắng thay bằng ký tự -
+                .replace(/-+/g, '-')                // Xóa ký tự - liên tiếp
+                .replace(/^-+|-+$/g, '');           // xóa phần dư - ở đầu & cuối
     }
  
     return (
         <div className={clsx(styles.wrapper)}>
             <Horizontal text={title} url="." />
             {
-                loading 
+                loading
                 ? <Loading />
                 : <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
                     {
-                        products && products.map(product => (
+                        products
+                        && products.map(product => (
                             <Col span={6} key={product.id}>
                                 <div className={clsx(styles.col)}>
-                                    <Link to=".">
+                                    <Link to={removeAccents(product.namePd)} state={{ id: product.id }}>
                                         <img src={product.image} alt={product.namePd} />
                                     </Link>
                                     <div className={clsx(styles.textBox)}>
@@ -91,7 +101,9 @@ const ListProduct = ({ category, subCategory, title }) => {
                                             </div> 
                                         }
                                         <p className={clsx(styles.name)}>
-                                            <Link to=".">{product.namePd}</Link>
+                                            <Link to={removeAccents(product.namePd)} state={{ id: product.id }}>
+                                                {product.namePd}
+                                            </Link>
                                         </p>
                                         <p>
                                             {

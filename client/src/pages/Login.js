@@ -22,9 +22,7 @@ const Login = () => {
         try {
             const values = await form.validateFields()
             const apiRes = await userApi.login(values)
-            console.log(apiRes.token)
             localStorage.setItem('access_token', apiRes.token)
-
             message.success('Đăng nhập thành công')
             setTimeout(() => {
                 navigate('/')

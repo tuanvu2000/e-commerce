@@ -17,7 +17,8 @@ import {
     AppLayout,
     Login,
     Register,
-    Home
+    Home,
+    DetailProduct
 } from './pages'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Routes>
                 <Route path="" element={<AppLayout />}>
                     <Route index element={<Home />} />
+                    <Route path=":product" element={<DetailProduct />} />
                 </Route>
 
                 <Route path="login" element={<Login />} />

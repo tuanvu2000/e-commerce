@@ -1,0 +1,131 @@
+.wrapper {
+    width: 320px;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 20;
+    background: #fff;
+    color: #000;
+    padding: 8px 16px 16px 16px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    display: none;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: 10px;
+        z-index: 19;
+        border-color: transparent transparent #fff transparent;
+        border-style: solid;
+        border-width: 10px 8px;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: -12px;
+        right: 0;
+        z-index: 18;
+        background: transparent;
+        width: 50px;
+        height: 15px;
+    }
+}
+
+.list {
+    max-width: 320px;
+}
+
+.item {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #000;
+    position: relative;
+
+    img {
+        margin-right: 16px;
+    }
+    > div {
+        width: 100%;
+        padding-right: 24px;
+
+        p:first-child {
+            margin-bottom: 6px;
+        }
+        p {
+            font-size: 14px;
+            margin-bottom: 0;
+            span {
+                &:first-child {
+                    font-weight: 700;
+                }
+                &:last-child {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    > span {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        line-height: 1;
+        
+        > i {
+            font-size: 18px;
+            transition: 0.2s;
+
+            &:hover {
+                color: #FF2C2C;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.total {
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    padding: 12px 0;
+}
+
+.btn {
+    border:none;
+    outline: none;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    a {
+        width: 100%;
+        display: block;
+        padding: 6px 0;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 10px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    &.yellow a {
+        background-color:#FBFF30;
+        color: #000;
+    }
+    &.red a {
+        background-color: #FF2C2C;
+        color: #fff;
+    }
+    &.red a:hover,
+    &.yellow a:hover {
+        opacity: 0.9;
+    }
+}
+
