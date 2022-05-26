@@ -175,7 +175,7 @@ const FormCreateProduct = ({ form }) => {
                         <Form.Item
                             name="porousMaterial"
                             label="Chất liệu xốp"
-                            initialValue={data.porousMaterial[0]}
+                            initialValue={data.porousMaterial[1]}
                         >
                             <Select value="Không">
                                 {data.porousMaterial.map(item => (

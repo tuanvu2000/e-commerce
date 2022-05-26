@@ -1,50 +1,67 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from './CartList.module.scss'
-import { Link } from 'react-router-dom'
+import empty from '../../assets/images/basket.png'
+import { removeOrder } from '../../redux/slices/orderSlice'
 
-const image="https://res.cloudinary.com/dwf04fosc/image/upload/v1652365706/rcvhp4sqstduja60ian9.jpg"
 const CartList = () => {
+    const dispatch = useDispatch()
+    const order = useSelector((state) => state.order)
 
-    const handleRemove = () => {
-        console.log("remove product")
+    const handleRemove = (index) => {
+        // console.log(`remove product - ${index}`)
+        dispatch(removeOrder(index))
+    }
+
+    const handleMoney = (number) => {
+        const numToString = number.toString();
+        const regex = /\B(?=(\d{3})+(?!\d))/g;
+        
+        return numToString.replace(regex, '.') + ' đ';
     }
 
     return (
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.list)}>
-                <div className={clsx(styles.item)}>
-                    <img src={image} alt="non" width="60" height="60" />
-                    <div>
-                        <p>Fullface KYT NFR Trắng A</p>
-                        <p>
-                            <span>1</span> * <span>3.910.000</span>
-                        </p>
-                    </div>
-                    <span onClick={handleRemove}>
-                        <i className="far fa-times-circle"></i>
-                    </span>
-                </div>
-                <div className={clsx(styles.item)}>
-                    <img src={image} alt="non" width="60" height="60" />
-                    <div>
-                        <p>Fullface KYT NFR Trắng</p>
-                        <p>
-                            <span>1</span> * <span>3.910.000</span>
-                        </p>
-                    </div>
-                    <span onClick={handleRemove}>
-                        <i className="far fa-times-circle"></i>
-                    </span>
-                </div>
+                {
+                    order.list.map((item, index) => (
+                        <div key={item.id + item.size} className={clsx(styles.item)}>
+                            <img src={item.image} alt="non" width="60" height="60" />
+                            <div>
+                                <p>{item.name} ({item.size})</p>
+                                <p>
+                                    <span>{item.quantity}</span> * <span>{handleMoney(item.price)}</span>
+                                </p>
+                            </div>
+                            <span onClick={() => handleRemove(index)}>
+                                <i className="far fa-times-circle"></i>
+                            </span>
+                        </div>
+                    ))
+                }
             </div>
-            <p className={clsx(styles.total)}>Tổng tiền: 7.820.000</p>
-            <button className={clsx(styles.btn, styles.yellow)}>
-                <Link to=".">Xem giỏ hàng</Link>
-            </button>
-            <button className={clsx(styles.btn, styles.red)}>
-                <Link to=".">Thanh toán</Link>
-            </button>
+            {
+                order.list.length > 0 
+                ? (
+                    <>
+                        <p className={clsx(styles.total)}>Tổng tiền: {handleMoney(order.total)}</p>
+                        <button className={clsx(styles.btn, styles.yellow)}>
+                            <Link to=".">Xem giỏ hàng</Link>
+                        </button>
+                        <button className={clsx(styles.btn, styles.red)}>
+                            <Link to=".">Thanh toán</Link>
+                        </button>
+                    </>
+                )
+                : (
+                    <div className={clsx(styles.empty)}>
+                        <img src={empty} alt="empty order" />
+                        <p>Giỏ hàng chưa có sản phẩm nào !</p>
+                    </div>
+                )
+            }
         </div>
     )
 }

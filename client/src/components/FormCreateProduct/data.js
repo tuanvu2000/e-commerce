@@ -8,7 +8,7 @@ export const data = {
     },
     size: ['S', 'M', 'L', 'XL', 'XXL'],
     hatMaterial: ['Không', 'ABS', 'Nhựa dẻo ADT', 'Sợi carbon 100%'],
-    porousMaterial: ['EPS', 'PC & EPS'],
+    porousMaterial: ['Không', 'EPS', 'PC & EPS'],
     liningMaterial: [
         'Không',
         'Vải lưới', 
