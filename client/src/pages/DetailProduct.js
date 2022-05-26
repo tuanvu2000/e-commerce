@@ -130,6 +130,7 @@ const DetailProduct = () => {
                 }))
             }
             setLoadingBtn(false)
+            setQuantity(1)
         }, 1000)
     }
 
