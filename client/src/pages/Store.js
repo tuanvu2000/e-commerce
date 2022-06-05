@@ -60,6 +60,7 @@ const Store = () => {
     },[location])
 
     useEffect(() => {
+        setLoading(true)
         const getApi = async () => {
             if (path.length === 1) {
                 const res = await productApi.getListType({
