@@ -2,29 +2,46 @@
     thead > tr > th {
         font-weight: 700;
     }
-    
-    table {
-        border-top: 1px solid #5e5e5e !important;
-        border-left: 1px solid #5e5e5e !important;
 
-        thead > tr > th,
-        tbody > tr > td {
-            border-right: 1px solid #5e5e5e !important;
-            border-bottom: 1px solid #5e5e5e !important;
+    :global {
+        .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>thead>tr>th {
+            border-right: 1px solid #5e5e5e;
+            border-top: 1px solid #5e5e5e;
+        }
+        .ant-table-thead>tr>th {
+            border-bottom: 1px solid #5e5e5e;
+            &:first-child {
+                border-left: 1px solid #5e5e5e;
+            }
+        }
 
-            > p:last-child {
-                margin-bottom: 0;
+        .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tbody>tr>td {
+            border-right: 1px solid #5e5e5e;
+        }
+        .ant-table-tbody>tr>td {
+            border-bottom: 1px solid #5e5e5e;
+            &:first-child {
+                border-left: 1px solid #5e5e5e;
             }
         }
     }
 
-    &.history {
+    &.admin.history {
         thead > tr > th {
             background: #9CACFF;
         }
 
         tr:hover > td {
             background: #FFD990;
+        }
+    }
+    &.user.history {
+        thead > tr > th {
+            background: #FFC52F;
+        }
+
+        tr:hover > td {
+            background: #CFCFCF;
         }
     }
 }

@@ -16,7 +16,53 @@
     padding: 0 20px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    background: #FDFF9A;
+
+    &.admin {
+        background: #FDFF9A;
+        .header i {
+            background: #FDFF9A;
+        }
+        .box {
+            background: #FFF7B4;
+        }
+        :global {
+            .ant-radio-inner:after {
+                background-color: #1890ff;
+            }
+            .ant-radio-wrapper-checked {
+                font-weight: 700;
+                .ant-radio-inner {
+                    background-color: #1890ff;
+                }
+            }
+            .ant-radio-checked .ant-radio-inner {
+                border-color: #000;
+            }
+        }
+    }
+    &.user {
+        background: #FFF;
+        .header i {
+            background: #FFF;
+        }
+        .box {
+            background: #ECECEC;
+        }
+        :global {
+            .ant-radio-inner:after {
+                background-color: #F4CB08;
+            }
+            .ant-radio-wrapper-checked {
+                font-weight: 700;
+                .ant-radio-inner {
+                    background-color: #F4CB08;
+                }
+            }
+            .ant-radio-checked .ant-radio-inner {
+                border-color: #000;
+            }
+        }
+    }
 }
 
 .header {
@@ -48,7 +94,7 @@
 }
 
 .group {
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
 
 .label {
@@ -60,6 +106,25 @@
     border: 1px solid #000;
     border-radius: 10px;
     font-weight: 500;
-    padding: 5px 8px;
-    min-height: 34px;
+    padding: 4px 11px;
+    min-height: 32px;
+}
+
+:global {
+    .ant-picker {
+        width: 100%;
+        border-color: #777;
+        border-radius: 10px;
+        input {
+            font-weight: 500;
+        }
+    }
+    .ant-input {
+        border-color: #777;
+        border-radius: 10px;
+        font-weight: 500;
+    }
+    .ant-radio-inner {
+        border-color: #777;
+    }
 }

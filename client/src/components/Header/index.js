@@ -62,10 +62,6 @@ const Header = () => {
                         ) : (
                             <>
                                 <li>
-                                    <Link to="admin">Anonymous</Link>
-                                </li>
-                                <li></li>
-                                <li>
                                     <Link to="login">Đăng nhập</Link>
                                 </li>
                                 <li></li>

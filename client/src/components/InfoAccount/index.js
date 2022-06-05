@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import styles from './InfoAccount.module.scss'
 import moment from 'moment'
 
-const InfoAccount = ({ data, edit, form }) => {
+const InfoAccount = ({ data, edit, form, theme }) => {
     const [dataUser, setDataUser] = useState([]);
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const InfoAccount = ({ data, edit, form }) => {
                         </div>
                     </Col>
                     <Col span={16}>
-                        <div className={clsx(styles.wrapBox)}>
+                        <div className={clsx(styles.wrapBox, styles[theme])}>
                             <div className={clsx(styles.header)}>
                                 <i className="fas fa-star"></i>
                             </div>

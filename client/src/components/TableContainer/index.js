@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from './TableContainer.module.scss'
 
-const TableContainer = ({type, data, loading}) => {
+const TableContainer = ({ type, data, loading, theme }) => {
 
     const handleMoney = (number) => {
         const numToString = number.toString();
@@ -258,7 +258,7 @@ const TableContainer = ({type, data, loading}) => {
     }
 
     return (
-        <div className={clsx(styles.tb, {
+        <div className={clsx(styles.tb, styles[theme], {
             [styles.history]: type === 'historyBuy'
         })}>
             <Table

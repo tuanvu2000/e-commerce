@@ -122,7 +122,7 @@ const AccountDetail = () => {
                     </div>
 
                     {/* Hiển thị thông tin tài khoản */}
-                    <InfoAccount data={user} edit={isEdit} form={form} />
+                    <InfoAccount data={user} edit={isEdit} form={form} theme="admin" />
                     <div className={clsx(styles.divider)}></div>
 
                     {/* Hiển thị lịch sử mua hàng */}
@@ -130,6 +130,7 @@ const AccountDetail = () => {
                     <TableContainer 
                         type="historyBuy"
                         data={dataTest}
+                        theme="admin"
                     />
                 </>
             }
