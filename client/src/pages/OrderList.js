@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button, Col, Radio, Row } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { Col, Radio, Row } from 'antd'
 import clsx from 'clsx'
 import styles from '../assets/styles/OrderList.module.scss'
 import { removeOrder } from '../redux/slices/orderSlice'
@@ -29,17 +29,17 @@ const OrderList = () => {
         return numToString.replace(regex, '.') + ' đ';
     }
 
-    const handleDecrease = (value) => {
-        setQuantity([
-            quantity[value] > 0 ? quantity[value] - 1 : 0
-        ])
-    }
+    // const handleDecrease = (value) => {
+    //     setQuantity([
+    //         quantity[value] > 0 ? quantity[value] - 1 : 0
+    //     ])
+    // }
 
-    const handleIncrease = (value) => {
-        setQuantity([
-            quantity[value] + 1
-        ])
-    }
+    // const handleIncrease = (value) => {
+    //     setQuantity([
+    //         quantity[value] + 1
+    //     ])
+    // }
 
     const handleOnChange = () => {
         console.log(123)

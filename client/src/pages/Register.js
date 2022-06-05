@@ -18,7 +18,7 @@ const Register = () => {
     const upImage = useSelector((state) => state.saved.user)
 
     const [nextStep, setNextStep] = useState(false)
-    const [next, setNext] = useState(true)
+    // const [next, setNext] = useState(true)
     const [image, setImage] = useState([])
 
     useEffect(() => {

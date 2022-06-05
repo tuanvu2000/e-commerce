@@ -204,10 +204,10 @@ exports.listType = async (req, res, next) => {
             .find({ [type]: convertData[value] })
             .skip((pageSize * page) - pageSize)
             .limit(pageSize)
-            .sort(sort)
+            .sort(sort);
         const count = await Product
             .find({ [type]: convertData[value] })
-            .count()
+            .count();
         res.status(200).json({
             products: list,
             current: page,
@@ -216,9 +216,7 @@ exports.listType = async (req, res, next) => {
             pageEnd: Math.floor(count / (pageSize * page))
                 ? (pageSize * page)
                 : (pageSize * (page - 1)) + (count - (pageSize * (page - 1)))
-            // count / (pageSize * page)
-            // Math.floor(count / (pageSize * page))
-        })
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json(error)
