@@ -26,6 +26,7 @@ import {
     Store,
     NotFound
 } from './pages'
+import { BanHang, MuaHang, GiaoHang, BaoVe } from './pages/subs';
 
 function App() {
     return (
@@ -48,6 +49,12 @@ function App() {
                     <Route path="giam-gia" element={<Promotion />} />
                     <Route path="dat-hang" element={<OrderList />} />
                     <Route path="thanh-toan" element={<Pay />} />
+                    <Route path="policy">
+                        <Route path="ban-hang" element={<BanHang />} />
+                        <Route path="mua-hang" element={<MuaHang />} />
+                        <Route path="giao-hang" element={<GiaoHang />} />
+                        <Route path="bao-ve" element={<BaoVe />} />
+                    </Route>
                 </Route>
 
                 <Route path="login" element={<Login />} />

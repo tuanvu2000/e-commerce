@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import clsx from 'clsx'
 import styles from './Header.module.scss'
 import userApi from '../../api/userApi'
@@ -11,6 +12,7 @@ import { Badge } from '../../components/UI'
 const Header = () => {
     const navigate = useNavigate()
     const refWrap = useRef(null)
+    const order = useSelector((state) => state.order)
     const [user, setUser] = useState()
     const [height, setHeight] = useState(0)
 
@@ -104,9 +106,13 @@ const Header = () => {
                             <NavbarList data={navBrand} />
                         </li>
                         <li>
-                            <Link to="dat-hang">
-                                <i className='bx bx-cart-alt'></i>
-                            </Link>
+                            {
+                                order.list.length > 0
+                                ? <Link to='dat-hang'>
+                                    <i className='bx bx-cart-alt'></i>
+                                </Link>
+                                : <i className='bx bx-cart-alt'></i>
+                            }
                             <CartList />
                             <Badge />
                         </li>

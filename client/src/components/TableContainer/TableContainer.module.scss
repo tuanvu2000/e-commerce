@@ -20,6 +20,9 @@
         }
         .ant-table-tbody>tr>td {
             border-bottom: 1px solid #5e5e5e;
+            > p:last-child {
+                margin-bottom: 0;
+            }
             &:first-child {
                 border-left: 1px solid #5e5e5e;
             }

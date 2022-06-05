@@ -25,12 +25,12 @@ const Footer = () => {
                     <h3>Thông tin</h3>
                     <span></span>
                     <ul>
-                        <li><Link to=".">Chính sách bán hàng</Link></li>
-                        <li><Link to=".">Giặt nón miễn phí</Link></li>
-                        <li><Link to=".">Chính sách bảo hành, đổi mới</Link></li>
-                        <li><Link to=".">Cách thức mua hàng</Link></li>
-                        <li><Link to=".">Giao hàng - Thánh toán</Link></li>
-                        <li><Link to=".">Chính sách bảo vệ thông tin cá nhân</Link></li>
+                        <li><Link to="policy/ban-hang">Chính sách bán hàng</Link></li>
+                        <li><Link to="policy/ban-hang">Giặt nón miễn phí</Link></li>
+                        <li><Link to="policy/ban-hang">Chính sách bảo hành, đổi mới</Link></li>
+                        <li><Link to="policy/mua-hang">Cách thức mua hàng</Link></li>
+                        <li><Link to="policy/giao-hang">Giao hàng - Thanh toán</Link></li>
+                        <li><Link to="policy/bao-ve">Chính sách bảo vệ thông tin cá nhân</Link></li>
                     </ul>
                 </Col>
                 <Col span={8} className={clsx(styles.list)}>

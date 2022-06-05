@@ -209,6 +209,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Số lượng',
             dataIndex: 'products',
             key: 'quantity',
+            width: 100,
             render: products => (
                 <>
                     {
