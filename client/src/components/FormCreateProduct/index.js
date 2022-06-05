@@ -18,6 +18,7 @@ const FormCreateProduct = ({ form }) => {
 
     const handleCategoryChange = value => {
         setCategory(data.subCategoryData[value])
+        form.setFieldsValue({ subCategory: data.subCategoryData[value][0] })
         // setSubCategory(subCategoryData[value][0])
         // console.log(value)
     }

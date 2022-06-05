@@ -1,0 +1,43 @@
+.wrapper {
+    max-width: 1200px;
+    padding: 32px 15px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.pageHeader {
+    padding: 10px 60px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > span {
+        margin-left: auto;
+        margin-right: 12px;
+    }
+}
+
+.pagination {
+    text-align: center;
+    padding: 20px 0;
+
+    // :global {
+    //     .ant-pagination-item {
+    //         background-color: #C4C4C4;
+    //         border-radius: 50%;
+    //         font-weight: 700;
+    //     }
+    //     .ant-pagination-item-active {
+    //         border-color:#F4CB08;
+    //         background:#F4CB08;
+            
+    //         a {
+    //             color: #000;
+    //         }
+    //     }
+    //     .ant-pagination-item-link {
+    //         background-color: #C4C4C4;
+    //         border-radius: 50%;
+    //     }
+    // }
+}

@@ -18,7 +18,13 @@ import {
     Login,
     Register,
     Home,
-    DetailProduct
+    Profile,
+    DetailProduct,
+    OrderList,
+    Pay,
+    Promotion,
+    Store,
+    NotFound
 } from './pages'
 
 function App() {
@@ -27,7 +33,21 @@ function App() {
             <Routes>
                 <Route path="" element={<AppLayout />}>
                     <Route index element={<Home />} />
-                    <Route path=":product" element={<DetailProduct />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path=":product/detail" element={<DetailProduct />} />
+                    {[
+                        ":type/",
+                        // ":type/page=:number",
+                        // ":type/orderby=:order",
+                        "non-bao-hiem/:type/",
+                        // "non-bao-hiem/:type/orderby=:order",
+                        // "phu-kien/:type/orderby=:order",
+                        // "thuong-hieu/:type/orderby=:order"
+                    ].map((path, index) => 
+                    <Route path={path} element={<Store />} key={index} />)}
+                    <Route path="giam-gia" element={<Promotion />} />
+                    <Route path="dat-hang" element={<OrderList />} />
+                    <Route path="thanh-toan" element={<Pay />} />
                 </Route>
 
                 <Route path="login" element={<Login />} />
@@ -44,6 +64,7 @@ function App() {
                     <Route path="order" element={<Order />} />
                     <Route path="total" element={<Total />} />
                 </Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );

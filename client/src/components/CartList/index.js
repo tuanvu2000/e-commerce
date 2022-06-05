@@ -11,7 +11,6 @@ const CartList = () => {
     const order = useSelector((state) => state.order)
 
     const handleRemove = (index) => {
-        // console.log(`remove product - ${index}`)
         dispatch(removeOrder(index))
     }
 
@@ -48,10 +47,10 @@ const CartList = () => {
                     <>
                         <p className={clsx(styles.total)}>Tổng tiền: {handleMoney(order.total)}</p>
                         <button className={clsx(styles.btn, styles.yellow)}>
-                            <Link to=".">Xem giỏ hàng</Link>
+                            <Link to="dat-hang">Xem giỏ hàng</Link>
                         </button>
                         <button className={clsx(styles.btn, styles.red)}>
-                            <Link to=".">Thanh toán</Link>
+                            <Link to="thanh-toan">Thanh toán</Link>
                         </button>
                     </>
                 )

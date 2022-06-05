@@ -37,6 +37,7 @@ router.put(
 
 router.delete(
     '/:id',
+    tokenHandler.verifyAdToken,
     userController.delete
 )
 

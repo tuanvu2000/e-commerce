@@ -1,5 +1,38 @@
 const { Product } = require('../models');
 
+const convertData = {
+    "non-bao-hiem": "Nón",
+    "phu-kien": "Phụ kiện",
+    "non-34": "Nón bảo hiểm 3/4",
+    "non-fullface": "Nón bảo hiểm full-face",
+    "non-nua-dau": "Nón nửa đầu",
+    "non-tre-em": "Nón trẻ em",
+    "mu-xe-dap": "Mũ xe đạp",
+    "royal": 'Royal',
+    "roc": 'ROC',
+    "balder": 'Balder',
+    "kyt": 'KYT',
+    "rona": 'Rona',
+    "andes": 'Andes',
+    "torc": 'TORC',
+    "jc": 'JC',
+    "asia": 'Asia',
+    "sunda": 'Sunda',
+}
+
+const convertBrand = {
+    royal: 'Royal',
+    roc: 'ROC',
+    balder: 'Balder',
+    kyt: 'KYT',
+    rona: 'Rona',
+    andes: 'Andes',
+    torc: 'TORC',
+    jc: 'JC',
+    asia: 'Asia',
+    sunda: 'Sunda',
+}
+
 exports.add = async (req, res) => {
     try {
         // kiểm tra tên sản phẩm đã tồn tại chưa
@@ -76,7 +109,19 @@ exports.bestSell = async (req, res) => {
     }
 }
 
-exports.listCategory = async (req, res) => {
+exports.bestSale = async (req, res) => {
+    try {
+        const list = await Product
+            .find({ sale: { $gt: 0 } })
+            .sort('-sale');
+        res.status(200).json(list);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.listSubCategory = async (req, res) => {
     try {
         const list = req.params.category.split('+');
 
@@ -143,5 +188,75 @@ exports.listCategory = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
+    }
+}
+
+exports.listType = async (req, res, next) => {
+    const {
+        page,
+        pageSize,
+        type,
+        value,
+        sort
+    } = req.body
+    try {
+        const list = await Product
+            .find({ [type]: convertData[value] })
+            .skip((pageSize * page) - pageSize)
+            .limit(pageSize)
+            .sort(sort)
+        const count = await Product
+            .find({ [type]: convertData[value] })
+            .count()
+        res.status(200).json({
+            products: list,
+            current: page,
+            total: count,
+            pageStart: (page * pageSize) - pageSize + 1,
+            pageEnd: Math.floor(count / (pageSize * page))
+                ? (pageSize * page)
+                : (pageSize * (page - 1)) + (count - (pageSize * (page - 1)))
+            // count / (pageSize * page)
+            // Math.floor(count / (pageSize * page))
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.listHatSub = async (req, res) => {
+    try {
+        const list = await Product
+            .find({ subCategory: convertData[req.params.subCategory] })
+            .sort('-price')
+        res.status(200).json(list)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.listAccessorySub = async (req, res) => {
+    try {
+        const list = await Product
+            .find({ subCategory: convertData[req.params.subCategory] })
+            .sort('-price')
+        res.status(200).json(list)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.listBrand = async (req, res) => {
+    try {
+        const list = await Product
+            .find({ brand: req.params.brand })
+            .sort('-price')
+        res.status(200).json(list)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
     }
 }

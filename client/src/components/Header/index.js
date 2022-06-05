@@ -6,6 +6,7 @@ import userApi from '../../api/userApi'
 import { logout } from '../../handlers/authHandler'
 import { navHat, navAccessory, navBrand } from './data'
 import { CartList } from '../../components'
+import { Badge } from '../../components/UI'
 
 const Header = () => {
     const navigate = useNavigate()
@@ -44,12 +45,14 @@ const Header = () => {
                     <ul className={clsx(styles.auth)}>
                         {user ? (
                             <>
-                                <li>
-                                    <Link to="admin">{user.fullName}</Link>
-                                </li>
+                                {
+                                    user.role === 'admin' 
+                                    ? <Link to="admin">{user.fullName}</Link>
+                                    : <Link to=".">{user.fullName}</Link>
+                                }
                                 <li></li>
                                 <li>
-                                    <Link to=".">Thông tin tài khoản</Link>
+                                    <Link to="../profile">Thông tin tài khoản</Link>
                                 </li>
                                 <li></li>
                                 <li onClick={handleLogout}>
@@ -79,36 +82,37 @@ const Header = () => {
                     </div>
                     <ul className={clsx(styles.navbar)}>
                         <li>
-                            <Link to=".">
+                            <Link to="/giam-gia">
                                 Khuyến mãi
                             </Link>
                         </li>
                         <li>
-                            <Link to=".">
+                            <Link to="/non-bao-hiem">
                                 Nón bảo hiểm
                                 <i className="fas fa-angle-down"></i>
                             </Link>
                             <NavbarList data={navHat} />
                         </li>
                         <li>
-                            <Link to=".">
+                            <Link to="/phu-kien">
                                 Phụ kiện
                                 <i className="fas fa-angle-down"></i>
                             </Link>
                             <NavbarItem data={navAccessory} />
                         </li>
                         <li>
-                            <Link to=".">
+                            <Link to="/thuong-hieu">
                                 Thương hiệu
                                 <i className="fas fa-angle-down"></i>
                             </Link>
                             <NavbarList data={navBrand} />
                         </li>
                         <li>
-                            <Link to=".">
+                            <Link to="dat-hang">
                                 <i className='bx bx-cart-alt'></i>
                             </Link>
                             <CartList />
+                            <Badge />
                         </li>
                     </ul>
                 </div>
@@ -125,7 +129,7 @@ const NavbarList = ({ data }) => {
             {
                 data.map(subCategory => (
                     <div key={subCategory.text}>
-                        <p>{subCategory.text}</p>
+                        <Link to={subCategory.to}>{subCategory.text}</Link>
                         {
                             subCategory.hasOwnProperty('list') && 
                             <ul>

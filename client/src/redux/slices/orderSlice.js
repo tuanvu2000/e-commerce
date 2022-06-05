@@ -30,7 +30,11 @@ const orderSlice = createSlice({
                     total + (item.price * item.quantity)
                 , 0)
             }
-        }
+        },
+        // decreaseOrder: (state, action) => {
+        //     const index = state.list.find(item => item.id === action.payload)
+
+        // }
     }
 })
 

@@ -1,11 +1,11 @@
 export const navHat = [
     {
         text: "Nón bảo hiểm 3/4",
-        to: "."
+        to: "non-bao-hiem/non-34"
     },
     {
         text: "Nón bảo hiểm fullface",
-        to: ".",
+        to: "non-bao-hiem/non-fullface",
         list: [
             {
                 subText: "Fullface trên 2 triệu",
@@ -23,7 +23,7 @@ export const navHat = [
     },
     {
         text: "Nón xe đạp",
-        to: ".",
+        to: "non-bao-hiem/mu-xe-dap",
         list: [
             {
                 subText: "Mũ ARC",
@@ -45,33 +45,33 @@ export const navHat = [
     },
     {
         text: "Nón nửa đầu",
-        to: ".",
+        to: "non-bao-hiem/non-nua-dau",
     },
     {
         text: "Nón trẻ em",
-        to: ".",
+        to: "non-bao-hiem/non-tre-em",
     }
 ]
 
 export const navAccessory = [
     {
         text: "Kính",
-        to: "."
+        to: "phu-kien/kinh"
     },
     {
         text: "Găng tay",
-        to: "."
+        to: "phu-kien/gang-tay"
     },
     {
         text: "Khác",
-        to: "."
+        to: "phu-kien/other"
     }
 ]
 
 export const navBrand = [
     {
         text: "Royal",
-        to: ".",
+        to: "thuong-hieu/royal/orderby=price-asc",
         list: [
             {
                 subText: "Royal M139",
@@ -97,7 +97,7 @@ export const navBrand = [
     },
     {
         text: "ROC",
-        to: ".",
+        to: "thuong-hieu/roc/orderby=price-asc",
         list: [
             {
                 subText: "ROC R01",
@@ -127,7 +127,7 @@ export const navBrand = [
     },
     {
         text: "Balder",
-        to: ".",
+        to: "thuong-hieu/balder/orderby=price-asc",
         list: [
             {
                 subText: "Balder Carbon",
@@ -157,7 +157,7 @@ export const navBrand = [
     },
     {
         text: "KYT",
-        to: ".",
+        to: "thuong-hieu/kyt/orderby=price-asc",
         list: [
             {
                 subText: "KYT FNJ",
@@ -183,7 +183,7 @@ export const navBrand = [
     },
     {
         text: "Rona",
-        to: ".",
+        to: "thuong-hieu/rona/orderby=price-asc",
         list: [
             {
                 subText: "Rona R9",
@@ -205,7 +205,7 @@ export const navBrand = [
     },
     {
         text: "Andes",
-        to: ".",
+        to: "thuong-hieu/andes/orderby=price-asc",
         list: [
             {
                 subText: "Andes 139",
@@ -223,14 +223,14 @@ export const navBrand = [
     },
     {
         text: "Torc",
-        to: "."
+        to: "thuong-hieu/torc/orderby=price-asc"
     },
     {
         text: "JC",
-        to: "."
+        to: "thuong-hieu/jc/orderby=price-asc"
     },
     {
         text: "Asia",
-        to: "."
+        to: "thuong-hieu/asia/orderby=price-asc"
     },
 ]

@@ -24,17 +24,32 @@ const TableContainer = ({type, data, loading}) => {
         {
             title: 'Họ và tên',
             dataIndex: 'fullName',
-            key: 'fullName'
+            key: 'fullName',
+            sorter: (a, b) => {
+                let x = a.fullName.toUpperCase(),
+                    y = b.fullName.toUpperCase();
+                return x === y ? 0 : x > y ? 1 : -1;
+            },
         },
         {
             title: 'Tên tài khoản',
             dataIndex: 'username',
-            key: 'username'
+            key: 'username',
+            sorter: (a, b) => {
+                let x = a.username.toUpperCase(),
+                    y = b.username.toUpperCase();
+                return x === y ? 0 : x > y ? 1 : -1;
+            },
         },
         {
             title: 'Email',
             dataIndex: 'email',
-            key: 'email'
+            key: 'email',
+            sorter: (a, b) => {
+                let x = a.email.toUpperCase(),
+                    y = b.email.toUpperCase();
+                return x === y ? 0 : x > y ? 1 : -1;
+            },
         },
         {
             title: 'Số điện thoại',
@@ -60,29 +75,62 @@ const TableContainer = ({type, data, loading}) => {
         {
             title: 'Tên sản phẩm',
             dataIndex: 'namePd',
-            key: 'namePd'
+            key: 'namePd',
+            sorter: (a, b) => {
+                let x = a.namePd.toUpperCase(),
+                    y = b.namePd.toUpperCase();
+                return x === y ? 0 : x > y ? 1 : -1;
+            },
         },
         {
             title: 'Loại sản phẩm',
             dataIndex: 'subCategory',
-            key: 'subCategory'
+            key: 'subCategory',
+            filters: [
+                { text: 'Nón bảo hiểm 3/4', value: 'Nón bảo hiểm 3/4'},
+				{ text: 'Nón bảo hiểm full-face', value: 'Nón bảo hiểm full-face'},
+				{ text: 'Nón nửa đầu', value: 'Nón nửa đầu'},
+				{ text: 'Mũ xe đạp', value: 'Mũ xe đạp'},
+				{ text: 'Nón trẻ em', value: 'Nón trẻ em'},
+				{ text: 'Găng tay', value: 'Găng tay'},
+				{ text: 'Kính', value: 'Kính'},
+				{ text: 'Khác', value: 'Khác'}
+			],
+			onFilter: (value, record) => record.subCategory.includes(value),
+            filterSearch: true
         },
         {
             title: 'Thương hiệu',
             dataIndex: 'brand',
             key: 'brand',
+            filters: [
+                { text: 'Royal', value: 'Royal'},
+				{ text: 'ROC', value: 'ROC'},
+				{ text: 'Balder', value: 'Balder'},
+				{ text: 'KYT', value: 'KYT'},
+				{ text: 'Rona', value: 'Rona'},
+				{ text: 'Andes', value: 'Andes'},
+				{ text: 'TORC', value: 'TORC'},
+				{ text: 'JC', value: 'JC'},
+				{ text: 'Asia', value: 'Asia'},
+				{ text: 'Sunda', value: 'Sunda'}
+			],
+			onFilter: (value, record) => record.brand.includes(value),
+            filterSearch: true
         },
         {
             title: 'Giá tiền',
             dataIndex: 'price',
             key: 'price',
+            sorter: (a, b) => a.price - b.price,
             render: text => handleMoney(text)
         },
         {
             title: 'Tồn kho',
             dataIndex: 'inventory',
             key: 'inventory',
-            width: 95
+            width: 95,
+            sorter: (a, b) => a.inventory - b.inventory,
         },
         {
             title: 'Chi tiết',
@@ -218,7 +266,7 @@ const TableContainer = ({type, data, loading}) => {
                 columns={columns[type]}
                 dataSource={data}
                 bordered={true}
-                pagination={{ pageSize: 20, position: ['bottomCenter'] }}
+                pagination={{ pageSize: 10, position: ['bottomCenter'] }}
             />
         </div>
     )

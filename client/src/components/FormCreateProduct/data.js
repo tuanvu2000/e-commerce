@@ -1,17 +1,17 @@
 export const data = {
-    // categoryData: ['Nón', 'Găng tay', 'Phụ kiện khác'],
-    categoryData: ['Nón'],
+    categoryData: ['Nón', 'Phụ kiện'],
     subCategoryData: {
         'Nón': ['Nón bảo hiểm 3/4', 'Nón bảo hiểm full-face', 'Nón nửa đầu', 'Mũ xe đạp', 'Nón trẻ em'],
-        'Găng tay': ['Găng tay kín', 'Găng tay hở ngón', 'Găng lông'],
-        'Phụ kiện khác': ['Kính', 'Áo', 'Trợ lực']
+        'Phụ kiện': ['Kính', 'Găng tay', 'Khác']
     },
     size: ['S', 'M', 'L', 'XL', 'XXL'],
     hatMaterial: ['Không', 'ABS', 'Nhựa dẻo ADT', 'Sợi carbon 100%'],
     porousMaterial: ['Không', 'EPS', 'PC & EPS'],
     liningMaterial: [
         'Không',
+        'Có thể tháo rời',
         'Vải lưới', 
+        'Vải lưới đen', 
         'Vải lưới 3 lớp', 
         'Vải êm',
         'Vải mỏng đệm êm đầu',

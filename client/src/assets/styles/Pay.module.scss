@@ -1,0 +1,143 @@
+.wrapper {
+    max-width: 1200px;
+    padding: 32px 15px 64px 15px;
+    margin: 0 auto;
+}
+
+.form {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 24px;
+
+    h2 {
+        font-weight: 700;
+    }
+
+    input, textarea {
+        border-color: #888;
+
+        &::placeholder {
+            color: #888;
+        }
+    }
+
+    .select {
+        :global {
+            .ant-select-selector {
+                border-color: #888;
+            }
+            .ant-select-selection-placeholder {
+                color: #888;
+                font-weight: 400;
+            }
+            .ant-select-arrow {
+                color: #888;
+            }
+        }
+    }
+
+    .textarea {
+        :global {
+            label {
+                height: 24px;
+            }
+        }
+    }
+
+    // right
+    .title {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #000;
+        span {
+            font-weight: 700;
+        }
+    }
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            display: inline-block;
+            &:nth-child(1) {
+                flex: 1;
+            }
+
+            &:nth-child(2) {
+                width: 120px;
+                text-align: right;
+                font-weight: 700;
+            }
+        }
+    }
+    .tb {
+        width: 100%;
+        > thead {
+            border-bottom: 1px solid #000;
+            
+            tr {
+                th:nth-child(1) {
+                    text-align: left;
+                }
+                th:nth-child(2) {
+                    text-align: right;
+                    width: 120px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: 4px 0 8px;
+                }
+                td:nth-child(2) {
+                    text-align: right;
+                    width: 120px;
+                    font-weight: 700;
+                }   
+            }
+            button {
+                margin-bottom: 12px;
+                width: 100%;
+                background: #FF2828;
+                border-color: #FF2828;
+                color: #FFF;
+                padding: 8px 0;
+                box-shadow: 0 2px 0 rgb(0, 0, 0, 0.1);
+                font-size: 14px;
+                font-weight: 600;
+                border-radius: 10px;
+                transition: 0.2s;
+            
+                &:hover {
+                    opacity: 0.9;
+                    cursor: pointer;
+                }
+            }
+        }
+        tfoot > tr > td:first-child {
+            font-weight: 700;
+        }
+    }
+    .tbSub {
+        th {
+            text-align: left;
+        }
+        :global {
+            .ant-radio-inner {
+                border-color: #000;
+                background-color: #ccc;
+            }
+            .ant-radio-inner:after {
+                background-color: #F4CB08;
+            }
+            .ant-radio-wrapper-checked {
+                font-weight: 700;
+                .ant-radio-inner {
+                    background-color: #F4CB08;
+                }
+            }
+        }
+    }
+}
