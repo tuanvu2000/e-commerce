@@ -1,4 +1,14 @@
 .wrapper {
     width: 500px;
     margin: 30px auto 0;
+
+    // :global {
+    //     .ant-input-password {
+    //         border-radius: 10px;
+    //         border-color: #777;
+    //         > .ant-input {
+    //             border-radius: 0;
+    //         }
+    //     }
+    // }
 }

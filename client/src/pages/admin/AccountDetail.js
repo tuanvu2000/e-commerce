@@ -10,6 +10,7 @@ import clsx from 'clsx'
 import styles from '../../assets/styles/Account.module.scss'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const AccountDetail = () => {
     useTitle('Detail Account')
@@ -19,6 +20,7 @@ const AccountDetail = () => {
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
     const [form] = Form.useForm()
+    const urlImg = useSelector((state) => state.saved.user)
     const id = window.location.pathname.split('/admin/account/')[1]
 
     useEffect(() => {
@@ -35,8 +37,17 @@ const AccountDetail = () => {
         try {
             const values = await form.validateFields();
             const birthday = values.birthday
-            values.birthday = birthday ? moment(birthday).format() : birthday
-            await userApi.update(id, values)
+            // values.birthday = birthday ? moment(birthday).format() : birthday
+            const newValue = {
+                ...values,
+                birthday: birthday ? moment(birthday).format() : birthday,
+                address: values.apartment + ', ' + values.city.reverse().join(', ')
+            }
+            if (urlImg.url && urlImg.cloudinaryId) {
+                values.avatar = urlImg.url
+                values.cloudinaryId = urlImg.cloudinaryId
+            }
+            await userApi.update(id, newValue)
             message.success('Create success')
         } catch (error) {
             message.error('error validate')
@@ -112,6 +123,7 @@ const AccountDetail = () => {
                                                 action='Lưu'
                                                 icon='add'
                                                 color='red'
+                                                type='user'
                                                 onSave={onSave}
                                             />
                                         </div>

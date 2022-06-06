@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Form } from 'antd'
+import { Form, message } from 'antd'
 import { InfoAccount, TableContainer } from '../components'
 import { Loading, ButtonAction } from '../components/UI'
+import { useSelector } from 'react-redux'
 import clsx from 'clsx'
 import styles from '../assets/styles/Profile.module.scss'
+import moment from 'moment'
 import userApi from '../api/userApi'
 
 const Profile = () => {
@@ -11,9 +13,31 @@ const Profile = () => {
     const [isEdit, setIsEdit] = useState(false)
     const [user, setUser] = useState({})
     const [form] = Form.useForm()
+    const urlImg = useSelector((state) => state.saved.user)
 
-    const onSave = () => {
-        console.log('saved')
+    
+    const onSave = async () => {
+        setLoading(true)
+        try {
+            const values = await form.validateFields();
+            const birthday = values.birthday
+            const newValue = {
+                ...values,
+                birthday: birthday ? moment(birthday).format() : birthday,
+                address: values.apartment + ', ' + values.city.reverse().join(', ')
+            }
+            if (urlImg.url && urlImg.cloudinaryId) {
+                values.avatar = urlImg.url
+                values.cloudinaryId = urlImg.cloudinaryId
+            }
+            console.log(newValue)
+            console.log(user.id)
+            await userApi.update(user.id, newValue)
+            message.success('Create success')
+        } catch (error) {
+            message.error('error validate')
+        }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -64,6 +88,7 @@ const Profile = () => {
                                     action='Lưu'
                                     icon='add'
                                     color='red'
+                                    type='user'
                                     onSave={onSave}
                                 />
                             </div>

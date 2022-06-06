@@ -1,8 +1,11 @@
-import { Form, Input, Radio, DatePicker } from 'antd'
+import { useState, useEffect } from 'react'
+import { Form, Input, Radio, DatePicker, Cascader } from 'antd'
 import clsx from 'clsx'
 import styles from './FormCreateUser.module.scss'
+import { data } from '../../api/tinhthanh'
 
 const FormCreateUser = ({form}) => {
+    const [options, setOptions] = useState()
 
     const validation = {
         fullname: [
@@ -49,7 +52,46 @@ const FormCreateUser = ({form}) => {
                 message: 'Please input your address!',
             },
         ],
+        city: [
+            {
+                required: true,
+                message: 'Please input your city!',
+            },
+        ],
+        apartment: [
+            {
+                required: true,
+                message: 'Please input your apartment number!',
+            },
+        ]
     }
+
+    useEffect(() => {
+        const formatArr = []
+        data.forEach((item) => {
+            const chilArr = []
+            item['level2s'].forEach((chil) => {
+                const chilArr2 = []
+                chil['level3s'].forEach((chil2) => {
+                    chilArr2.push({
+                        value: chil2.name,
+                        label: chil2.name,
+                    })
+                })
+                chilArr.push({
+                    value: chil.name,
+                    label: chil.name,
+                    children: chilArr2
+                })
+            })
+            formatArr.push({
+                value: item.name,
+                label: item.name,
+                children: chilArr
+            })
+        })
+        setOptions(formatArr)
+    }, [])
 
     return (
         <div className={clsx(styles.wrapper)}>
@@ -117,9 +159,16 @@ const FormCreateUser = ({form}) => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="Địa chỉ"
-                    name="address"
-                    rules={validation.address}
+                    label="Thành phố"
+                    name="city"
+                    rules={validation.city}
+                >
+                    <Cascader options={options} />
+                </Form.Item>
+                <Form.Item
+                    label="Số nhà"
+                    name="apartment"
+                    rules={validation.apartment}
                 >
                     <Input />
                 </Form.Item>

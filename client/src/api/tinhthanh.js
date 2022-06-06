@@ -1,4 +1,4 @@
-const data = [
+export const data = [
     {
         "level1_id": "01",
         "name": "Thành phố Hà Nội",
@@ -58367,4 +58367,4 @@ const data = [
     }
 ]
 
-export default data
+// export default data

@@ -15,8 +15,13 @@ const AccountCreate = () => {
         try {
             const values = await form.validateFields();
             const birthday = values.birthday
-            values.birthday = birthday ? moment(birthday).format() : birthday
-            await userApi.register(values)
+            // values.birthday = birthday ? moment(birthday).format() : birthday
+            const newValue = {
+                ...values,
+                birthday: birthday ? moment(birthday).format() : birthday,
+                address: values.apartment + ', ' + values.city.reverse().join(', ')
+            }
+            await userApi.register(newValue)
             message.success('Create success')
         } catch (error) {
             message.error('error validate')

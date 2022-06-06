@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from '../assets/styles/Pay.module.scss'
-import data from '../api/tinhthanh'
+import { data } from '../api/tinhthanh'
 
 const { Option } = Select
 const Pay = () => {

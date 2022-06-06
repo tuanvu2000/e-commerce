@@ -2,9 +2,9 @@ import { Button } from 'antd'
 import clsx from 'clsx'
 import styles from './ButtonAction.module.scss'
 import { useDispatch } from 'react-redux'
-import { saveImgProduct } from '../../../redux/slices/savedSlice'
+import { saveImgProduct, saveImgUser } from '../../../redux/slices/savedSlice'
 
-const ButtonAction = ({ action, icon, color, onSave, onDelete }) => {
+const ButtonAction = ({ action, icon, color, onSave, onDelete, type }) => {
     const dispatch = useDispatch()
     const arrIcon = {
         add: <i className="fas fa-user-plus"></i>,
@@ -25,10 +25,18 @@ const ButtonAction = ({ action, icon, color, onSave, onDelete }) => {
 
         if (action === 'Lưu') {
             onSave()
-            dispatch(saveImgProduct({
-                url: '',
-                cloudinaryId: ''
-            }))
+            if (type === 'user') {
+                dispatch(saveImgUser({
+                    url: '',
+                    cloudinaryId: ''
+                }))
+            }
+            if (type === 'product') {
+                dispatch(saveImgProduct({
+                    url: '',
+                    cloudinaryId: ''
+                }))
+            }
         }
 
         if (action === 'Xóa sản phẩm' || action === 'Xóa tài khoản') {

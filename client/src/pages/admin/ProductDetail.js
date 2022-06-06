@@ -124,6 +124,7 @@ const ProductDetail = () => {
                                                 action='Lưu'
                                                 icon='addPd'
                                                 color='red'
+                                                type='product'
                                                 onSave={onSave}
                                             />
                                         </div>

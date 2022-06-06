@@ -5,7 +5,7 @@ import productApi from '../api/productApi'
 import { Loading } from '../components/UI'
 import clsx from 'clsx'
 import styles from '../assets/styles/DetailProduct.module.scss'
-import { Button, Col, Radio, Row } from 'antd'
+import { Button, Col, Radio, Row, message } from 'antd'
 import { addOrder } from '../redux/slices/orderSlice'
 
 const DetailProduct = () => {
@@ -128,6 +128,9 @@ const DetailProduct = () => {
                     sale: product.sale,
                     quantity: quantity
                 }))
+                message.success('Đã thêm vào giỏ hàng')
+            } else {
+                message.error('Vui lòng chọn size phù hợp')
             }
             setLoadingBtn(false)
             setQuantity(1)
@@ -174,7 +177,7 @@ const DetailProduct = () => {
                             }
                         </div>
                         <div className={clsx(styles.addCart)}>
-                            <h3>Chọn kich thước nón:</h3>
+                            <h3>Chọn kích thước nón:</h3>
                             <Radio.Group onChange={handleChangeSize} value={size}>
                                 {
                                     product.size.split(', ').map(item => (
