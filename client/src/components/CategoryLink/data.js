@@ -9,31 +9,31 @@ export const imgList = [
     {
         src: require('../../assets/images/category/non-34.jpg'),
         alt: 'Nón 3/4',
-        to: '.'
+        to: 'non-bao-hiem/non-34'
     },
     {
         src: require('../../assets/images/category/non-fullface.jpg'),
         alt: 'Nón fullface',
-        to: '.'
+        to: 'non-bao-hiem/non-fullface'
     },
     {
         src: require('../../assets/images/category/non-nua-dau.jpg'),
         alt: 'Nón nửa đầu',
-        to: '.'
+        to: 'non-bao-hiem/non-nua-dau'
     },
     {
         src: require('../../assets/images/category/non-tre-em.jpg'),
         alt: 'Nón trẻ em',
-        to: '.'
+        to: 'non-bao-hiem/non-tre-em'
     },
     {
         src: require('../../assets/images/category/mu-xe-dap.jpg'),
         alt: 'Nón xe đạp',
-        to: '.'
+        to: 'non-bao-hiem/mu-xe-dap'
     },
     {
         src: require('../../assets/images/category/phu-kien.jpg'),
         alt: 'Phụ kiện',
-        to: '.'
+        to: 'phu-kien'
     }
 ]

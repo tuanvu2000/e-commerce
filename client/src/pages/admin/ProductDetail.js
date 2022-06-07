@@ -34,7 +34,7 @@ const ProductDetail = () => {
     const onSave = async () => {
         setLoading(true)
         try {
-            const values = await form.validateFields();
+            const values = await form.validateFields()
             values.price = values.price.number
             values.sale = values.sale.number
             values.inventory = values.inventory.number
@@ -48,10 +48,8 @@ const ProductDetail = () => {
             }
             await productApi.update(id, values)
             message.success('Create new product success')
-            // console.log(values)
         } catch (error) {
             message.error('Please input all fields')
-            // console.log('error: ', error)
         }
         setLoading(false)
     }

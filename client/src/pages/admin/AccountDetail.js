@@ -35,9 +35,8 @@ const AccountDetail = () => {
     const onSave = async () => {
         setLoading(true)
         try {
-            const values = await form.validateFields();
+            const values = await form.validateFields()
             const birthday = values.birthday
-            // values.birthday = birthday ? moment(birthday).format() : birthday
             const newValue = {
                 ...values,
                 birthday: birthday ? moment(birthday).format() : birthday,
@@ -48,9 +47,9 @@ const AccountDetail = () => {
                 values.cloudinaryId = urlImg.cloudinaryId
             }
             await userApi.update(id, newValue)
-            message.success('Create success')
+            message.success('Create new user success')
         } catch (error) {
-            message.error('error validate')
+            message.error('Please input all fields required')
         }
         setLoading(false)
     }

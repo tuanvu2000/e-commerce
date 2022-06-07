@@ -11,7 +11,8 @@ const list = [
         title: 'Bán chạy',
         data: {
             category: '',
-            subCategory: ''
+            subCategory: '',
+            to: ''
         }
     },
     {
@@ -20,7 +21,8 @@ const list = [
         title: 'Nón 3/4',
         data: {
             category: 'Nón',
-            subCategory: 'Nón bảo hiểm 3/4'
+            subCategory: 'Nón bảo hiểm 3/4',
+            to: 'non-bao-hiem/non-34'
         }
     },
     {
@@ -29,7 +31,8 @@ const list = [
         title: 'Nón fullface',
         data: {
             category: 'Nón',
-            subCategory: 'Nón bảo hiểm full-face'
+            subCategory: 'Nón bảo hiểm full-face',
+            to: 'non-bao-hiem/non-fullface'
         }
     },
     {
@@ -38,7 +41,8 @@ const list = [
         title: 'Nón nửa đầu',
         data: {
             category: 'Nón',
-            subCategory: 'Nón nửa đầu'
+            subCategory: 'Nón nửa đầu',
+            to: 'non-bao-hiem/non-nua-dau'
         }
     },
     {
@@ -47,7 +51,8 @@ const list = [
         title: 'Mũ xe đạp',
         data: {
             category: 'Nón',
-            subCategory: 'Mũ xe đạp'
+            subCategory: 'Mũ xe đạp',
+            to: 'non-bao-hiem/mu-xe-dap'
         }
     },
     {
@@ -56,7 +61,8 @@ const list = [
         title: 'Phụ kiện',
         data: {
             category: 'Phụ kiện',
-            subCategory: ''
+            subCategory: '',
+            to: 'phu-kien'
         }
     },
 ]
@@ -76,6 +82,7 @@ const Home = () => {
                                     category={item.data.category} 
                                     subCategory={item.data.subCategory}
                                     title={item.title}
+                                    to={item.data.to}
                                 />
                             </div>
                         ))

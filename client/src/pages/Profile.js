@@ -15,7 +15,17 @@ const Profile = () => {
     const [form] = Form.useForm()
     const urlImg = useSelector((state) => state.saved.user)
 
-    
+    useEffect(() => {
+        const getApi = async () => {
+            if (localStorage.getItem('access_token')) {
+                const res = await userApi.checkToken()
+                setUser(res)
+                setLoading(false)
+            }
+        }
+        getApi()
+    }, [])
+
     const onSave = async () => {
         setLoading(true)
         try {
@@ -27,11 +37,10 @@ const Profile = () => {
                 address: values.apartment + ', ' + values.city.reverse().join(', ')
             }
             if (urlImg.url && urlImg.cloudinaryId) {
-                values.avatar = urlImg.url
-                values.cloudinaryId = urlImg.cloudinaryId
+                newValue.avatar = urlImg.url
+                newValue.cloudinaryId = urlImg.cloudinaryId
             }
-            console.log(newValue)
-            console.log(user.id)
+            // console.log(newValue)
             await userApi.update(user.id, newValue)
             message.success('Create success')
         } catch (error) {
@@ -39,17 +48,6 @@ const Profile = () => {
         }
         setLoading(false)
     }
-
-    useEffect(() => {
-        const getApi = async () => {
-            if (localStorage.getItem('access_token')) {
-                const res = await userApi.checkToken()
-                setUser(res)
-                setLoading(false)
-            }
-        }
-        getApi()
-    }, [])
 
     return (
         loading

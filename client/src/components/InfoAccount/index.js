@@ -158,7 +158,7 @@ const InfoAccount = ({ data, edit, form, theme }) => {
         }
     }
     // end edit image user
-
+    // console.log(data.avatar)
     return (
         <div style={{ marginTop: 30 }}>
             <Form form={form}>
@@ -171,7 +171,7 @@ const InfoAccount = ({ data, edit, form, theme }) => {
                                     {
                                         upImage 
                                         ? <img src={upImage} alt="img user" />
-                                        : <img src={noAvatar} alt="img user" />
+                                        : <img src={data.avatar ? data.avatar : noAvatar} alt="img user" />
                                     }
                                     <div className={clsx(styles.upload)}>
                                         <Upload

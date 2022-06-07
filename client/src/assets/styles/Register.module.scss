@@ -63,7 +63,7 @@
 .form {
     label {
         color: #fff;
-        font-size: 16px;
+        // font-size: 16px;
         // display: flex;
         align-items: center;
 
@@ -78,28 +78,64 @@
         display: none;
         margin-left: -7.2px;
     }
-    span {
-        > input {
-            letter-spacing: 1px;
-        }
-    }
-    div > input,
-    span > input {
-        font-weight: 600;
-        font-size: 16px;
-    }
-    svg {
-        font-size: 20px;
-    }
+    // span {
+    //     > input {
+    //         letter-spacing: 1px;
+    //     }
+    // }
+    // div > input,
+    // span > input {
+        // font-weight: 600;
+        // font-size: 16px;
+    // }
+    // svg {
+    //     font-size: 20px;
+    // }
     .flexRow {
         display: flex;
         flex-direction: row;
+        align-items: center;
     }
     .wrapInput {
         display: flex;
         
         > div:first-child {
             margin-right: 8px;
+        }
+    }
+    :global {
+        .ant-input {
+            font-weight: 500;
+        }
+        .ant-picker {
+            width: 100%;
+        }
+        .ant-picker-input {
+            > input {
+                font-weight: 500;
+                &::placeholder {
+                    color: #888;
+                }
+            }
+        }
+        .ant-select-selection-placeholder {
+            color: #888;
+            font-weight: 500;
+        }
+        .ant-select-selection-item {
+            font-weight: 500;
+        }
+        .ant-select-arrow {
+            color: #888;
+        }
+        .ant-upload-list {
+            width: 100%;
+        }
+        .ant-upload-list-text-container {
+            width: 100%;
+        }
+        .ant-upload-list-item-name {
+            color: #FF4D4F;
         }
     }
 }
@@ -153,13 +189,14 @@
         background: #C4C4C4;
         border: 1px solid #000;
         border-radius: 50%;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-size: 18px;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
 
         p {
             font-weight: 700;
@@ -173,22 +210,27 @@
     
     img {
         border-radius: 50%;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
         object-fit: cover;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
     }
 
     .center {
         margin-top: 8px;
         text-align: center;
 
-        div ~ div {
-            > div > div {
-                color: #FF4D4F;
-            }
-            > div {
-                width: 300px;
-            }
-        }
+        // div ~ div {
+        //     > div > div {
+        //         color: #FF4D4F;
+        //     }
+        //     // > div {
+        //     //     width: 300px;
+        //     // }
+        // }
     }
+}
+
+.content {
+    max-width: 450px;
 }

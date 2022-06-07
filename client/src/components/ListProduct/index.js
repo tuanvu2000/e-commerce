@@ -6,7 +6,7 @@ import productApi from '../../api/productApi'
 import { Col, Row } from 'antd'
 import { Loading } from '../UI'
 
-const ListProduct = ({ category, subCategory, title }) => {
+const ListProduct = ({ category, subCategory, title, to }) => {
     const [products, setProducts] = useState()
     const [loading, setLoading] = useState(false)
 
@@ -75,7 +75,7 @@ const ListProduct = ({ category, subCategory, title }) => {
  
     return (
         <div className={clsx(styles.wrapper)}>
-            <Horizontal text={title} url="." />
+            <Horizontal text={title} url={to} />
             {
                 loading
                 ? <Loading />

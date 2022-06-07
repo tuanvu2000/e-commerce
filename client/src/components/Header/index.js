@@ -48,7 +48,7 @@ const Header = () => {
                         {user ? (
                             <>
                                 {
-                                    user.role === 'admin' 
+                                    user.role === 'admin' || user.role === 'mod'
                                     ? <Link to="admin">{user.fullName}</Link>
                                     : <Link to=".">{user.fullName}</Link>
                                 }
