@@ -33,21 +33,21 @@ const TableContainer = ({ type, data, loading, theme }) => {
         },
         {
             title: 'Tên tài khoản',
-            dataIndex: 'username',
+            dataIndex: ['accountId', 'username'],
             key: 'username',
             sorter: (a, b) => {
-                let x = a.username.toUpperCase(),
-                    y = b.username.toUpperCase();
+                let x = a.accountId.username.toUpperCase(),
+                    y = b.accountId.username.toUpperCase();
                 return x === y ? 0 : x > y ? 1 : -1;
             },
         },
         {
             title: 'Email',
-            dataIndex: 'email',
+            dataIndex: ['accountId', 'email'],
             key: 'email',
             sorter: (a, b) => {
-                let x = a.email.toUpperCase(),
-                    y = b.email.toUpperCase();
+                let x = a.accountId.email.toUpperCase(),
+                    y = b.accountId.email.toUpperCase();
                 return x === y ? 0 : x > y ? 1 : -1;
             },
         },
@@ -61,7 +61,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
-            render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to={`${text.accountId.id}`}><SelectOutlined /> Xem chi tiết</Link>
         }
     ]
 

@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv');
 const appRoute = require('./src/routes');
 
@@ -11,6 +12,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(mongoSanitize());
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());

@@ -24,7 +24,7 @@ const AdminLayout = () => {
             await isAuth()
             try {
                 const resApi = await userApi.checkToken()
-                if (resApi.role === 'admin' || resApi.role === 'mod')
+                if (resApi.accountId.role === 'admin' || resApi.accountId.role === 'mod')
                     setAdmin(resApi)
                 else {
                     navigate('/')

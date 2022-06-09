@@ -25,7 +25,7 @@ const orderSlice = createSlice({
         },
         removeOrder: (state, action) => {
             state.list.splice(action.payload, 1)
-            if (state.list.length > 0) {
+            if (state.list.length >= 0) {
                 state.total = state.list.reduce((total, item) => 
                     total + (item.price * item.quantity)
                 , 0)

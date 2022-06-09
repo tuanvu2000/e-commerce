@@ -32,12 +32,27 @@ const InfoAccount = ({ data, edit, form, theme }) => {
             email: 'Email',
         }
         for (let key in data) {
+            if (typeof data[key] === 'object') {
+                for (let keyChil in data[key]) {
+                    if (keyChil === 'username' || keyChil === 'email') {
+                        resData.push({
+                            span: keyChil === 'username' ? 8 : 12,
+                            label: arrLabel[keyChil],
+                            name: keyChil,
+                            text: data[key][keyChil],
+                            order: arrName.indexOf(keyChil),
+                            type: key === 'disabled',
+                            
+                        })
+                        arrResData.push(keyChil)
+                    }
+                }
+            }
             if (arrName.includes(key)) {
                 resData.push({
-                    // span: key === 'address' || key === 'email' ? 24 : 8,
                     span: key === 'address' 
                         ? 16
-                        : key === 'fullName' || key === 'email'
+                        : key === 'fullName'
                         ? 12
                         : 8, 
                     label: arrLabel[key],
@@ -48,7 +63,7 @@ const InfoAccount = ({ data, edit, form, theme }) => {
                         ? 'date'
                         : key === 'gender'
                         ? 'radio'
-                        : key === 'email' || key === 'username' || key === 'address'
+                        : key === 'address'
                         ? 'disabled'
                         : 'text'
                 })
@@ -101,8 +116,6 @@ const InfoAccount = ({ data, edit, form, theme }) => {
             return true
         })
         setDataUser(resData)
-
-
     }, [data])
 
     // begin edit image user

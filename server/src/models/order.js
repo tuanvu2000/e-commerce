@@ -7,26 +7,31 @@ const orderSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    user: {
+    customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        anonymouse: {
-            fullName: String,
-            email: String,
-            phoneNumber: String,
-            address: String
-        }
     },
-    products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        quantity: Number,
-    }],
+    // products: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Product',
+    //     quantity: Number,
+    // }],
+    products: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            quantity: Number,
+        }
+    ],
     transportFee: Number,
     note: String,
     status: {
         type: String,
         required: true,
+        enum: ['Chờ xử lý', 'Đã hoàn thành', 'Hủy đơn hàng'],
         default: 'Chờ xử lý'
     },
     total: Number,

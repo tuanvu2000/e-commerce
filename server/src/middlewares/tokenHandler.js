@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const { User, Account } = require('../models');
 
 const tokenDecode = (req) => {
     const bearerHeader = req.headers['authorization'];
@@ -64,7 +64,13 @@ exports.verifyAdToken = async (req, res, next) => {
 exports.verifyToken = async (req, res, next) => {
     const tokenDecoded = tokenDecode(req);
     if (tokenDecoded) {
-        const user = await User.findById(tokenDecoded.id);
+        // const account = await Account.findById(tokenDecoded.id, { password: 0 });
+        const user = await User
+            .findOne({ accountId: tokenDecoded.id })
+            .populate({
+                path: 'accountId',
+                select: '-password'
+            })
         if (!user)
             return res.status(403).json('Not allowed!');
         req.user = user;

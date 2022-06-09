@@ -135,7 +135,6 @@ const Register = () => {
                 cloudinaryId: upImage.cloudinaryId ? upImage.cloudinaryId : ''
             }
             await userApi.register(newValues)
-            console.log(newValues)
 
             navigate('../login')
             message.success('Đăng kí thành công')

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styles from './SideBar.module.scss'
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-// import avt from '../../assets/images/avt.jpg'
+import noAvatar from '../../assets/images/no-photo.jpg'
 
 const SideBar = ({ admin }) => {
     const openSidebar = useSelector((state) => state.config.open)
@@ -55,14 +55,14 @@ const SideBar = ({ admin }) => {
     return (
         <div className={wrapperStyle}>
             <div className={clsx(styles.logo)}>
-                <span>PHƯỢT CULTURE</span>
+                <Link to="../">PHƯỢT CULTURE</Link>
             </div>
             <div className={clsx(styles.avt)}>
-                <Avatar src={admin && admin.avatar} icon={<UserOutlined />} />
+                <Avatar src={admin && admin.avatar ? admin.avatar : noAvatar} icon={<UserOutlined />} />
                 <div>
                     <p className="fullname">{admin && admin.fullName}</p>
                     <span className={clsx(styles.divider)}></span>
-                    <p className="role">{admin ? admin.role : 'admin'}</p>
+                    <p className="role">{admin ? admin.accountId.role : 'admin'}</p>
                 </div>
             </div>
             <div className={clsx(styles.list)}>
@@ -85,6 +85,7 @@ const SideBar = ({ admin }) => {
                         </Link>
                     ))
                 }
+
             </div>
         </div>
     )

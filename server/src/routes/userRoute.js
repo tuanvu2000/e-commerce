@@ -4,12 +4,12 @@ const tokenHandler = require('../middlewares/tokenHandler')
 
 router.post(
     '/register',
-    userController.register
+    userController.postRegister
 )
 
 router.post(
     '/login',
-    userController.login
+    userController.postLogin
 )
 
 router.post(
@@ -22,23 +22,62 @@ router.post(
 
 router.get(
     '/',
-    userController.getAll
+    userController.getUserList
 )
 
 router.get(
     '/:id',
-    userController.getOne
+    userController.getUserInfo
 )
 
 router.put(
     '/:id',
-    userController.update
+    userController.putUser
 )
 
 router.delete(
     '/:id',
     tokenHandler.verifyAdToken,
-    userController.delete
+    userController.deleteUser
 )
+
+// router.post(
+//     '/register',
+//     userController.register
+// )
+
+// router.post(
+//     '/login',
+//     userController.login
+// )
+
+// router.post(
+//     '/check-token',
+//     tokenHandler.verifyToken,
+//     (req, res) => {
+//         res.status(200).json(req.user)
+//     }
+// )
+
+// router.get(
+//     '/',
+//     userController.getAll
+// )
+
+// router.get(
+//     '/:id',
+//     userController.getOne
+// )
+
+// router.put(
+//     '/:id',
+//     userController.update
+// )
+
+// router.delete(
+//     '/:id',
+//     tokenHandler.verifyAdToken,
+//     userController.delete
+// )
 
 module.exports = router;

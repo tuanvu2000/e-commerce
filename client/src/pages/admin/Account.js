@@ -24,6 +24,7 @@ const Account = () => {
                 }
                 setLoading(false)
                 setList(resData)
+                console.log(resData)
             } catch (error) {
                 console.log(error)
             }

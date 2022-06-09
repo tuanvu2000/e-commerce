@@ -15,6 +15,7 @@
 
     input, textarea {
         border-color: #888;
+        // font-weight: 500;
 
         &::placeholder {
             color: #888;
@@ -33,6 +34,9 @@
             .ant-select-arrow {
                 color: #888;
             }
+            // .ant-select-selection-item {
+            //     font-weight: 500;
+            // }
         }
     }
 

@@ -28,6 +28,7 @@ const AccountDetail = () => {
             const apiRes = await userApi.getOne(id)
             setUser(apiRes)
             setLoading(false)
+            console.log(apiRes)
         }
         getData()
     }, [id, loading])
@@ -46,7 +47,7 @@ const AccountDetail = () => {
                 values.avatar = urlImg.url
                 values.cloudinaryId = urlImg.cloudinaryId
             }
-            await userApi.update(id, newValue)
+            await userApi.update(user.id, newValue)
             message.success('Create new user success')
         } catch (error) {
             message.error('Please input all fields required')
