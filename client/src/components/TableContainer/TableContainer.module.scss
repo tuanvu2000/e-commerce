@@ -47,4 +47,17 @@
             background: #CFCFCF;
         }
     }
+    .bold {
+        font-weight: 600;
+        &.orange {
+            color: #ff7e14;
+        }
+        &.green {
+            color: #09BD09;
+        }
+        &.red {
+            color: #EE3E34;
+        }
+
+    }
 }

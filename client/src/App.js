@@ -48,7 +48,7 @@ function App() {
                     ].map((path, index) => 
                     <Route path={path} element={<Store />} key={index} />)}
                     <Route path="giam-gia" element={<Promotion />} />
-                    <Route path="dat-hang" element={<OrderList />} />
+                    <Route path="gio-hang" element={<OrderList />} />
                     <Route path="thanh-toan" element={<Pay />} />
                     <Route path="policy">
                         <Route path="ban-hang" element={<BanHang />} />

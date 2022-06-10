@@ -47,10 +47,10 @@ const CartList = () => {
                     <>
                         <p className={clsx(styles.total)}>Tổng tiền: {handleMoney(order.total)}</p>
                         <button className={clsx(styles.btn, styles.yellow)}>
-                            <Link to="dat-hang">Xem giỏ hàng</Link>
+                            <Link to="gio-hang">Xem giỏ hàng</Link>
                         </button>
                         <button className={clsx(styles.btn, styles.red)}>
-                            <Link to="thanh-toan">Thanh toán</Link>
+                            <Link to="thanh-toan">Đặt hàng</Link>
                         </button>
                     </>
                 )

@@ -1,6 +1,6 @@
-// .wrapper {
-
-// }
+.wrapper {
+    font-size: 16px;
+}
 
 .header {
     margin-top: 32px;
@@ -60,6 +60,7 @@
                 font-weight: 700;
                 padding: 8px 24px;
                 border-right: 1px solid #000;
+                text-align: left;
                 &:last-child {
                     border-right: none;
                 }
@@ -71,6 +72,83 @@
                 &:last-child {
                     border-right: none;
                 }
+            }
+        }
+    }
+}
+
+.quality {
+    display: flex;
+    position: relative;
+    padding: 32px 0 24px;
+    > div {
+        width: 33.33%;
+        text-align: center;
+
+        h3 {
+            font-weight: 700;
+        }
+
+        > span > svg {
+            font-size: 48px;
+            color: #FFC52F;
+        }
+    }
+}
+
+.policies {
+    display: flex;
+    flex-direction: column;
+
+    > div {
+        display: flex;
+        align-items: center;
+        padding: 32px 64px;
+        background-color: #E9FFFC;
+
+        &:nth-child(2n+1) {
+            background-color: #FFC52F;
+        }
+
+        .last {
+            order: 2;
+        }
+
+        .text {
+            flex: 1;
+            > h2 {
+                font-size: 22px;
+                font-weight: 700;
+            } 
+            > p {
+                font-size: 16px;
+            }
+            ul {
+                padding-left: 64px;
+                // list-style: none;
+            }
+        }
+
+        .icon {
+            width: 250px;
+            font-size: 64px;
+            
+            &.iRight {
+                text-align: right;
+                margin-right: 20px;
+            }
+            &.iLeft {
+                text-align: left;
+                margin-left: 20px;
+            }
+        }
+        
+        .call {
+            p {
+                font-size: 24px;
+            }
+            span {
+                color: #FF2828;
             }
         }
     }

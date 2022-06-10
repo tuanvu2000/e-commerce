@@ -5,6 +5,8 @@ exports.postNewOrder = async (req, res) => {
         const { info, products, total, transport } = req.body;
         const { fullName, phoneNumber, address, notes } = info;
         let userId = info.id;
+        //Kiểm tra sản phẩm trong kho còn hay không ?
+        // for (let )
         // Nếu không có user id thì tạo User là anonymous
         if (!userId) {
             const newUser = new User({

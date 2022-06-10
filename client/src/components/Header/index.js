@@ -108,7 +108,7 @@ const Header = () => {
                         <li>
                             {
                                 order.list.length > 0
-                                ? <Link to='dat-hang'>
+                                ? <Link to='gio-hang'>
                                     <i className='bx bx-cart-alt'></i>
                                 </Link>
                                 : <i className='bx bx-cart-alt'></i>

@@ -153,7 +153,7 @@ const OrderList = () => {
                         <button
                             onClick={handleClick}
                         >
-                            TIẾN HÀNH THANH TOÁN
+                            XÁC NHẬN THANH TOÁN
                         </button>
                     </div>
                 </Col>

@@ -157,6 +157,8 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Tổng tiền',
             dataIndex: 'total',
             key: 'total',
+            width: 135,
+            sorter: (a, b) => a.total - b.total,
             render: text => handleMoney(text)
         },
         {
@@ -168,7 +170,18 @@ const TableContainer = ({ type, data, loading, theme }) => {
         {
             title: 'Tình trạng',
             dataIndex: 'status',
-            key: 'status'
+            key: 'status',
+            filters: [
+                { text: 'Chờ xử lý', value: 'Chờ xử lý'},
+                { text: 'Đã hoàn thành', value: 'Đã hoàn thành'},
+                { text: 'Hủy đơn hàng', value: 'Hủy đơn hàng'}
+            ],
+            onFilter: (value, record) => record.status.includes(value),
+            render: (text) => <span className={clsx(styles.bold, {
+                [styles.green]: text === 'Đã hoàn thành',
+                [styles.orange]: text === 'Chờ xử lý',
+                [styles.red]: text === 'Hủy đơn hàng',
+            })}>{text}</span>
         },
         {
             title: 'Chi tiết',
