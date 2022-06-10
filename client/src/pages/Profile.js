@@ -7,21 +7,31 @@ import clsx from 'clsx'
 import styles from '../assets/styles/Profile.module.scss'
 import moment from 'moment'
 import userApi from '../api/userApi'
+import orderApi from '../api/orderApi'
 
 const Profile = () => {
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
     const [user, setUser] = useState({})
+    const [historyOrder, setHistoryOrder] = useState([])
     const [form] = Form.useForm()
     const urlImg = useSelector((state) => state.saved.user)
 
     useEffect(() => {
         const getApi = async () => {
-            if (localStorage.getItem('access_token')) {
-                const res = await userApi.checkToken()
-                setUser(res)
-                setLoading(false)
-            }
+            if (!localStorage.getItem('access_token')) return false
+
+            const resUser = await userApi.checkToken()
+            setUser(resUser)
+
+            const resOrder = await orderApi.history(resUser.id)
+            const ordersNew = resOrder.map((order, index) => ({
+                ...order,
+                key: index,
+                stt: index + 1
+            }))
+            setHistoryOrder(ordersNew)
+            setLoading(false)
         }
         getApi()
     }, [])
@@ -103,7 +113,7 @@ const Profile = () => {
             <p className={clsx(styles.title)}>Lịch sử mua hàng</p>
             <TableContainer 
                 type="historyBuy"
-                data={dataTest}
+                data={historyOrder}
                 theme="user"
             />
         </div>
@@ -111,53 +121,3 @@ const Profile = () => {
 }
 
 export default Profile
-
-const dataTest = [
-    {
-        key: 1,
-        stt: 1,
-        idOrder: '000001',
-        products: [
-            {
-                nameProduct: 'Mũ Xe Đạp Balder B79 Đen Xanh',
-                quantity: 2,
-                price: 672000,
-            },
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 3344000,
-        dateOrder: '12/03/2022 07:12:46'
-    },
-    {
-        key: 2,
-        stt: 2,
-        idOrder: '000002',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 2000000,
-        dateOrder: '21/04/2022 15:43:25'
-    },
-    {
-        key: 3,
-        stt: 3,
-        idOrder: '000003',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Xám Đen Nhám',
-                quantity: 1,
-                price: 1750000,
-            }
-        ],
-        total: 1750000,
-        dateOrder: '23/04/2022 17:22:07'
-    }
-]

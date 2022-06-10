@@ -20,19 +20,6 @@ const convertData = {
     "sunda": 'Sunda',
 }
 
-const convertBrand = {
-    royal: 'Royal',
-    roc: 'ROC',
-    balder: 'Balder',
-    kyt: 'KYT',
-    rona: 'Rona',
-    andes: 'Andes',
-    torc: 'TORC',
-    jc: 'JC',
-    asia: 'Asia',
-    sunda: 'Sunda',
-}
-
 exports.add = async (req, res) => {
     try {
         // kiểm tra tên sản phẩm đã tồn tại chưa

@@ -38,7 +38,7 @@ const Product = () => {
                 <ButtonCreate
                     to='create'
                     action='Thêm'
-                    icon='addProduct'
+                    icon='add'
                 />
             </div>
             <div style={{ margin: 15 }}></div>

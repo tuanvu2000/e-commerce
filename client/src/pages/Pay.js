@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Form, Input, Row, Select, Radio, Checkbox, message } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Loading } from '../components/UI'
 import { Link, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
@@ -8,11 +8,14 @@ import styles from '../assets/styles/Pay.module.scss'
 import { data } from '../api/tinhthanh'
 import { isAuth } from '../handlers/authHandler'
 import userApi from '../api/userApi'
+import orderApi from '../api/orderApi'
+import { resetOrder } from '../redux/slices/orderSlice'
 
 const { Option } = Select
 const Pay = () => {
     const [form] = Form.useForm()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const order = useSelector((state) => state.order)
     const [transport, setTransport] = useState(order.total > 500000 ? 0 : 20000)
     const [city, setCity] = useState('')
@@ -106,18 +109,31 @@ const Pay = () => {
         }  
         try {
             const values = await form.validateFields()
+            const products = order.list.map(product => ({
+                productId: product.id,
+                quantity: product.quantity
+            }))
             const apartment = values.apartment
             const ward = values.ward
             const district = values.district
             const city = values.city
             values.address = [apartment, ward, district, city].join(', ')
-            console.log({
+
+            await orderApi.new({
                 info: {
                     ...values,
-                    id: user.id
+                    id: user ? user.id : ''
                 },
-                ...order
+                products: products,
+                transport: transport,
+                total: order.total + transport
             })
+            message.success('Đặt hàng thành công')
+            dispatch(resetOrder({
+                list: [],
+                total: 0
+            }))
+            navigate('/')
         } catch (error) {
             message.error('Vui lòng nhập đủ thông tin để shop giao hàng')
         }

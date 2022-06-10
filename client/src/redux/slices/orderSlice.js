@@ -31,6 +31,9 @@ const orderSlice = createSlice({
                 , 0)
             }
         },
+        resetOrder: (state, action) => {
+            Object.assign(state, action.payload)
+        }
         // decreaseOrder: (state, action) => {
         //     const index = state.list.find(item => item.id === action.payload)
 
@@ -39,5 +42,5 @@ const orderSlice = createSlice({
 })
 
 const { reducer, actions } = orderSlice
-export const { addOrder, removeOrder } = actions
+export const { addOrder, removeOrder, resetOrder } = actions
 export default reducer

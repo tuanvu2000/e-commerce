@@ -11,6 +11,7 @@ import {
     ProductCreate,
     ProductDetail,
     Order,
+    OrderDetail,
     Total
 } from './pages/admin'
 import {
@@ -69,6 +70,7 @@ function App() {
                     <Route path="product/create" element={<ProductCreate />} />
                     <Route path="product/:id" element={<ProductDetail />} />
                     <Route path="order" element={<Order />} />
+                    <Route path="order/:id" element={<OrderDetail />} />
                     <Route path="total" element={<Total />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />

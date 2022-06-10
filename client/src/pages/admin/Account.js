@@ -22,9 +22,8 @@ const Account = () => {
                         stt: parseInt(key) + 1
                     })
                 }
-                setLoading(false)
                 setList(resData)
-                console.log(resData)
+                setLoading(false)
             } catch (error) {
                 console.log(error)
             }

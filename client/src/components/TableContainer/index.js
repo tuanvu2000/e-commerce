@@ -4,6 +4,7 @@ import { SelectOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from './TableContainer.module.scss'
+import moment from 'moment'
 
 const TableContainer = ({ type, data, loading, theme }) => {
 
@@ -61,7 +62,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
-            render: (text) => <Link to={`${text.accountId.id}`}><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to={text.accountId.id}><SelectOutlined /> Xem chi tiết</Link>
         }
     ]
 
@@ -129,7 +130,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Tồn kho',
             dataIndex: 'inventory',
             key: 'inventory',
-            width: 95,
+            width: 108,
             sorter: (a, b) => a.inventory - b.inventory,
         },
         {
@@ -155,12 +156,14 @@ const TableContainer = ({ type, data, loading, theme }) => {
         {
             title: 'Tổng tiền',
             dataIndex: 'total',
-            key: 'total'
+            key: 'total',
+            render: text => handleMoney(text)
         },
         {
             title: 'Ngày đặt hàng',
             dataIndex: 'dateOrder',
-            key: 'dateOrder'
+            key: 'dateOrder',
+            render: (text) => moment(text).format('DD/MM/YYYY HH:mm:ss')
         },
         {
             title: 'Tình trạng',
@@ -171,8 +174,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
-            // render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
-            render: (text) => <Link to="."><SelectOutlined /> Xem chi tiết</Link>
+            render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
         },
     ]
 
@@ -186,19 +188,19 @@ const TableContainer = ({ type, data, loading, theme }) => {
         },
         {
             title: 'Mã hóa đơn',
-            dataIndex: 'idOrder',
-            key: 'idOrder',
+            dataIndex: 'orderId',
+            key: 'orderId',
         },
         {
             title: 'Tên sản phẩm',
             dataIndex: 'products',
-            key: 'nameProduct',
+            key: 'namePd',
             render: products => (
                 <>
                     {
                         products.map((product, index) => (
                             <p key={'N'+index}>
-                                {product.nameProduct}
+                                {product.productId.namePd}
                             </p>
                         ))
                     }
@@ -231,7 +233,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
                     {
                         products.map((product, index) => (
                             <p key={'N'+index}>
-                                {handleMoney(product.price)}
+                                {handleMoney(product.productId.price)}
                             </p>
                         ))
                     }
@@ -246,8 +248,9 @@ const TableContainer = ({ type, data, loading, theme }) => {
         },
         {
             title: 'Ngày đặt hàng',
-            dataIndex: 'dateOrder',
-            key: 'dateOrder',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (text) => moment(text).format('DD/MM/YYYY HH:mm:ss')
         },
     ]
 

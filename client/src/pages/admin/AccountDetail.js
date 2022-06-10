@@ -5,6 +5,7 @@ import { Loading } from '../../components/UI'
 import { Form, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import userApi from '../../api/userApi'
+import orderApi from '../../api/orderApi'
 import useTitle from '../../hooks/useTitle'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Account.module.scss'
@@ -17,6 +18,7 @@ const AccountDetail = () => {
     const navigate = useNavigate()
 
     const [user, setUser] = useState({})
+    const [historyOrder, setHistoryOrder] = useState([])
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
     const [form] = Form.useForm()
@@ -25,10 +27,17 @@ const AccountDetail = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const apiRes = await userApi.getOne(id)
-            setUser(apiRes)
+            const resUser = await userApi.getOne(id)
+            setUser(resUser)
+
+            const resOrder = await orderApi.history(resUser.id)
+            const ordersNew = resOrder.map((order, index) => ({
+                ...order,
+                key: index,
+                stt: index + 1
+            }))
+            setHistoryOrder(ordersNew)
             setLoading(false)
-            console.log(apiRes)
         }
         getData()
     }, [id, loading])
@@ -141,7 +150,7 @@ const AccountDetail = () => {
                     <p className={clsx(styles.title)}>Lịch sử mua hàng</p>
                     <TableContainer 
                         type="historyBuy"
-                        data={dataTest}
+                        data={historyOrder}
                         theme="admin"
                     />
                 </>
@@ -152,52 +161,52 @@ const AccountDetail = () => {
 
 export default AccountDetail
 
-const dataTest = [
-    {
-        key: 1,
-        stt: 1,
-        idOrder: '000001',
-        products: [
-            {
-                nameProduct: 'Mũ Xe Đạp Balder B79 Đen Xanh',
-                quantity: 2,
-                price: 672000,
-            },
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 3344000,
-        dateOrder: '12/03/2022 07:12:46'
-    },
-    {
-        key: 2,
-        stt: 2,
-        idOrder: '000002',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Leopard',
-                quantity: 1,
-                price: 2000000,
-            }
-        ],
-        total: 2000000,
-        dateOrder: '21/04/2022 15:43:25'
-    },
-    {
-        key: 3,
-        stt: 3,
-        idOrder: '000003',
-        products: [
-            {
-                nameProduct: 'Nón 3/4 KYT Venom Xám Đen Nhám',
-                quantity: 1,
-                price: 1750000,
-            }
-        ],
-        total: 1750000,
-        dateOrder: '23/04/2022 17:22:07'
-    }
-]
+// const dataTest = [
+//     {
+//         key: 1,
+//         stt: 1,
+//         idOrder: '000001',
+//         products: [
+//             {
+//                 nameProduct: 'Mũ Xe Đạp Balder B79 Đen Xanh',
+//                 quantity: 2,
+//                 price: 672000,
+//             },
+//             {
+//                 nameProduct: 'Nón 3/4 KYT Venom Leopard',
+//                 quantity: 1,
+//                 price: 2000000,
+//             }
+//         ],
+//         total: 3344000,
+//         dateOrder: '12/03/2022 07:12:46'
+//     },
+//     {
+//         key: 2,
+//         stt: 2,
+//         idOrder: '000002',
+//         products: [
+//             {
+//                 nameProduct: 'Nón 3/4 KYT Venom Leopard',
+//                 quantity: 1,
+//                 price: 2000000,
+//             }
+//         ],
+//         total: 2000000,
+//         dateOrder: '21/04/2022 15:43:25'
+//     },
+//     {
+//         key: 3,
+//         stt: 3,
+//         idOrder: '000003',
+//         products: [
+//             {
+//                 nameProduct: 'Nón 3/4 KYT Venom Xám Đen Nhám',
+//                 quantity: 1,
+//                 price: 1750000,
+//             }
+//         ],
+//         total: 1750000,
+//         dateOrder: '23/04/2022 17:22:07'
+//     }
+// ]

@@ -6,7 +6,7 @@ import styles from './ButtonCreate.module.scss'
 const ButtonCreate = ({ to, action, icon }) => {
     const arrIcon = {
         addUser: <i className="fas fa-user-plus"></i>,
-        addProduct: <i className="fas fa-plus"></i>
+        add: <i className="fas fa-plus"></i>
     }
 
     return (    

@@ -1,33 +1,53 @@
+import { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import { CardItem, TableOrderNew } from '../../components'
-import { TitleContent } from '../../components/UI'
+import { TitleContent, Loading } from '../../components/UI'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import styles from '../../assets/styles/Dashboard.module.scss'
 import useTitle from '../../hooks/useTitle'
+import orderApi from '../../api/orderApi'
 
 const Dashboard = () => {
     useTitle('Dashboard')
+    const [loading, setLoading] = useState(true)
+    const [summary, setSummary] = useState()
+
+    useEffect(() => {
+        const getApi = async () => {
+            const res = await orderApi.sum()
+            setSummary(res)
+            setLoading(false)
+        }
+        getApi()
+    }, [])
+
+    const handleMoney = (number) => {
+        const numToString = number.toString();
+        const regex = /\B(?=(\d{3})+(?!\d))/g;
+
+        return numToString.replace(regex, '.')
+    }
 
     const cards = [
         <CardItem 
             header="Sản phẩm"
-            number={348}
+            number={summary ? summary.totalProduct : 0}
             url="product"
         />,
         <CardItem 
             header="Khách hàng"
-            number={71}
+            number={summary ? summary.totalUser : 0}
             url="account"
         />,
         <CardItem 
             header="Đơn hàng"
-            number={259}
+            number={summary ? summary.totalOrder : 0}
             url="order"
         />,
         <CardItem 
             header="Tổng doanh thu"
-            number={'19.131.410 đ'}
+            number={summary ? handleMoney(summary.totalMoney) : 0}
             url="total"
         />
     ]
@@ -87,6 +107,9 @@ const Dashboard = () => {
     ]
 
     return (
+        loading
+        ? <Loading />
+        :
         <div>
             <TitleContent content='bảng điều khiển' />
             <div style={{ margin: '30px 0' }}>

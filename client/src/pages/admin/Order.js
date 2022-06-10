@@ -1,66 +1,45 @@
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { TableContainer } from '../../components'
 import { TitleContent, ButtonCreate } from '../../components/UI'
 import useTitle from '../../hooks/useTitle'
+import orderApi from '../../api/orderApi'
 
 const Order = () => {
     useTitle('Order')
+    
+    const [orders, setOrders] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    const list = [
-        {
-            orderId: '00001',
-            fullName: 'Nguyễn Văn A',
-            total: 2581000,
-            dateOrder: '29/03/2022 15:48',
-            status: 'Đang giao',
-        },
-        {
-            orderId: '00002',
-            fullName: 'Nguyễn Văn B',
-            total: 750000,
-            dateOrder: '30/03/2022 19:09',
-            status: 'Đang xử lý',
-        },
-        {
-            orderId: '00002',
-            fullName: 'Nguyễn Văn B',
-            total: 750000,
-            dateOrder: '30/03/2022 19:09',
-            status: 'Đang xử lý',
-        },
-        {
-            orderId: '00002',
-            fullName: 'Nguyễn Văn B',
-            total: 750000,
-            dateOrder: '30/03/2022 19:09',
-            status: 'Đang xử lý',
-        },
-        {
-            orderId: '00002',
-            fullName: 'Nguyễn Văn B',
-            total: 750000,
-            dateOrder: '30/03/2022 19:09',
-            status: 'Đang xử lý',
-        },
-    ]
+    useEffect(() => {
+        const getApi = async () => {
+            const res = await orderApi.getAll()
+            const listOrder = res.map((order, index) => ({
+                key: index,
+                id: order.id,
+                orderId: order.orderId,
+                fullName: order.customer.fullName,
+                total: order.total,
+                dateOrder: order.createdAt,
+                status: order.status
+            }))
+            setOrders(listOrder)
+            setLoading(false) 
+        }
+        getApi()
+    }, [])
 
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                <TitleContent content='' />
-                <ButtonCreate
-                    to='create'
-                    action='Thêm'
-                    icon='addUser'
-                />
+                <TitleContent content='Danh sách đơn hàng' />
             </div>
 
             <div style={{ margin: 15 }}></div>
 
             <TableContainer 
                 type="order"
-                data={list}
-                // loading={loading}
+                data={orders}
+                loading={loading}
             />
         </div>
     )
