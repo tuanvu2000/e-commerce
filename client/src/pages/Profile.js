@@ -41,10 +41,20 @@ const Profile = () => {
         try {
             const values = await form.validateFields();
             const birthday = values.birthday
+            const formatComma = /(\s*,\s*)/
+            const formatString = /Tỉnh|Thành phố/
+            if (values.apartment.search(formatComma) !== -1) {
+                setLoading(false)
+                message.error('Trong số nhà không được chứa dấu phẩy')
+                return false
+            }
+            const city = values.city[0].search(formatString) === -1
+                ? values.city.join(', ')
+                : values.city.reverse().join(', ')
             const newValue = {
                 ...values,
                 birthday: birthday ? moment(birthday).format() : birthday,
-                address: values.apartment + ', ' + values.city.reverse().join(', ')
+                address: values.apartment + ', ' + city
             }
             if (urlImg.url && urlImg.cloudinaryId) {
                 newValue.avatar = urlImg.url

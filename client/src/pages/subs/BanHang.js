@@ -4,10 +4,11 @@ import styles from '../../assets/styles/Policy.module.scss'
 import { CheckCircleOutlined, SafetyCertificateOutlined } from '@ant-design/icons'
 
 const BanHang = () => {
+    const year = new Date()
     return (
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.header, styles.horizontal)}>
-                <p>CHÍNH SÁCH BÁN HÀNG 2022</p>
+                <p>CHÍNH SÁCH BÁN HÀNG {year.getFullYear()}</p>
             </div>
             <div className={clsx(styles.quality)}>
                 <div>

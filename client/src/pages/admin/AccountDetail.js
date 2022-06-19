@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { InfoAccount, TableContainer } from '../../components'
 import { TitleContent, ButtonAction } from '../../components/UI'
 import { Loading } from '../../components/UI'
-import { Form, message, Modal } from 'antd'
+import { Form, Select, message, Modal } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import userApi from '../../api/userApi'
 import orderApi from '../../api/orderApi'
@@ -18,9 +18,12 @@ const AccountDetail = () => {
     const navigate = useNavigate()
 
     const [user, setUser] = useState({})
+    const [roleAdmin, setRoleAdmin] = useState('')
+    const [roleEdit, setRoleEdit] = useState('')
     const [historyOrder, setHistoryOrder] = useState([])
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
+    const [isEditRole, setIsEditRole] = useState(false)
     const [form] = Form.useForm()
     const urlImg = useSelector((state) => state.saved.user)
     const id = window.location.pathname.split('/admin/account/')[1]
@@ -29,6 +32,7 @@ const AccountDetail = () => {
         const getData = async () => {
             const resUser = await userApi.getOne(id)
             setUser(resUser)
+            setRoleEdit(resUser.accountId.role)
 
             const resOrder = await orderApi.history(resUser.id)
             const ordersNew = resOrder.map((order, index) => ({
@@ -41,6 +45,14 @@ const AccountDetail = () => {
         }
         getData()
     }, [id, loading])
+
+    useEffect(() => {
+        const checkRole = async () => {
+            const res = await userApi.checkToken()
+            setRoleAdmin(res.accountId.role)
+        }
+        checkRole()
+    }, [])
 
     const onSave = async () => {
         setLoading(true)
@@ -83,6 +95,29 @@ const AccountDetail = () => {
         })
     }
 
+    const handleOpenEditRole = () => {
+        setIsEditRole(true)
+    }
+    const handleCloseEditRole = () => {
+        setIsEditRole(false)
+        setRoleEdit(user.accountId.role)
+    }
+
+    const handleChangeRole = (value) => {
+        setRoleEdit(value)
+    }
+
+    const handleSendRequest = async () => {
+        setLoading(true)
+        await userApi.changeRole({
+            userId: user.accountId.id,
+            role: roleEdit
+        })
+        message.success('Change role user success')
+        setIsEditRole(false)
+        setLoading(false)
+    }
+
     return (
         <div>
             {
@@ -92,6 +127,31 @@ const AccountDetail = () => {
                     {/* Hiển thị tiêu đề trang và các button */}
                     <div className={clsx(styles.flex)}>
                         <TitleContent content='Thông tin khách hàng' />
+                        <div className={clsx(styles.role)}>
+                            {
+                                isEditRole
+                                ? <>
+                                    <Select 
+                                        style={{ width: 100 }} 
+                                        value={roleEdit} 
+                                        onChange={handleChangeRole}
+                                    >
+                                        <Select.Option value='user'>User</Select.Option>
+                                        <Select.Option value='admin'>Admin</Select.Option>
+                                    </Select>
+                                    <i className="fas fa-check-circle" onClick={handleSendRequest} style={{ color: '#2EB85C'}}></i>
+                                    <i className="fas fa-times-circle" onClick={handleCloseEditRole} style={{ color: '#E55353'}}></i>
+                                </>
+                                : <>
+                                    <p>( {user.accountId.role} )</p>
+                                    {
+                                        roleAdmin === 'mod' &&
+                                        <i className="fas fa-edit" onClick={handleOpenEditRole}></i>
+                                    }
+                                </>
+                            }
+                        </div>
+
                         <div className={clsx(styles.flex, styles.space)}>
                             {
                                 !isEdit ? (
@@ -160,53 +220,3 @@ const AccountDetail = () => {
 }
 
 export default AccountDetail
-
-// const dataTest = [
-//     {
-//         key: 1,
-//         stt: 1,
-//         idOrder: '000001',
-//         products: [
-//             {
-//                 nameProduct: 'Mũ Xe Đạp Balder B79 Đen Xanh',
-//                 quantity: 2,
-//                 price: 672000,
-//             },
-//             {
-//                 nameProduct: 'Nón 3/4 KYT Venom Leopard',
-//                 quantity: 1,
-//                 price: 2000000,
-//             }
-//         ],
-//         total: 3344000,
-//         dateOrder: '12/03/2022 07:12:46'
-//     },
-//     {
-//         key: 2,
-//         stt: 2,
-//         idOrder: '000002',
-//         products: [
-//             {
-//                 nameProduct: 'Nón 3/4 KYT Venom Leopard',
-//                 quantity: 1,
-//                 price: 2000000,
-//             }
-//         ],
-//         total: 2000000,
-//         dateOrder: '21/04/2022 15:43:25'
-//     },
-//     {
-//         key: 3,
-//         stt: 3,
-//         idOrder: '000003',
-//         products: [
-//             {
-//                 nameProduct: 'Nón 3/4 KYT Venom Xám Đen Nhám',
-//                 quantity: 1,
-//                 price: 1750000,
-//             }
-//         ],
-//         total: 1750000,
-//         dateOrder: '23/04/2022 17:22:07'
-//     }
-// ]

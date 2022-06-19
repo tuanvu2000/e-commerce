@@ -117,9 +117,13 @@ const DetailProduct = () => {
     const handleClickAdd = () => {
         setLoadingBtn(true)
         setTimeout(() => {
-            if (size) {
+            if (!size) {
+                setLoadingBtn(false)
+                return message.error('Vui lòng chọn size phù hợp')
+            }
+            if (quantity <= product.inventory) {
                 dispatch(addOrder({
-                    id: product.id,
+                    id: product._id,
                     name: product.namePd,
                     image: product.image,
                     size: size,
@@ -130,7 +134,7 @@ const DetailProduct = () => {
                 }))
                 message.success('Đã thêm vào giỏ hàng')
             } else {
-                message.error('Vui lòng chọn size phù hợp')
+                message.error('Số lượng vượt quá số hàng tồn kho của shop')
             }
             setLoadingBtn(false)
             setQuantity(1)
@@ -161,11 +165,13 @@ const DetailProduct = () => {
                                 product.sale > 0
                                 ? <>
                                     <span className={clsx(styles.priceOld)}>{handleMoney(product.price)}</span>
-                                    <span>{handleMoney(handleSale(product))}</span>
+                                    {/* <span>{handleMoney(handleSale(product))}</span> */}
+                                    <span>{handleMoney(product.priceSale)}</span>
                                 </>
                                 : <span>{handleMoney(product.price)}</span>
                             }
                         </p>
+                        <p className={clsx(styles.sell)}>Đã bán {product.quantitySell}</p>
                         <div className={clsx(styles.content)}>
                             {
                                 content.map(item => (
@@ -199,6 +205,7 @@ const DetailProduct = () => {
                                 >
                                     Thêm vào giỏ hàng
                                 </Button>
+                                <span>Tồn kho: {product.inventory}</span>
                             </div>
                         </div>
                     </Col>

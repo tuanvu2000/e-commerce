@@ -17,6 +17,7 @@ const Register = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [form] = Form.useForm()
+    const [form2] = Form.useForm()
     const upImage = useSelector((state) => state.saved.user)
 
     const [nextStep, setNextStep] = useState(false)
@@ -32,11 +33,18 @@ const Register = () => {
     }, [navigate])
 
     const handleNextStep = (e) => {
-        e.preventDefault();
+        e.preventDefault()
+        const fields = ['username', 'password', 'email']
+        for (let key of fields) {
+            if (!form.getFieldValue(key)) {
+                message.error('Vui lòng không được bỏ trống các trường nhập')
+                return false
+            }
+        }
         setNextStep(true)
     }
     const handleReturnStep = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         setNextStep(false)
     }
 

@@ -11,49 +11,20 @@ const ListProduct = ({ category, subCategory, title, to }) => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        const changeData = () => {
-            if (category === 'Nón') {
-                if (subCategory === 'Nón bảo hiểm 3/4')
-                    return 'non+non-34'
-                if (subCategory === 'Nón bảo hiểm full-face')
-                    return 'non+non-fullface'
-                if (subCategory === 'Nón nửa đầu')
-                    return 'non+non-nua-dau'
-                if (subCategory === 'Nón trẻ em')
-                    return 'non+non-tre-em'
-                if (subCategory === 'Mũ xe đạp')
-                    return 'non+mu-xe-dap'
-            }
-            if (category === 'Phụ kiện') {
-                if (!subCategory)
-                    return 'phukien'
-                if (subCategory === 'Kính')
-                    return 'phukien+kinh'
-                if (subCategory === 'Găng tay')
-                    return 'phukien+gang-tay'
-                if (subCategory === 'Orther')
-                    return 'phukien+other'
-            }
-        }
-        setLoading(true)
         const getApi = async () => {
-            if (category === '' & subCategory === '') {
-                const resApi = await productApi.getBestSell()
-                // const resLimit = resApi.filter((item, index) => index < 8)
-                setProducts(resApi.filter((item, index) => index < 8))
-                setLoading(false)
-            } else {
-                const resApi = await productApi.getCategory(changeData(category, subCategory))
-                setProducts(resApi.filter((item, index) => index < 8))
-                setLoading(false)
-            }
+            const sort = (category === '' && subCategory === '') ? '-quantitySell' : '-createdAt'
+            const res = await productApi.getListType({
+                pageSize: 8,
+                page: 1,
+                type: category,
+                value: subCategory,
+                sort: sort
+            })
+            setProducts(res.products)
+            setLoading(false)
         }
         getApi()
-    }, [category, subCategory   ])
-
-    const handleSale = (product) => {
-        return product.price - ((product.price * product.sale) / 100)
-    }
+    }, [category, subCategory])
 
     const handleMoney = (number) => {
         const numToString = number.toString();
@@ -83,25 +54,35 @@ const ListProduct = ({ category, subCategory, title, to }) => {
                     {
                         products
                         && products.map(product => (
-                            <Col span={6} key={product.id}>
+                            <Col span={6} key={product._id}>
                                 <div className={clsx(styles.col)}>
-                                    <Link to={removeAccents(product.namePd)+'/detail'} state={{ id: product.id }}>
+                                    <Link to={removeAccents(product.namePd)+'/detail'} state={{ id: product._id }}>
                                         <img src={product.image} alt={product.namePd} />
                                     </Link>
                                     <div className={clsx(styles.textBox)}>
-                                        {
-                                            product.sale > 0 &&
-                                            <div className={clsx(styles.promotion)}>
-                                                <span className={clsx(styles.icon)}>
-                                                    <i className='bx bxs-hot'></i>
-                                                </span>
-                                                <span className={clsx(styles.sale)}>
-                                                    {product.sale}%
-                                                </span>
-                                            </div> 
-                                        }
+                                        <div className={clsx(styles.wrapNote)}>
+                                            {
+                                                product.sale > 0 &&
+                                                <div className={clsx(styles.note)}>
+                                                    <span className={clsx(styles.icon)}>
+                                                        <i className='bx bxs-hot'></i>
+                                                    </span>
+                                                    <span className={clsx(styles.noteContent)}>
+                                                        {product.sale}%
+                                                    </span>
+                                                </div> 
+                                            }
+                                            {
+                                                product.inventory === 0 &&
+                                                <div className={clsx(styles.note)}>
+                                                    <span className={clsx(styles.noteContent)}>
+                                                        sold out
+                                                    </span>
+                                                </div> 
+                                            }
+                                        </div>
                                         <p className={clsx(styles.name)}>
-                                            <Link to={removeAccents(product.namePd)+'/detail'} state={{ id: product.id }}>
+                                            <Link to={removeAccents(product.namePd)+'/detail'} state={{ id: product._id }}>
                                                 {product.namePd}
                                             </Link>
                                         </p>
@@ -113,7 +94,7 @@ const ListProduct = ({ category, subCategory, title, to }) => {
                                                         {handleMoney(product.price)} đ
                                                     </span>
                                                     <span>
-                                                        {handleMoney(handleSale(product))} đ</span>
+                                                        {handleMoney(product.priceSale)} đ</span>
                                                 </>
                                                 : <span>{handleMoney(product.price)} đ</span>
                                             }

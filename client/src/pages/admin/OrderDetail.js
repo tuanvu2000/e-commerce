@@ -44,10 +44,10 @@ const OrderDetail = () => {
                 setLoading(true)
                 try {
                     await orderApi.updateState(order.id, { status: 'Hủy đơn hàng' })
-                    message.success('Hủy đơn hàng thành công')
+                    await message.success('Hủy đơn hàng thành công')
                     setLoading(false)
                 } catch (error) {
-                    message.error('Không thể hủy đơn hàng này')
+                    await message.error('Không thể hủy đơn hàng này')
                     setLoading(false)
                 }
             }
@@ -65,10 +65,10 @@ const OrderDetail = () => {
                 setLoading(true)
                 try {
                     await orderApi.updateState(order.id, { status: 'Đã hoàn thành' })
-                    message.success('Đơn hàng đã thành hoàn')
+                    await message.success('Đơn hàng đã thành hoàn')
                     setLoading(false)
                 } catch (error) {
-                    message.error('Không thể hoàn thành đơn hàng này')
+                    await message.error('Không thể hoàn thành đơn hàng này')
                     setLoading(false)
                 }
             }
@@ -86,11 +86,11 @@ const OrderDetail = () => {
                 setLoading(true)
                 try {
                     await orderApi.updateState(order.id, { status: 'Chờ xử lý' })
-                    message.success('Đơn hàng đã được khôi phục mới')
+                    await message.success('Đơn hàng đã được khôi phục mới')
                     setLoading(false)
                 } catch (error) {
-                    message.error('Không thể khôi phục đơn hàng này')
-                    setLoading(false)
+                    await message.error('Không thể khôi phục đơn hàng này')
+                    return setLoading(false)
                 }
             }
         })

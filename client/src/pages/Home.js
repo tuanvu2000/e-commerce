@@ -20,8 +20,8 @@ const list = [
         alt: 'banner 4',
         title: 'Nón 3/4',
         data: {
-            category: 'Nón',
-            subCategory: 'Nón bảo hiểm 3/4',
+            category: 'subCategory',
+            subCategory: 'non-34',
             to: 'non-bao-hiem/non-34'
         }
     },
@@ -30,8 +30,8 @@ const list = [
         alt: 'banner 5',
         title: 'Nón fullface',
         data: {
-            category: 'Nón',
-            subCategory: 'Nón bảo hiểm full-face',
+            category: 'subCategory',
+            subCategory: 'non-fullface',
             to: 'non-bao-hiem/non-fullface'
         }
     },
@@ -40,8 +40,8 @@ const list = [
         alt: 'banner 6',
         title: 'Nón nửa đầu',
         data: {
-            category: 'Nón',
-            subCategory: 'Nón nửa đầu',
+            category: 'subCategory',
+            subCategory: 'non-nua-dau',
             to: 'non-bao-hiem/non-nua-dau'
         }
     },
@@ -50,8 +50,8 @@ const list = [
         alt: 'banner 7',
         title: 'Mũ xe đạp',
         data: {
-            category: 'Nón',
-            subCategory: 'Mũ xe đạp',
+            category: 'subCategory',
+            subCategory: 'mu-xe-dap',
             to: 'non-bao-hiem/mu-xe-dap'
         }
     },
@@ -60,8 +60,8 @@ const list = [
         alt: 'banner 8',
         title: 'Phụ kiện',
         data: {
-            category: 'Phụ kiện',
-            subCategory: '',
+            category: 'category',
+            subCategory: 'phu-kien',
             to: 'phu-kien'
         }
     },

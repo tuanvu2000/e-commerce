@@ -79,7 +79,7 @@
         transition: 0.2s;
         position: relative;
         
-        a {
+        > a, > span {
             color: #fff;
             > i {
                 margin-left: 4px;
@@ -87,8 +87,11 @@
         }
         &:not(li:last-child):hover {
             background-color: #F4CB08;
-            > a {
+            > a, > span {
                 color: #000;
+            }
+            > span {
+                cursor: default;
             }
             .wrapperNav {
                 display: flex;
@@ -133,6 +136,11 @@
 
     &.large {
         min-width: 875px;
+
+        > div > a {
+            padding: 4px 0;
+        }
+        
     }
     
     &.small {
@@ -149,6 +157,33 @@
             }
             &:hover {
                 background: rgb(244, 203, 8, 0.25);
+            }
+        }
+    }
+
+    &.flex {
+        min-width: 360px;
+        a {
+            
+            display: block;
+            padding: 8px 4px;
+            color: #000;
+            border-top: 1px solid #F4CB08;
+
+            // &:first-child {
+            //     border-top: none;
+            // }
+            &:hover {
+                background: rgb(244, 203, 8, 0.25);
+            }
+        }
+        div {
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
+                > a {
+                    border-top: none;
+                }
             }
         }
     }

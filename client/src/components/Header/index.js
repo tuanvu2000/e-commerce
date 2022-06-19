@@ -8,6 +8,7 @@ import { logout } from '../../handlers/authHandler'
 import { navHat, navAccessory, navBrand } from './data'
 import { CartList } from '../../components'
 import { Badge } from '../../components/UI'
+import { Col, Row } from 'antd'
 
 const Header = () => {
     const navigate = useNavigate()
@@ -99,11 +100,11 @@ const Header = () => {
                             <NavbarItem data={navAccessory} />
                         </li>
                         <li>
-                            <Link to="/thuong-hieu">
+                            <span>
                                 Thương hiệu
                                 <i className="fas fa-angle-down"></i>
-                            </Link>
-                            <NavbarList data={navBrand} />
+                            </span>
+                            <NavbarFlex data={navBrand} />
                         </li>
                         <li>
                             {
@@ -161,6 +162,24 @@ const NavbarItem = ({ data }) => {
                     </Link>
                 ))
             }
+        </div>
+    )
+}
+
+const NavbarFlex = ({ data }) => {
+    return (
+        <div className={clsx(styles.wrapperNav, styles.flex)}>
+            <Row gutter={16}>
+                {
+                    data.map(item => (
+                        <Col span={8} key={item.text}>
+                            <Link to={item.to}>
+                                {item.text}
+                            </Link>
+                        </Col>
+                    ))
+                }
+            </Row>
         </div>
     )
 }

@@ -7,6 +7,7 @@ import styles from './Footer.module.scss'
 import paymentImg from '../../assets/images/payment.webp'
 
 const Footer = () => {
+    const date = new Date()
     return (
         <div className={clsx(styles.wrapper)}>
             <Row style={{ margin: '24px 0'}}>
@@ -47,7 +48,7 @@ const Footer = () => {
                 </Col>
             </Row>
             <p className={clsx(styles.copyright)}>
-                Copyright 2022 © <b>phuotculture.netlify.app - Design & SEO By Phượt Culture</b>
+                Copyright {date.getFullYear()} © <b>phuotculture.netlify.app - Design & SEO By Phượt Culture</b>
             </p>
         </div>
     )

@@ -30,39 +30,29 @@ router.delete(
     productController.delete
 )
 
-router.get(
-    '/list/best-sell',
-    productController.bestSell
-)
+// router.get(
+//     '/list/best-sell',
+//     productController.bestSell
+// )
 
 router.get(
     '/list/best-sale',
     productController.bestSale
 )
 
-router.get(
-    '/list/:category',
-    productController.listSubCategory
-)
+// router.get(
+//     '/list/:category',
+//     productController.listSubCategory
+// )
 
 router.post(
     '/store',
     productController.listType
 )
 
-router.get(
-    '/store/non-bao-hiem/:subCategory',
-    productController.listHatSub
-)
-
-router.get(
-    '/store/phu-kien/:subCategory',
-    productController.listAccessorySub
-)
-
-router.get(
-    '/store/thuong-hieu/:brand',
-    productController.listBrand
+router.put(
+    '/add/quantity',
+    productController.putAddProduct
 )
 
 module.exports = router;

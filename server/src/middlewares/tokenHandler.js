@@ -22,11 +22,11 @@ const tokenDecode = (req) => {
 exports.verifyModToken = async (req, res, next) => {
     const tokenDecoded = tokenDecode(req);
     if (tokenDecoded) {
-        const admin = await User.findById(tokenDecoded.id);
-        const role = admin.role;
+        const mod = await Account.findById(tokenDecoded.id);
+        const role = mod.role;
         if (role !== 'mod')
             return res.status(403).json('Require Mod Role!');
-        req.admin = admin;
+        req.mod = mod;
         next();
     } else {
         res.status(401).json('Unauthorized');
@@ -36,7 +36,7 @@ exports.verifyModToken = async (req, res, next) => {
 exports.verifyAdminToken = async (req, res, next) => {
     const tokenDecoded = tokenDecode(req);
     if (tokenDecoded) {
-        const admin = await User.findById(tokenDecoded.id);
+        const admin = await Account.findById(tokenDecoded.id);
         const role = admin.role;
         if (role !== 'admin')
             return res.status(403).json('Require Admin Role!');
@@ -50,7 +50,7 @@ exports.verifyAdminToken = async (req, res, next) => {
 exports.verifyAdToken = async (req, res, next) => {
     const tokenDecoded = tokenDecode(req);
     if (tokenDecoded) {
-        const admins = await User.findById(tokenDecoded.id);
+        const admins = await Account.findById(tokenDecoded.id);
         const role = admins.role;
         if (role === 'user')
             return res.status(403).json('Require Higher Role!');

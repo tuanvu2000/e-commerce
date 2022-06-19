@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { InfoProduct } from '../../components'
 import { ButtonAction, TitleContent } from '../../components/UI'
 import { Loading } from '../../components/UI'
-import { Form, message, Modal } from 'antd'
+import { Form, InputNumber, message, Modal, Tooltip } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import productApi from '../../api/productApi'
 import useTitle from '../../hooks/useTitle'
@@ -18,6 +18,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(true)
     const [isEdit, setIsEdit] = useState(false)
+    const [openInput, setOpenInput] = useState(false)
+    const [quantity, setQuantity] = useState(0)
     const [form] = Form.useForm()
     const id = window.location.pathname.split('/admin/product/')[1]
     const urlImg = useSelector((state) => state.saved.product)
@@ -73,6 +75,37 @@ const ProductDetail = () => {
         })
     }
 
+    const handleOpenInput = () => {
+        setOpenInput(true)
+    }
+    
+    const handleCloseInput = () => {
+        setOpenInput(false)
+        setQuantity(0)
+    }
+
+    const handleChangeQuantity = (value) => {
+        setQuantity(value)
+    }
+
+    const handleSendRequest = async () => {
+        setLoading(true)
+        await productApi.putAddQuantity({
+            id: product._id,
+            quantity: +quantity
+        })
+        message.success(
+            quantity > 0 
+            ? `added ${quantity} successful products`
+            : `removed ${quantity} successful products`
+        )
+        setQuantity(0)
+        setOpenInput(false)
+        setLoading(false)
+    }
+
+    
+
     return (
         <div>
             {
@@ -82,6 +115,24 @@ const ProductDetail = () => {
                     {/* Hiển thị tiêu đề trang và các button */}
                     <div className={clsx(styles.flex)}>
                         <TitleContent content='Thông tin sản phẩm' />
+                        <div className={clsx(styles.subHeader)}>
+                            {
+                                openInput
+                                ? <>
+                                    <InputNumber value={quantity} onChange={handleChangeQuantity} />
+                                    <i className="fas fa-check-circle" onClick={handleSendRequest} style={{ color: '#2EB85C'}}></i>
+                                    <i className="fas fa-times-circle" onClick={handleCloseInput} style={{ color: '#E55353'}}></i>
+                                </>
+                                : <Tooltip placement="right" onClick={handleOpenInput} title="Thêm sản phẩm">
+                                    <i className="fas fa-plus-circle" style={{ color: '#FF7121', marginLeft: 0 }}></i>
+                                </Tooltip>
+                            }
+                            <div className={clsx(styles.sell)}>
+                                <span>Đã bán {product.quantitySell} sản phẩm</span>
+                            </div>
+                        </div>
+
+
                         <div className={clsx(styles.flex, styles.space)}>
                             {
                                 !isEdit ? (
@@ -132,7 +183,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
 
-                    {/* Hiển thị thông tin tài khoản */}
+                    {/* Hiển thị thông tin sản phẩm */}
                     <InfoProduct data={product} edit={isEdit} form={form} />
                 </>
             }

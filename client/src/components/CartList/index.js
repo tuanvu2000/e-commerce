@@ -10,7 +10,8 @@ const CartList = () => {
     const dispatch = useDispatch()
     const order = useSelector((state) => state.order)
 
-    const handleRemove = (index) => {
+    const handleRemove = (e, index) => {
+        e.preventDefault()
         dispatch(removeOrder(index))
     }
 
@@ -21,12 +22,28 @@ const CartList = () => {
         return numToString.replace(regex, '.') + ' đ';
     }
 
+    const removeAccents = (str) => {
+        return str.toLowerCase()
+                .normalize('NFD')                   // chuyển chuỗi sang unicode tổ hợp
+                .replace(/[\u0300-\u036f]/g, '')    // xóa các ký tự dấu sau khi tách tổ hợp
+                .replace(/[đĐ]/g, 'd')              // Thay ký tự đ Đ
+                .replace(/([^0-9a-z-\s])/g, '')     // Xóa ký tự đặc biệt
+                .replace(/(\s+)/g, '-')             // Xóa khoảng trắng thay bằng ký tự -
+                .replace(/-+/g, '-')                // Xóa ký tự - liên tiếp
+                .replace(/^-+|-+$/g, '');           // xóa phần dư - ở đầu & cuối
+    }
+
     return (
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.list)}>
                 {
                     order.list.map((item, index) => (
-                        <div key={item.id + item.size} className={clsx(styles.item)}>
+                        <Link 
+                            key={item.id + item.size} 
+                            to={`../${removeAccents(item.name)}/detail`} 
+                            state={{ id: item.id }} 
+                            className={clsx(styles.item)}
+                        >
                             <img src={item.image} alt="non" width="60" height="60" />
                             <div>
                                 <p>{item.name} ({item.size})</p>
@@ -34,10 +51,10 @@ const CartList = () => {
                                     <span>{item.quantity}</span> * <span>{handleMoney(item.price)}</span>
                                 </p>
                             </div>
-                            <span onClick={() => handleRemove(index)}>
+                            <span onClick={(e) => handleRemove(e, index)}>
                                 <i className="far fa-times-circle"></i>
                             </span>
-                        </div>
+                        </Link>
                     ))
                 }
             </div>

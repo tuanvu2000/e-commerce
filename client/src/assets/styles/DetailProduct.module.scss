@@ -23,7 +23,7 @@
     .price {
         font-size: 24px;
         font-weight: 700;
-        margin-bottom: 32px;
+        margin-bottom: 16px;
         
         > .priceOld {
             font-weight: 400;
@@ -31,6 +31,11 @@
             text-decoration: line-through;
             margin-right: 16px;
         }
+    }
+    .sell {
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-style: italic;
     }
     .content {
         display: flex;
@@ -64,7 +69,15 @@
         }
         .confirm {
             display: flex;
+            align-items: center;
             padding: 20px 0 12px;
+
+            > span {
+                display: inline-block;
+                margin-left: 12px;
+                font-size: 14px;
+                font-style: italic;
+            }
         }
         .quantity {
             display: flex;

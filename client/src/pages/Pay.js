@@ -17,7 +17,6 @@ const Pay = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const order = useSelector((state) => state.order)
-    const [transport, setTransport] = useState(order.total > 500000 ? 0 : 20000)
     const [city, setCity] = useState('')
     const [district, setDistrict] = useState('')
     const [ward, setWard] = useState('')
@@ -25,8 +24,13 @@ const Pay = () => {
     const [loading, setLoading] = useState(false)
     const [initValue, setInitValue] = useState({})
     const [agree, setAgree] = useState('')
+    const [transport, setTransport] = useState(order.total > 500000 ? 0 : city.name === 'Thành phố Hồ Chí Minh' ? 20000 : 50000)
 
     useEffect(() => {
+        if (!order.list.length) {
+            message.error('Giỏ hàng hiện tại chưa có sản phẩm !')
+            return navigate('/')
+        }
         const checkUser = async () => {
             setLoading(true)
             const isUser = await isAuth()
@@ -60,7 +64,7 @@ const Pay = () => {
         }
         checkUser()
         window.scrollTo(0, 0)
-    }, [])
+    }, [navigate, order.list.length])
 
     const handleMoney = (number) => {
         const numToString = number.toString();
@@ -287,10 +291,16 @@ const Pay = () => {
                                                                     {
                                                                         order.total >= 500000
                                                                         ? <Radio value={0}>Giao hàng miễn phí (Giao thường)</Radio>
-                                                                        : <Radio value={20000}>Giao hàng thường: 20.000đ (2 - 3 ngày)</Radio>
+                                                                        : city.name === 'Thành phố Hồ Chí Minh'
+                                                                        ? <Radio value={20000}>Giao hàng thường: 20.000đ (2 - 3 ngày)</Radio>
+                                                                        : <Radio value={50000}>Giao hàng thường: 50.000đ (2 - 3 ngày)</Radio>
                                                                     }
-                                                                    {/* <Radio value={0}>Giao hàng miễn phí (Giao thường)</Radio> */}
-                                                                    <Radio value={30000}>Giao hàng nhanh: 30.000 đ</Radio>
+                                                                    {
+                                                                        city.name === 'Thành phố Hồ Chí Minh'
+                                                                        ? <Radio value={30000}>Giao hàng nhanh: 30.000 đ</Radio>
+                                                                        : <Radio disabled>Chỉ giao nhanh ở nội thành TP. Hồ Chí Minh</Radio>
+                                                                    }
+                                                                    {/* <Radio value={30000}>Giao hàng nhanh: 30.000 đ</Radio> */}
                                                                 </Radio.Group>
                                                             </td>
                                                         </tr>
@@ -313,7 +323,7 @@ const Pay = () => {
                                             <td colSpan="2">
                                                 <Checkbox onChange={handleCheckAgree}>
                                                     Tôi đã đọc và đồng ý với
-                                                    <Link to="."> điều khoản và điều kiện </Link>
+                                                    <Link to="../policy/ban-hang"> điều khoản và điều kiện </Link>
                                                     của website.
                                                 </Checkbox>
                                             </td>

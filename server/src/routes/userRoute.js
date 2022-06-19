@@ -22,17 +22,26 @@ router.post(
 
 router.get(
     '/',
+    tokenHandler.verifyAdToken,
     userController.getUserList
 )
 
 router.get(
     '/:id',
+    tokenHandler.verifyToken,
     userController.getUserInfo
 )
 
 router.put(
     '/:id',
+    tokenHandler.verifyToken,
     userController.putUser
+)
+
+router.put(
+    '/edit/change-role',
+    tokenHandler.verifyModToken,
+    userController.putChangeRole
 )
 
 router.delete(
@@ -40,5 +49,6 @@ router.delete(
     tokenHandler.verifyAdToken,
     userController.deleteUser
 )
+
 
 module.exports = router;

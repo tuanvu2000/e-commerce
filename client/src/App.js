@@ -39,12 +39,9 @@ function App() {
                     <Route path=":product/detail" element={<DetailProduct />} />
                     {[
                         ":type/",
-                        // ":type/page=:number",
-                        // ":type/orderby=:order",
                         "non-bao-hiem/:type/",
-                        // "non-bao-hiem/:type/orderby=:order",
-                        // "phu-kien/:type/orderby=:order",
-                        // "thuong-hieu/:type/orderby=:order"
+                        "phu-kien/:type/",
+                        "thuong-hieu/:type/"
                     ].map((path, index) => 
                     <Route path={path} element={<Store />} key={index} />)}
                     <Route path="giam-gia" element={<Promotion />} />

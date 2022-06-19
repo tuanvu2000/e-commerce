@@ -80,7 +80,7 @@ const Login = () => {
                                 {
                                     type: 'string',
                                     min: 3,
-                                    message: "Mật khẩu phải hơn 3 kí tự"
+                                    message: "Mật khẩu phải tối thiểu 3 kí tự"
                                 }
                             ]}
                         >

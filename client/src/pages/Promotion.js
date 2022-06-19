@@ -33,7 +33,7 @@ const Promotion = () => {
                     : <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
                         {
                             products.map(product => (
-                                <React.Fragment key={product.id}>
+                                <React.Fragment key={product._id}>
                                     <CardProduct product={product} />
                                 </React.Fragment>
                             ))

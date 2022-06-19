@@ -22,6 +22,10 @@ const userApi = {
         `user/${id}`,
         params
     ),
+    changeRole: (params) => axiosClient.put(
+        'user/edit/change-role',
+        params
+    ),
     delete: (id) => axiosClient.delete(
         `user/${id}`
     )

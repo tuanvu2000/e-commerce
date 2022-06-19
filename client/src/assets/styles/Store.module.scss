@@ -41,3 +41,24 @@
     //     }
     // }
 }
+
+.noneProducts {
+    padding: 64px;
+    p {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    :global {
+        .ant-empty-img-simple-g {
+            stroke: #F4CB08;
+        }
+        .ant-empty-img-simple-ellipse {
+            fill: #f4e7e7;
+        }
+        .ant-empty-description {
+            color: #989898;
+        }
+    }
+}

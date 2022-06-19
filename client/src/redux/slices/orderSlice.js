@@ -33,14 +33,22 @@ const orderSlice = createSlice({
         },
         resetOrder: (state, action) => {
             Object.assign(state, action.payload)
+        },
+        increaseOrder: (state, action) => {
+            // const index = state.list.find(item => item.id === action.payload)
+            const idx = action.payload.index
+            const currentObj  = state.list.findIndex((item, index) => index === idx )
+            if (currentObj) {
+                // const obj = state.list[idx]
+                state.list[idx] = {
+                    ...state.list[idx],
+                    quantity: action.payload.quantity
+                }
+            }
         }
-        // decreaseOrder: (state, action) => {
-        //     const index = state.list.find(item => item.id === action.payload)
-
-        // }
     }
 })
 
 const { reducer, actions } = orderSlice
-export const { addOrder, removeOrder, resetOrder } = actions
+export const { addOrder, removeOrder, resetOrder, increaseOrder } = actions
 export default reducer

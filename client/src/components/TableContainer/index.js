@@ -20,12 +20,14 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'STT',
             dataIndex: 'stt',
             key: 'stt',
-            width: 50,
+            fixed: 'left',
+            width: 65,
         },
         {
             title: 'Họ và tên',
             dataIndex: 'fullName',
             key: 'fullName',
+            fixed: 'left',
             sorter: (a, b) => {
                 let x = a.fullName.toUpperCase(),
                     y = b.fullName.toUpperCase();
@@ -71,12 +73,14 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'STT',
             dataIndex: 'stt',
             key: 'stt',
-            width: 50,
+            fixed: 'left',
+            width: 65,
         },
         {
             title: 'Tên sản phẩm',
             dataIndex: 'namePd',
             key: 'namePd',
+            fixed: 'left',
             sorter: (a, b) => {
                 let x = a.namePd.toUpperCase(),
                     y = b.namePd.toUpperCase();
@@ -137,6 +141,7 @@ const TableContainer = ({ type, data, loading, theme }) => {
             title: 'Chi tiết',
             key: 'detail',
             width: 150,
+            fixed: 'right',
             render: (text) => <Link to={`${text.id}`}><SelectOutlined /> Xem chi tiết</Link>
         }
     ]
@@ -283,6 +288,8 @@ const TableContainer = ({ type, data, loading, theme }) => {
                 columns={columns[type]}
                 dataSource={data}
                 bordered={true}
+                // sticky
+                scroll={{ x: 1200 }}
                 pagination={{ pageSize: 10, position: ['bottomCenter'] }}
             />
         </div>

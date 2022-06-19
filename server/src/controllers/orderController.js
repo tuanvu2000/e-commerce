@@ -6,7 +6,15 @@ exports.postNewOrder = async (req, res) => {
         const { fullName, phoneNumber, address, notes } = info;
         let userId = info.id;
         //Kiểm tra sản phẩm trong kho còn hay không ?
-        // for (let )
+        for (let product of products) {
+            const checkProduct = await Product.findById(product.productId)
+            if (checkProduct.inventory === 0) {
+                return res.status(403).json({ message: 'Sản phẩm đã hết hàng, vui lòng chọn sản phẩm khác' })
+            }
+            if (checkProduct.inventory < product.quantity) {
+                return res.status(403).json({ message: 'Sản phẩm trong cửa hàng không đủ với yêu cầu của bạn' })
+            }
+        }
         // Nếu không có user id thì tạo User là anonymous
         if (!userId) {
             const newUser = new User({
@@ -21,6 +29,7 @@ exports.postNewOrder = async (req, res) => {
         }
         const orderId = "O" + Date.now();
 
+        // Tạo thông tin đơn hàng
         const newOrder = new Order({
             orderId: orderId,
             customer: userId,
@@ -30,6 +39,16 @@ exports.postNewOrder = async (req, res) => {
             total: total
         });
         const createOrder = await newOrder.save()
+
+        // Giảm sản phầm sẽ bán trong table sản phẩm
+        for (let product of products) {
+            await Product.findByIdAndUpdate(
+                product.productId,
+                { 
+                    $inc: { inventory: -(product.quantity) }
+                }
+            )
+        }
 
         res.status(200).json(createOrder);
     } catch (error) {
@@ -103,13 +122,60 @@ exports.getNewOrder = async (req, res) => {
 }
 
 exports.putStatus = async (req, res) => {
+    const {
+        status
+    } = req.body
     try {
-        const order = await Order.findByIdAndUpdate(
+        const checkOrder = await Order.findById(req.params.id)
+
+        if (checkOrder.status === 'Chờ xử lý') {
+            if (status === 'Hủy đơn hàng') {
+                const findOrder = await Order.findById(req.params.id)
+                findOrder.products.forEach(async (item) => 
+                    await Product.findByIdAndUpdate(
+                        item.productId,
+                        {
+                            $inc: { inventory: +(item.quantity) }
+                        }
+                    )
+                )
+            }
+            if (status === 'Đã hoàn thành') {
+                const findOrder = await Order.findById(req.params.id)
+                findOrder.products.forEach(async (item) => 
+                    await Product.findByIdAndUpdate(
+                        item.productId,
+                        {
+                            $inc: { quantitySell: +(item.quantity) }
+                        }
+                    )
+                )
+            }
+        }
+        if (checkOrder.status === 'Hủy đơn hàng') {
+            if (status === 'Chờ xử lý') {
+                const findOrder = await Order.findById(req.params.id)
+                findOrder.products.every(async (item) => {
+                    const findProduct = await Product.findById(item.productId)
+                    return findProduct.inventory > item.quantity
+                })
+                findOrder.products.forEach(async (item) => 
+                    await Product.findByIdAndUpdate(
+                        item.productId,
+                        {
+                            $inc: { inventory: -(item.quantity) }
+                        }
+                    )
+                )
+            }
+        }
+
+        await Order.findByIdAndUpdate(
             req.params.id,
-            { status: req.body.status }
+            { status: status }
         );
 
-        res.status(200).json(order);
+        return res.status(200).json({ message: 'Cập nhật đơn hàng thành công' });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);

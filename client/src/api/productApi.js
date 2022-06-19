@@ -18,28 +18,32 @@ const productApi = {
     delete: (id) => axiosClient.delete(
         `product/${id}`
     ),
-    getBestSell: () => axiosClient.get(
-        'product/list/best-sell'
-    ),
     getBestSale: () => axiosClient.get(
         'product/list/best-sale'
-    ),
-    getCategory: (values) => axiosClient.get(
-        `product/list/${values}`
     ),
     getListType: (params) => axiosClient.post(
         `product/store`,
         params
     ),
-    getListHatSub: (values) => axiosClient.get(
-        `product/store/non-bao-hiem/${values}`
-    ),
-    getListAccessorySub: (values) => axiosClient.get(
-        `product/store/phu-kien/${values}`
-    ),
-    getListBrand: (values) => axiosClient.get(
-        `product/store/thuong-hieu/${values}`
-    ),
+    putAddQuantity: (params) => axiosClient.put(
+        'product/add/quantity',
+        params
+    )
+    // getBestSell: () => axiosClient.get(
+    //     'product/list/best-sell'
+    // ),
+    // getCategory: (values) => axiosClient.get(
+    //     `product/list/${values}`
+    // ),
+    // getListHatSub: (values) => axiosClient.get(
+    //     `product/store/non-bao-hiem/${values}`
+    // ),
+    // getListAccessorySub: (values) => axiosClient.get(
+    //     `product/store/phu-kien/${values}`
+    // ),
+    // getListBrand: (values) => axiosClient.get(
+    //     `product/store/thuong-hieu/${values}`
+    // ),
 }
 
 export default productApi

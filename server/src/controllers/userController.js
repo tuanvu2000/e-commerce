@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User, Account } = require('../models');
 const CryptoJS = require('crypto-js');
+const { findById } = require('../models/user');
 
 exports.postRegister = async (req, res) => {
     const {
@@ -79,14 +80,22 @@ exports.postLogin = async (req, res) => {
 
 exports.getUserList = async (req, res) => {
     try {
+        const ad = req.admins.role;
+        const roleAdmin = ['user', 'admin'];
         const list = await User
             .find({ isUser: true })
             .sort('-createdAt')
             .populate({
                 path: 'accountId',
                 select: '-password'
-            })
-        res.status(200).json(list)
+            });
+        
+        const newList = list.filter(user =>
+            ad === 'admin'
+            ? roleAdmin.includes(user.accountId.role)
+            : user
+        );
+        res.status(200).json(newList);
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -110,10 +119,35 @@ exports.getUserInfo = async (req, res) => {
 
 exports.putUser = async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(
-            req.params.id,
-            { $set: req.body }
-        );
+        const role = req.user.accountId.role
+        const roleUser = await User.findById(req.params.id).populate({ path: 'accountId', select: '-password' })
+        const priory = {
+            user: 1,
+            admin: 2,
+            mod: 3
+        } 
+
+        if (priory[role] < priory[roleUser.accountId.role]) {
+            res.status(500).json('Role current not allowed edit')
+        } else {
+            const user = await User.findByIdAndUpdate(
+                req.params.id,
+                { $set: req.body }
+            );
+            res.status(200).json(user);
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+exports.putChangeRole = async (req, res) => {
+    try {
+        const user = await Account.findByIdAndUpdate(
+            req.body.userId,
+            { role: req.body.role }
+        )
         res.status(200).json(user);
     } catch (error) {
         console.log(error);
@@ -123,6 +157,9 @@ exports.putUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
+        const admin = req.admins.role
+        if (admin === 'user') return false
+
         await Account.findByIdAndDelete(req.params.id);
         await User.findOneAndDelete({
             accountId: req.params.id

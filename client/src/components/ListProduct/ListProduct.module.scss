@@ -16,13 +16,20 @@
         padding: 22px 8px 12px;
         position: relative;
 
-        .promotion {
+        .wrapNote {
             position: absolute;
             top: 0;
+            display: flex;
+        }
+
+        .note {
+            // position: absolute;
+            // top: 0;
             background: linear-gradient(-90deg, #ec1f1f 0%, #ff9c00 100%);
             display: inline-flex;
             align-items: center;
             border-radius: 20px;
+            margin-right: 4px;
             
             .icon {
                 // display: inline-block;
@@ -35,11 +42,12 @@
                     color: #fff;
                 }
             }
-            .sale {
+            .noteContent {
                 font-size: 12px;
                 font-weight: 700;
                 color: #fff;
                 padding: 0 10px 0 8px;
+                line-height: 22px;
             }
         }
 

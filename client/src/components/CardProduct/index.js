@@ -6,10 +6,6 @@ import styles from './CardProduct.module.scss'
 
 const CardProduct = ({ product }) => {
 
-    const handleSale = (product) => {
-        return product.price - ((product.price * product.sale) / 100)
-    }
-
     const handleMoney = (number) => {
         const numToString = number.toString();
         const regex = /\B(?=(\d{3})+(?!\d))/g;
@@ -31,23 +27,33 @@ const CardProduct = ({ product }) => {
     return (
         <Col span={6} key={product.id} className={clsx(styles.hover)}>
             <div className={clsx(styles.col)}>
-                <Link to={`../${removeAccents(product.namePd)}/detail`} state={{ id: product.id }}>
+                <Link to={`../${removeAccents(product.namePd)}/detail`} state={{ id: product._id }}>
                     <img src={product.image} alt={product.namePd} />
                 </Link>
                 <div className={clsx(styles.textBox)}>
-                    {
-                        product.sale > 0 &&
-                        <div className={clsx(styles.promotion)}>
-                            <span className={clsx(styles.icon)}>
-                                <i className='bx bxs-hot'></i>
-                            </span>
-                            <span className={clsx(styles.sale)}>
-                                {product.sale}%
-                            </span>
-                        </div> 
-                    }
+                    <div className={clsx(styles.wrapNote)}>
+                        {
+                            product.sale > 0 &&
+                            <div className={clsx(styles.note)}>
+                                <span className={clsx(styles.icon)}>
+                                    <i className='bx bxs-hot'></i>
+                                </span>
+                                <span className={clsx(styles.noteContent)}>
+                                    {product.sale}%
+                                </span>
+                            </div> 
+                        }
+                        {
+                            product.inventory === 0 &&
+                            <div className={clsx(styles.note)}>
+                                <span className={clsx(styles.noteContent)}>
+                                    sold out
+                                </span>
+                            </div> 
+                        }
+                    </div>
                     <p className={clsx(styles.name)}>
-                        <Link to={`../${removeAccents(product.namePd)}/detail`} state={{ id: product.id }}>
+                        <Link to={`../${removeAccents(product.namePd)}/detail`} state={{ id: product._id }}>
                             {product.namePd}
                         </Link>
                     </p>
@@ -59,7 +65,7 @@ const CardProduct = ({ product }) => {
                                     {handleMoney(product.price)} đ
                                 </span>
                                 <span>
-                                    {handleMoney(handleSale(product))} đ</span>
+                                    {handleMoney(product.priceSale)} đ</span>
                             </>
                             : <span>{handleMoney(product.price)} đ</span>
                         }

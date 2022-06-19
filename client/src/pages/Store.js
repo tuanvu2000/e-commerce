@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Breadcrumb, Select, Row, Pagination } from 'antd'
+import { Breadcrumb, Select, Row, Pagination, Empty  } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 import { Loading } from '../components/UI'
 import clsx from 'clsx'
@@ -9,17 +9,18 @@ import productApi from '../api/productApi'
 import { CardProduct } from '../components'
 
 const Store = () => {
+    const location = useLocation()
     const [data, setData] = useState()
     const [loading, setLoading] = useState(true)
     const [path, setPath] = useState([])
+    const [sort, setSort] = useState('max')
     const [params, setParams] = useState({
         page: 1,
         pageSize: 12,
         type: 'category',
         value: 'non-bao-hiem',
-        sort: 'price'
+        sort: '-price'
     })
-    const location = useLocation()
     
     useEffect(() => {
         const pathname = window.location.pathname
@@ -37,6 +38,17 @@ const Store = () => {
             'gang-tay': 'Găng tay',
             'other': 'Khác',
         }
+        const subCategory = [
+            'non-34', 
+            'non-fullface', 
+            'non-nua-dau', 
+            'mu-xe-dap', 
+            'non-tre-em',
+            'kinh', 
+            'gang-tay', 
+            'other'
+        ]
+        // const phuKien = ['kinh', 'gang-tay', 'other']
         if (title.length === 2) {
             setPath([
                 {
@@ -49,24 +61,35 @@ const Store = () => {
             setPath([
                 {
                     title: arrayType[title[1]],
-                    to: title[1]
+                    to: title[1],
                 },
                 {
                     title: arrayType[title[2]],
-                    to: title[2]
+                    to: title[2],
+                    type: subCategory.includes(title[2]) 
+                        ? 'subCategory'
+                        : 'brand'
                 }
             ])
         }
+        setSort('max')
     },[location])
 
     useEffect(() => {
         setLoading(true)
+        const changeData = {
+            max: '-price',
+            min: 'price',
+            date: '-createdAt',
+            popular: '-quantitySell'
+        }
         const getApi = async () => {
             if (path.length === 1) {
                 const res = await productApi.getListType({
                     ...params,
                     type: 'category',
-                    value: path[0].to
+                    value: path[0].to,
+                    sort: changeData[sort]
                 })
                 setData(res)
                 setLoading(false)
@@ -74,8 +97,9 @@ const Store = () => {
             if (path.length === 2) {
                 const res = await productApi.getListType({
                     ...params,
-                    type: 'subCategory',
-                    value: path[1].to
+                    type: path[1].type,
+                    value: path[1].to,
+                    sort: changeData[sort]
                 })
                 setData(res)
                 setLoading(false)
@@ -83,7 +107,12 @@ const Store = () => {
             window.scrollTo(0, 0)
         }
         getApi()
-    }, [params, path])
+    }, [params, path, sort])
+
+
+    const handleSort = (value) => {
+        setSort(value)
+    }
 
     return (
         loading 
@@ -117,40 +146,47 @@ const Store = () => {
                     }
                 </Breadcrumb>
                 <span>{`Hiển thị ${data.pageStart}-${data.pageEnd} của ${data.total} sản phẩm`}</span>
-                <Select style={{ width: 260 }} defaultValue={'max'}>
+                <Select style={{ width: 260 }} value={sort} onChange={handleSort}>
                     <Select.Option value="popularity">Thứ tự mức độ phổ biến</Select.Option>
                     <Select.Option value="date">Mới nhất</Select.Option>
                     <Select.Option value="min">Thứ tự theo giá: Thấp đến cao</Select.Option>
                     <Select.Option value="max">Thứ tự theo giá: Cao đến thấp</Select.Option>
                 </Select>
             </div>
-            <div className={clsx(styles.wrapper)}>
-                <Row gutter={[32, 16]}>
-                    {
-                        data.products.map(product => (
-                            <React.Fragment key={product.id}>
-                                <CardProduct product={product} />
-                            </React.Fragment>
-                        ))
-                    }
-                </Row>
-                <div className={clsx(styles.pagination)}>
-                    <Pagination
-                        total={data.total}
-                        // showSizeChanger={true}
-                        defaultCurrent={params.page}
-                        defaultPageSize={params.pageSize}
-                        pageSizeOptions={['12', '20', '32']}
-                        onChange={(page, pageSize) => {
-                            setParams({
-                                ...params, 
-                                page: page,
-                                pageSize: pageSize
-                            })
-                        }}
-                    />
+            {
+                data.products.length > 0
+                ? <div className={clsx(styles.wrapper)}>
+                    <Row gutter={[32, 16]}>
+                        {
+                            data.products.map(product => (
+                                <React.Fragment key={product._id}>
+                                    <CardProduct product={product} />
+                                </React.Fragment>
+                            ))
+                        }
+                    </Row>
+                    <div className={clsx(styles.pagination)}>
+                        <Pagination
+                            total={data.total}
+                            // showSizeChanger={true}
+                            defaultCurrent={params.page}
+                            defaultPageSize={params.pageSize}
+                            pageSizeOptions={['12', '20', '32']}
+                            onChange={(page, pageSize) => {
+                                setParams({
+                                    ...params, 
+                                    page: page,
+                                    pageSize: pageSize
+                                })
+                            }}
+                        />
+                    </div>
                 </div>
-            </div>
+                : <div className={clsx(styles.noneProducts)}>
+                    <p>Không có dữ liệu cho loại sản phẩm này !</p>
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                </div> 
+            }
         </div>
     )
 }

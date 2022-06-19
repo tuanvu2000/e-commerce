@@ -32,3 +32,40 @@
     font-size: 16px;
     border-bottom: 1px solid #000;
 }
+
+.subHeader {
+    margin-right: auto;
+    font-size: 18px;
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+
+    p {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-style: italic;
+        display: inline-block;
+        margin-bottom: 0;
+        transition: 0.3s;
+    }
+    i {
+        margin-left: 12px;
+        transition: 0.2s;
+        font-size: 24px;
+        display: inline-block;
+        transition: 0.3s;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+    }
+}
+
+.sell {
+    margin-left: 20px;
+    // display: flex;
+    // align-items: center;
+    font-size: 14px;
+    font-style: italic;
+}
