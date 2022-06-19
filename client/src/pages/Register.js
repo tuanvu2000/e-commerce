@@ -17,11 +17,9 @@ const Register = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [form] = Form.useForm()
-    const [form2] = Form.useForm()
     const upImage = useSelector((state) => state.saved.user)
 
     const [nextStep, setNextStep] = useState(false)
-    // const [next, setNext] = useState(true)
     const [image, setImage] = useState([])
     const [city, setCity] = useState('')
     const [district, setDistrict] = useState('')

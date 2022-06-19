@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import styles from './TableOrderNew.module.scss'
 import { Table } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const TableOrderNew = (props) => {
     const navigate = useNavigate()
