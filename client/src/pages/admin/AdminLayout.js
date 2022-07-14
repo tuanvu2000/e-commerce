@@ -19,6 +19,8 @@ const AdminLayout = () => {
     })
     const wrapContent = clsx(styles.wrapContent)
 
+    document.querySelector('#fb-root').style.display = 'none';
+
     useEffect(() => {
         const checkApi = async () => {
             await isAuth()
