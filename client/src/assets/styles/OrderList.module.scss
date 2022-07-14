@@ -66,6 +66,19 @@
                     }
                 }
             }
+            &:nth-child(4) {
+                p {
+                    &.priceOld {
+                        text-decoration: line-through;
+                        color: #777;
+                        margin-bottom: 8px;
+                    }
+                    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
             &:nth-child(5) {
                 .quantity {
                     display: inline-flex;

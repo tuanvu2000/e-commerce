@@ -19,7 +19,7 @@ const orderSlice = createSlice({
             }
             if (state.list.length > 0) {
                 state.total = state.list.reduce((total, item) => 
-                    total + (item.price * item.quantity)
+                    total + (item.priceSale * item.quantity)
                 , 0)
             }
         },
@@ -27,12 +27,20 @@ const orderSlice = createSlice({
             state.list.splice(action.payload, 1)
             if (state.list.length >= 0) {
                 state.total = state.list.reduce((total, item) => 
-                    total + (item.price * item.quantity)
+                    total + (item.priceSale * item.quantity)
                 , 0)
             }
         },
         resetOrder: (state, action) => {
             Object.assign(state, action.payload)
+        },
+        updateOrder: (state, action) => {
+            state.list = action.payload
+            if (state.list.length >= 0) {
+                state.total = state.list.reduce((total, item) => 
+                    total + (item.priceSale * item.quantity)
+                , 0)
+            }
         },
         increaseOrder: (state, action) => {
             // const index = state.list.find(item => item.id === action.payload)

@@ -48,7 +48,7 @@ const CartList = () => {
                             <div>
                                 <p>{item.name} ({item.size})</p>
                                 <p>
-                                    <span>{item.quantity}</span> * <span>{handleMoney(item.price)}</span>
+                                    <span>{item.quantity}</span> * <span>{handleMoney(item.priceSale)}</span>
                                 </p>
                             </div>
                             <span onClick={(e) => handleRemove(e, index)}>

@@ -263,7 +263,7 @@ const Pay = () => {
                                                         {item.name}
                                                         <strong> x {item.quantity}</strong>
                                                     </td>
-                                                    <td>{handleMoney(item.quantity * item.price)}</td>
+                                                    <td>{handleMoney(item.quantity * item.priceSale)}</td>
                                                 </tr>
                                             ))
                                         }

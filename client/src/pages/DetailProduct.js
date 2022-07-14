@@ -95,9 +95,9 @@ const DetailProduct = () => {
         getApi()
     }, [id])
     
-    const handleSale = (product) => {
-        return product.price - ((product.price * product.sale) / 100)
-    }
+    // const handleSale = (product) => {
+    //     return product.price - ((product.price * product.sale) / 100)
+    // }
 
     const handleMoney = (number) => {
         const numToString = number.toString();
@@ -128,7 +128,7 @@ const DetailProduct = () => {
                     image: product.image,
                     size: size,
                     price: product.price,
-                    priceSale: handleSale(product),
+                    priceSale: product.priceSale,
                     sale: product.sale,
                     quantity: quantity
                 }))

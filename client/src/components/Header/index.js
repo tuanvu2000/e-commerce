@@ -8,7 +8,7 @@ import { logout } from '../../handlers/authHandler'
 import { navHat, navAccessory, navBrand } from './data'
 import { CartList } from '../../components'
 import { Badge } from '../../components/UI'
-import { Col, Row } from 'antd'
+import { Col, Row, message } from 'antd'
 
 const Header = () => {
     const navigate = useNavigate()
@@ -36,8 +36,11 @@ const Header = () => {
     }, [])
 
     const handleLogout = () => {
-        logout(navigate)
-        setUser()
+        setTimeout(() =>{
+            logout(navigate)
+            setUser()
+            message.success('Đăng xuất thành công')
+        }, 300)
     };
 
     return (

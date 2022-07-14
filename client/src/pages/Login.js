@@ -26,7 +26,7 @@ const Login = () => {
             message.success('Đăng nhập thành công')
             setTimeout(() => {
                 navigate('/')
-            }, 1000)
+            }, 500)
         } catch (error) {
             message.error('Đăng nhập thất bại, vui lòng thử lại')
             console.log('error: ', error)

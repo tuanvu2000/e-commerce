@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { Col, Radio, Row } from 'antd'
 import clsx from 'clsx'
 import styles from '../assets/styles/OrderList.module.scss'
-import { removeOrder, increaseOrder } from '../redux/slices/orderSlice'
+import { removeOrder } from '../redux/slices/orderSlice'
 import empty from '../assets/images/basket.png'
 
 const OrderList = () => {
     const navigate =  useNavigate()
     const dispatch = useDispatch()
     const order = useSelector((state) => state.order)
+    // const [orderNew, setOrderNew] = useState(order.list)
     const [quantity, setQuantity] = useState([])
     const [transport, setTransport] = useState(order.total >= 500000 ? 0 : 20000)
     // const [list, setList] = useState([])
@@ -31,19 +32,24 @@ const OrderList = () => {
         return numToString.replace(regex, '.') + ' đ';
     }
 
-    // const handleDecrease = (value) => {
-    //     setQuantity([
-    //         quantity[value] > 0 ? quantity[value] - 1 : 0
-    //     ])
+    // const handleIncrease = (index) => {
+    //     const quantityInc = quantity[index]++
+    //     const orderInc = {
+    //         // ...orderNew[index],
+    //         quantity: quantityInc
+    //     }
+        
+        
+    //     console.log(orderInc)
     // }
 
-    const handleIncrease = (value) => {
-        const newArr = quantity
-        newArr[value]++
+    // const handleIncrease = (value) => {
+    //     const newArr = quantity
+    //     newArr[value]++
 
-        dispatch(increaseOrder({ index: value, quantity: newArr[value] }))
-        console.log(newArr)
-    }
+    //     dispatch(increaseOrder({ index: value, quantity: newArr[value] }))
+    //     console.log(newArr)
+    // }
 
     const handleOnChange = () => {
         console.log(123)
@@ -59,6 +65,10 @@ const OrderList = () => {
 
     const onChangeTransport = (e) => {
         setTransport(e.target.value)
+    }
+
+    const handleUpdateOrder = () => {
+        
     }
 
     return (
@@ -95,15 +105,27 @@ const OrderList = () => {
                                                         <p>size: {item.size}</p>
                                                     </div>
                                                 </td>
-                                                <td>{handleMoney(item.price)}</td>
+                                                <td>
+                                                    <div className={clsx(styles.price)}>
+                                                        {
+                                                            item.sale > 0
+                                                            ? <>
+                                                                <p className={clsx(styles.priceOld)}>{handleMoney(item.price)}</p>
+                                                                <p>{handleMoney(item.priceSale)}</p>
+                                                            </>
+                                                            : <p>{handleMoney(item.price)}</p>
+                                                        }
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div className={clsx(styles.quantity)}>
                                                         <span>-</span>
                                                         <input value={quantity[index]} onChange={handleOnChange} />
-                                                        <span onClick={() => handleIncrease(index)}>+</span>
+                                                        <span>+</span>
+                                                        {/* <span onClick={() => handleIncrease(index)}>+</span> */}
                                                     </div>
                                                 </td>
-                                                <td>{handleMoney(item.price * item.quantity)}</td>
+                                                <td>{handleMoney(item.priceSale * item.quantity)}</td>
                                             </tr>
                                         ))
                                     }
@@ -114,7 +136,7 @@ const OrderList = () => {
                                     <i className="fas fa-arrow-left"></i>
                                     Xem thêm sản phẩm khác
                                 </button>
-                                <button className={clsx(styles.black)}>
+                                <button className={clsx(styles.black)} onClick={handleUpdateOrder}>
                                     Cập nhật giỏ hàng
                                 </button>
                             </div>
